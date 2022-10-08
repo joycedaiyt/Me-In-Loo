@@ -1,9 +1,16 @@
-html,
+html {
+  width: fit-content;
+}
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+@keyframes waterPrintAnimination {
+  0% {color: black;}
+  50% {color: white;}
+  100% {color: black;}
 }
 
 a {
@@ -15,12 +22,47 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+.waterPrint {
+  font-size: 40px;
+  position: absolute;
+  top: 14vh;
+  left: 10vh;
+  font-family: "EB Garamond";
+  animation-name: waterPrintAnimination;
+  animation-duration: 15s;
+  animation-delay: 1.5s;
+}
+
+.heading {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.headingFont {
+  font-family: "EB Garamond";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 4rem;
+  /* white-space: nowrap; */
+  color: white
+}
+
+.ButtonStyle {
+  color: "white";
+  border-color: "white";
+  border-radius: 0;
+  width: 35%;
+  font-family: "Montserrat";
+  font-size: 13px;
+  font-weight: 600;
+  height: 40px;
+  top: 17vh;
 }
