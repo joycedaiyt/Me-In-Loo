@@ -1,5 +1,27 @@
 # CS348-Project
 
+### Setup Virtual Env
+#### Generate requirements.txt
+```
+pip3 install pipreqs
+pipreqs /path/to/project
+```
+#### To setup your virtualenv:
+```python
+# https://docs.python.org/3/library/venv.html
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+```
+#### To deactivate your virtualenv:
+```python
+deactivate
+```
+#### To reactivate your virtualenv:
+```python
+source venv/bin/activate
+```
+
 ### Connecting to GCP database
 #### Set up IP Address
 1. Find your IP Address
@@ -10,11 +32,8 @@
 6. Click Done. Then click Save at the bottom of the page to save your changes.
 
 #### Making the Connection
-Install sql Connector Library:
-```
-pip install mysql-connector-python
-```
-Connection configuration is located in the "gcp_mysql_connection.py" file. More information can be found [HERE](https://towardsdatascience.com/sql-on-the-cloud-with-python-c08a30807661)
+- Makesure mysql-connector-python sql Connector Library is installed.
+- Connection configuration is located in the "gcp_mysql_connection.py" file. More information can be found [HERE](https://towardsdatascience.com/sql-on-the-cloud-with-python-c08a30807661)
 
 Connection can also be established using the following command:
 ```
