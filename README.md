@@ -10,13 +10,15 @@
 6. Click Done. Then click Save at the bottom of the page to save your changes.
 
 #### Making the Connection
-Install sql Connector Library
+Install sql Connector Library:
 ```
 pip install mysql-connector-python
 ```
-Connection configuration is located in the "config" file. More information can be found [HERE](https://towardsdatascience.com/sql-on-the-cloud-with-python-c08a30807661)
+Connection configuration is located in the "gcp_mysql_connection.py" file. More information can be found [HERE](https://towardsdatascience.com/sql-on-the-cloud-with-python-c08a30807661)
 
-Connection can also be established using the following command
+Connection can also be established using the following command:
 ```
 mysql -uroot -p -h 35.193.141.203 --ssl-ca=server-ca.pem --ssl-cert=client-cert.pem --ssl-key=client-key.pem
 ```
+- To create a new database, run "create_db.py" file, and change the database name to your desired name
+- To connect to a new database, run "connect_db.py" and change the database name
