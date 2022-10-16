@@ -1,0 +1,18 @@
+{
+    "git.ignoreLimitWarning": true,
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+      },
+    "emmet.triggerExpansionOnTab": true,
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.formatOnSave": true,
+    "[json]": {
+      "editor.quickSuggestions": {
+        "strings": true
+      },
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.suggest.insertMode": "replace"
+    }
+}
