@@ -6,5 +6,4 @@
 3. To open the Overview page of an instance, click the instance name.
 4. Select Connections from the SQL navigation menu.
 5. In the Authorized networks section, click Add network and enter the IP address of the machine where the client is installed.
-Note: The IP address of the instance and the mysql client IP address you authorize must be the same IP version: either IPv4 or IPv6.
 6. Click Done. Then click Save at the bottom of the page to save your changes.
