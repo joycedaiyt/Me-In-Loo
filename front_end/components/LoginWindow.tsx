@@ -78,13 +78,27 @@ export const LoginWindow = (props: {}) => {
           <span
             style={{ fontWeight: "bold", color: "#1976d2", cursor: "pointer" }}
           >
-            sign up
+            <a href="/signUp" target="_blank" rel="noopener noreferrer">
+              sign up
+            </a>
           </span>
           &nbsp;and create an account for free!
         </div>
         <Button
           variant="contained"
-          style={{ fontFamily: "montserrat", fontSize: 30 }}
+          style={{
+            fontSize: 18,
+            color: "black",
+            fontWeight: "500",
+            borderRadius: 0,
+            borderWidth: 5,
+            backgroundColor: "#fbeb4f",
+            letterSpacing: 3,
+            width: 125,
+            height: 45,
+            marginTop: 25,
+            marginBottom: 25,
+          }}
         >
           Login
         </Button>
