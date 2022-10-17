@@ -9,6 +9,7 @@ import { LoginWindow } from "../components/LoginWindow";
 
 export default function WelcomePage() {
   const [windowWidth, setWindowWidth] = useState(1440);
+  const [curQuery, setCurQuery] = useState("");
   useEffect(() => {
     function updateSize() {
       setWindowWidth(window.innerWidth);
@@ -19,7 +20,13 @@ export default function WelcomePage() {
   }, []);
   const handleEnterMainPage = () => {
     router.push("?page=login");
+    setCurQuery("login");
   };
+  // useEffect(() => {
+  //   const query = router.asPath;
+  //   console.log(router.asPath);
+  //   setCurQuery(query as any);
+  // }, [router.asPath]);
   return (
     <div>
       <div
@@ -70,7 +77,11 @@ export default function WelcomePage() {
           borderRadius: 30,
         }}
       >
-        <LoginWindow />
+        {curQuery == "login" ? (
+          <LoginWindow curQuery={curQuery} setCurQuery={setCurQuery} />
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
