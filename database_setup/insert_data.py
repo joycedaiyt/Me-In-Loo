@@ -1,29 +1,30 @@
-from gcp_mysql_connection import cnxn
-from connect_db import cursor
+from gcp_mysql_connection import cnxn, config, mysql
+import pandas as pd
+import datetime
 import csv
 
-# data = pd.read_csv("data.csv")
+config['database'] = 'test'  # connects to the corresponding database
+cnxn = mysql.connector.connect(**config)
+cursor = cnxn.cursor()
 
-# # first we setup our query
-# query = ("INSERT INTO space_mission3 (company_name, location, datum, detail, status_rocket, rocket, status_mission) "
-#          "VALUES (%s, %s, %s, %s, %s, %s, %s)")
-
-
-with open('data.csv', newline='',  encoding="utf8") as csvfile:
+# example
+with open('data.csv') as csvfile:
     spamreader = csv.reader(csvfile)
     for row in spamreader:
-        # Prepare SQL query to INSERT a record into the database.
-        sql = "INSERT INTO space_missions (company_name, location, datum, detail, status_rocket, rocket, status_mission) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-        print(sql)
-        try:
-            # Execute the SQL command
-            cursor.execute(sql)
-            # Commit your changes in the database
-            cnxn.commit()
-        except:
-            # Rollback in case there is any error
-            cnxn.rollback()
+        row[2] = datetime.datetime.now()
+        print(row)
 
-# # then we execute with every row in our dataframe
-# cursor.executemany(query, list(data.to_records(index=False)))
-# cnxn.commit()  # and commit changes
+        # first we setup our query
+        query = 'INSERT INTO space_mission3 (company_name, location, datum, detail, status_rocket, rocket, status_mission) VALUES (%s, %s, %s, %s, %s, %s, %s)'
+
+        try:
+            cursor.execute(query, row)
+            cnxn.commit()
+            print("success")
+        except:
+            cnxn.rollback()
+            print("failed on")
+
+tb_key_stats = pd.read_sql_query(
+    "select * from space_mission3", con=cnxn)
+print(tb_key_stats)

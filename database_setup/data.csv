@@ -1,6 +1,4 @@
-﻿Company Name,Location,Datum,Detail,Status Rocket,Rocket,Mission
-"SpaceX","lC-39A, Kennedy Space Center, Florida USA","08-07-2020 05:12:33","falcon 9 block 5","statusactive","50.0","success"
-CASC,"site 9401 (SLS-2), Jiuquan Satellite Launch","08-06-2020 05:12:33",long march 2d,statusactive,29.75,success
-SpaceX,"Pad A, Boca Chica, Texas, USA","08-04-2020 05:12:33",starship prototype,statusactive,77.6,success
-Roscomos,"site 200/39, Baikonur Cosmodrome Kazakhstan","03-02-2020 05:12:33,proton-m,statusactive,65.0,success
-ULA,"SLC-41, Cape Canaveral AFS, Florida, USA","02-01-2020 05:12:33",atlas v,statusactive,145.0,success
+﻿SpaceX,lC-39A Kennedy Space Center Florida USA,08-07-2020 05:12:33,falcon 9 block 5,statusactive,50.0,success
+CASC,site 9401 (SLS-2) Jiuquan Satellite Launch,08-06-2020 05:12:33,long march 2d,statusactive,29.75,success
+SpaceX,Pad A Boca Chica Texas USA,08-04-2020 05:12:33,starship prototype,statusactive,77.6,success
+Roscomos,site 200/39, Baikonur Cosmodrome Kazakhstan,03-02-2020 05:12:33,proton-m,statusactive,65.0,success

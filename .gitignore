@@ -1,3 +1,3 @@
-env/
-venv/
-_pycache_
+database_setup/_pycache_
+env
+venv
