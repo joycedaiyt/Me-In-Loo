@@ -2,9 +2,9 @@ from google.cloud import storage
 from os import listdir
 from os.path import isfile, join
 
+
 # Google Cloud Storage Config
 # storage_client = storage.Client()
-
 storage_client = storage.Client.from_service_account_json(
     "dynamic-branch-308302-f0b255f61755.json", project="dynamic-branch-308302"
 )

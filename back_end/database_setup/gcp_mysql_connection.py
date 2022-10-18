@@ -1,5 +1,4 @@
 import mysql.connector
-from mysql.connector.constants import ClientFlag
 
 config = {
     'user': 'me-in-loo',
