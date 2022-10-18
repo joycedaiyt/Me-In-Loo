@@ -1,6 +1,5 @@
 import csv
 import datetime
-import pandas as pd
 import mysql.connector
 from pathlib import Path
 from gcp_sql_config import config
@@ -8,82 +7,98 @@ from gcp_sql_config import config
 
 config['database'] = 'test'  # assign which database to connect to
 cnxn = mysql.connector.connect(**config)
-print("Established Connection")
+print("Established Connection...")
 cursor = cnxn.cursor()
 
 
 def create_db():
     # create a new 'test' database
     cursor.execute('CREATE DATABASE test')
-    cnxn.close()  # close conne
 
 
 def create_table(sqlPath):
-    query = Path(sqlPath).read_text()
 
-    # example
-    # query = ("CREATE TABLE test4 ("
-    #          "company_name VARCHAR(255),"
-    #          "location VARCHAR(255),"
-    #          "datum DATETIME,"
-    #          "detail VARCHAR(255),"
-    #          "status_rocket VARCHAR(255),"
-    #          "rocket DECIMAL(6,2),"
-    #          "status_mission VARCHAR(255) )")
+    fd = open(sqlPath, 'r')
+    sqlFile = fd.read()
+    fd.close()
 
+    # all SQL commands
+    sqlCommands = sqlFile.split(';\n')
+
+    # Execute every command from the input file
     try:
-        cursor.execute(query, multi=True)  # create tables using sql commands
-        cnxn.commit()  # this commits changes to the database
+        for query in sqlCommands:
+            cursor.execute(query)  # create tables using sql commands
+
+        cnxn.commit()
         print("successfully created tables")
     except:
         cnxn.rollback()
         print("failed and rolledback")
 
+    # prints current tables in the database
     cursor.execute("SHOW TABLES")
     print("Current Tables:")
     for table_name in cursor:
         print(table_name)
 
 
-def insert_data(sqlPath, dataPath):
+def insert_data(sqlPath, dataPaths):
+    i = 0
+    fd = open(sqlPath, 'r')
+    sqlFile = fd.read()
+    fd.close()
 
-    # example
-    with open(dataPath) as csvfile:
-        spamreader = csv.reader(csvfile)
-        for row in spamreader:
-            row[2] = datetime.datetime.now()
-            print(row)
+    # all SQL commands
+    sqlCommands = sqlFile.split(';\n')
 
-            query = Path(sqlPath).read_text()
-
-            try:
+    for query in sqlCommands:
+        print(query)
+        with open(dataPaths[i]) as csvfile:
+            spamreader = csv.reader(csvfile)
+        try:
+            for row in spamreader:
                 cursor.execute(query, row)
-                cnxn.commit()
-                print("success")
-            except:
-                cnxn.rollback()
-                print("failed on")
-
-    # prints the data stored in the table
-    tb_key_stats = pd.read_sql_query(
-        "select * from space_mission3", con=cnxn)
-    print(tb_key_stats)
+            cnxn.commit()
+            print("SUCCESS")
+        except:
+            cnxn.rollback()
+            print("FAILED...")
+        i += 1
 
 
 def other_queries(sqlPath):
-    query = Path(sqlPath).read_text()
+    fd = open(sqlPath, 'r')
+    sqlFile = fd.read()
+    fd.close()
 
-    cursor.execute(querym multi=True)
-    for table_name in cursor:
-        print(table_name)
+    # all SQL commands
+    sqlCommands = sqlFile.split(';\n')
+
+    try:
+        for query in sqlCommands:
+            cursor.execute(query)
+        cnxn.commit()
+        print("SUCCESS")
+    except:
+        cnxn.rollback()
+        print("FAILED...")
 
 
 def main():
     # create_db()
     # create_table('./sql_commands/create_tables.sql')
-    # insert_data('./sql_commands/insert_data.sql', './datasets/data.csv')
+
+    dataPaths = ['./datasets/user.csv',
+                 './datasets/tag.csv',
+                 './datasets/profile.csv',
+                 './datasets/post.csv',
+                 './datasets/attachedBy.csv',
+                 './datasets/report.csv']
+    insert_data('./sql_commands/insert_data.sql', dataPaths)
     # other_queries('./sql_commands/drop_tables.sql)
-    pass
+
+    cnxn.close()  # close conne
 
 
 if __name__ == "__main__":

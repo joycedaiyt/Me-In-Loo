@@ -1,6 +1,6 @@
-drop Table SecretID;
-drop Table Profile;
-drop Table Tag;
-drop Table Report;
-drop Table Post;
-drop Table User;
+DROP TABLE Report;
+DROP TABLE AttachedBy;
+DROP TABLE Tag;
+DROP TABLE Post;
+DROP TABLE Profile;
+DROP TABLE User;

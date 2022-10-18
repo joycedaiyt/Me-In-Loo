@@ -1,42 +1,45 @@
-create table User (
-    user_email varchar(255) NOT NULL PRIMARY KEY,
-    user_secret varchar(6666) NOT NULL,
-    points int NOT NULL
+CREATE TABLE User (
+    user_email VARCHAR(255) NOT NULL PRIMARY KEY,
+    user_secret VARCHAR(300) NOT NULL,
+    points INT NOT NULL
 );
-
-create table Profile (
-    user_email varchar(255) NOT NULL PRIMARY KEY,
-    profile_pic_url varchar(255),
-    prof_description varchar(255),
-    post_count int,
-    Foreign key(user_email) References User(user_email)
+CREATE TABLE Profile (
+    user_email VARCHAR(255) NOT NULL PRIMARY KEY,
+    profile_pic_url VARCHAR(255),
+    prof_description VARCHAR(255),
+    post_count INT,
+    FOREIGN KEY(user_email) REFERENCES User(user_email)
 );
-
-create table Post (
-	post_id int Not NULL, auto_increment,
-    post_url varchar(6666) Not NULL,
-    user_email varchar(255) NOT NULL,
-    name varchar(255),
-    upload_date datetime,
-    download_count int,
-    cost int,
-    like_count int,
-    report_count int,
-    Foreign key(user_email) References User(user_email)
+CREATE TABLE Post (
+    user_email VARCHAR(255) NOT NULL,
+    post_url VARCHAR(300) NOT NULL,
+    post_name VARCHAR(255) NOT NULL,
+    update_date DATETIME NOT NULL,
+    download_count INT,
+    like_count INT,
+    cost INT NOT NULL,
+    report_count INT,
+    PRIMARY KEY(user_email, post_url),
+    FOREIGN KEY(user_email) REFERENCES User(user_email)
 );
-
-create table Tag (
-    tag_name varchar(255) Not NULL Primary Key,
-    post_id int not null,
-    Foreign key(post_id) References Post(post_id)
+CREATE TABLE Tag (
+    tag_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    category VARCHAR(255) NOT NULL
 );
-
-create table Report (
-    report_id int NOT NULL Primary Key AUTO_INCREMENT,
-    post_id int Not NULL,
-    description varchar(255),
-    create_date datetime,
-    Foreign key(post_id) References Post(post_id)
+CREATE TABLE AttachedBy (
+    user_email VARCHAR(255) NOT NULL,
+    post_url VARCHAR(300) NOT NULL,
+    tag_id INT NOT NULL,
+    PRIMARY KEY(user_email, post_url, tag_id),
+    FOREIGN KEY(user_email, post_url) REFERENCES Post(user_email, post_url),
+    FOREIGN KEY(tag_id) REFERENCES Tag(tag_id)
 );
-
-
+CREATE TABLE Report (
+    report_id INT NOT NULL AUTO_INCREMENT,
+    post_url VARCHAR(300) NOT NULL,
+    user_email VARCHAR(255) NOT NULL,
+    description VARCHAR(255),
+    create_date DATETIME NOT NULL,
+    PRIMARY KEY(report_id, post_url, user_email),
+    FOREIGN KEY(user_email, post_url) REFERENCES Post(user_email, post_url)
+);
