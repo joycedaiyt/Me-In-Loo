@@ -1,4 +1,4 @@
-# CS348-Project
+# Me-In-Loo
 
 ### Setup Virtual Env
 #### Generate requirements.txt
