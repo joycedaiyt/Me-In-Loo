@@ -36,11 +36,11 @@ Makesure mysql-connector-python sql Connector Library is installed:
 ```
 python3 -m pip3 install mysql-connector
 ```
-- Connection configuration is located in the `gcp_mysql_connection.py` file. More information can be found [HERE](https://towardsdatascience.com/sql-on-the-cloud-with-python-c08a30807661)
+- Connection configuration is located in the `gcp_sql_config.py` file. More information can be found [HERE](https://towardsdatascience.com/sql-on-the-cloud-with-python-c08a30807661)
 
 Connection can also be established using the following command:
 ```
 mysql -uroot -p -h 35.193.141.203 --ssl-ca=server-ca.pem --ssl-cert=client-cert.pem --ssl-key=client-key.pem
 ```
-- To create a new database, run "create_db.py" file, and change the database name to your desired name
-- To connect to a new database, run "connect_db.py" and change the database name
+- Interactions with the GCP MySQL database are located in the `back_end/database_setup` folder
+- Interactions with the project GCP bucket for the GCP Storage API are located in the `back_end/gcpbucket_setup` folder
