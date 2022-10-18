@@ -21,7 +21,7 @@ python database_maintain.py
 
 
 #### Insert Data `insert_data(sqlPath, dataPath)`
-` The functions takes two parameters, sqlPath as the path to the SQL commands for the insert specifications, and a dataPath as the ath to the actual data that needs to be inserted
+`- The functions takes two parameters, sqlPath as the path to the SQL commands for the insert specifications, and a dataPath as the path to the actual data that needs to be inserted
 - The dataset can be stored in a csv file, or just any file where each row corresponds to an entry, and each attribute is seperated by a comma. An example of the dataset is located in `./datasets/data.csv`
 - An example to populate the data is also in `insert_data.py`
 
