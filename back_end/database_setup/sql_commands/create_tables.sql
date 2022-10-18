@@ -1,35 +1,28 @@
 create table User (
-    email varchar(255) NOT NULL PRIMARY KEY,
+    user_email varchar(255) NOT NULL PRIMARY KEY,
+    user_secret varchar(6666) NOT NULL,
     points int NOT NULL
 );
 
-create table SecretID (
-    secret_id int Not NULL PRIMARY KEY AUTO_INCREMENT,
-    hash_pwd varchar(255),
-    secret_content varchar(255),
-    email varchar(255),
-    Foreign key(email) References User(email)
-);
-
 create table Profile (
-    email varchar(255) NOT NULL PRIMARY KEY,
-    profile_pic varchar(255),
-    description varchar(255),
+    user_email varchar(255) NOT NULL PRIMARY KEY,
+    profile_pic_url varchar(255),
+    prof_description varchar(255),
     post_count int,
-    Foreign key(email) References User(email)
+    Foreign key(user_email) References User(user_email)
 );
 
 create table Post (
-	post_id int Not NULL Primary key auto_increment,
+	post_id int Not NULL, auto_increment,
     post_url varchar(6666) Not NULL,
-    email varchar(255) NOT NULL,
+    user_email varchar(255) NOT NULL,
     name varchar(255),
     upload_date datetime,
     download_count int,
     cost int,
     like_count int,
     report_count int,
-    Foreign key(email) References User(email)
+    Foreign key(user_email) References User(user_email)
 );
 
 create table Tag (
