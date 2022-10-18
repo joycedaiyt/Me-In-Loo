@@ -73,7 +73,7 @@ def insert_data(sqlPath, dataPath):
 def other_queries(sqlPath):
     query = Path(sqlPath).read_text()
 
-    cursor.execute(query)
+    cursor.execute(querym multi=True)
     for table_name in cursor:
         print(table_name)
 
@@ -81,7 +81,8 @@ def other_queries(sqlPath):
 def main():
     # create_db()
     # create_table('./sql_commands/create_tables.sql')
-    # insert_data('./sql_commands/insert_data.sql', 'data.csv')
+    # insert_data('./sql_commands/insert_data.sql', './datasets/data.csv')
+    # other_queries('./sql_commands/drop_tables.sql)
     pass
 
 
