@@ -36,7 +36,7 @@ Makesure mysql-connector-python sql Connector Library is installed:
 ```
 python3 -m pip3 install mysql-connector
 ```
-- Connection configuration is located in the "gcp_mysql_connection.py" file. More information can be found [HERE](https://towardsdatascience.com/sql-on-the-cloud-with-python-c08a30807661)
+- Connection configuration is located in the `gcp_mysql_connection.py` file. More information can be found [HERE](https://towardsdatascience.com/sql-on-the-cloud-with-python-c08a30807661)
 
 Connection can also be established using the following command:
 ```
