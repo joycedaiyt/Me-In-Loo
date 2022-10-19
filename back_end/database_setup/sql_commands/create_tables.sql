@@ -21,7 +21,7 @@ CREATE TABLE Post (
     like_count INT,
     cost INT NOT NULL,
     report_count INT,
-    PRIMARY KEY(user_email, post_url),
+    PRIMARY KEY(post_url),
     FOREIGN KEY(user_email) REFERENCES User(user_email)
 );
 
@@ -31,20 +31,18 @@ CREATE TABLE Tag (
 );
 
 CREATE TABLE AttachedBy (
-    user_email VARCHAR(255) NOT NULL,
     post_url VARCHAR(300) NOT NULL,
     tag_id INT NOT NULL,
-    PRIMARY KEY(user_email, post_url, tag_id),
-    FOREIGN KEY(user_email, post_url) REFERENCES Post(user_email, post_url),
+    PRIMARY KEY(post_url, tag_id),
+    FOREIGN KEY(post_url) REFERENCES Post(post_url),
     FOREIGN KEY(tag_id) REFERENCES Tag(tag_id)
 );
 
 CREATE TABLE Report (
     report_id INT NOT NULL AUTO_INCREMENT,
-    user_email VARCHAR(255) NOT NULL,
     post_url VARCHAR(300) NOT NULL,
     rep_description VARCHAR(255),
     create_date DATETIME NOT NULL,
-    PRIMARY KEY(report_id, post_url, user_email),
-    FOREIGN KEY(user_email, post_url) REFERENCES Post(user_email, post_url)
+    PRIMARY KEY(report_id, post_url),
+    FOREIGN KEY(post_url) REFERENCES Post(post_url)
 );

@@ -11,7 +11,7 @@ INSERT INTO Post
 VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
 
 INSERT INTO AttachedBy
-VALUES (%s, %s, %s);
+VALUES (%s, %s);
 
 INSERT INTO Report
-VALUES (%s, %s, %s, %s, %s);
+VALUES (%s, %s, %s, %s);
