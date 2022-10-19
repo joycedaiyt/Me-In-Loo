@@ -42,7 +42,7 @@ source venv/bin/activate
 6. Click Done. Then click Save at the bottom of the page to save your changes.
 
 #### Making the Connection
-Makesure mysql-connector-python sql Connector Library is installed:
+(Optional) The virtual environment should have mysql-connector-python installed, but if not, install the library by:
 ```
 pip install mysql-connector-python
 python3 -m pip install mysql-connector
