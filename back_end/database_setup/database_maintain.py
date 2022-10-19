@@ -1,9 +1,6 @@
 import csv
-import datetime
 import mysql.connector
-from pathlib import Path
 from gcp_sql_config import config
-
 
 config['database'] = 'test'  # assign which database to connect to
 cnxn = mysql.connector.connect(**config)
@@ -11,24 +8,31 @@ print("Established Connection...")
 cursor = cnxn.cursor()
 
 
-def create_db():
-    # create a new 'test' database
-    cursor.execute('CREATE DATABASE test')
+# create a new database with databaseName
+def create_db(databaseName):
+    try:
+        cursor.execute('CREATE DATABASE ' + databaseName)
+        print("Database " + databaseName + " successfully created!")
+    except:
+        cnxn.rollback()
+        print("Failed to created database " + databaseName)
 
 
-def create_table(sqlPath):
+def create_tables(sqlPath):
 
+    # Open SQL commands file
     fd = open(sqlPath, 'r')
     sqlFile = fd.read()
     fd.close()
 
-    # all SQL commands
-    sqlCommands = sqlFile.split(';\n')
+    # All SQL commands
+    sqlCommands = sqlFile.split(';\n\n')
 
     # Execute every command from the input file
     try:
         for query in sqlCommands:
-            cursor.execute(query)  # create tables using sql commands
+            # create tables using sql commands
+            cursor.execute(query)  
 
         cnxn.commit()
         print("successfully created tables")
@@ -62,6 +66,8 @@ def insert_data(sqlPath, dataPaths):
         with open(dataPaths[i]) as csvfile:
             spamreader = csv.reader(csvfile)
             for row in spamreader:
+                row = [None if item== 'None' else item for item in row]
+                # print(row)
                 try:
                     cursor.execute(query, row)
                     cnxn.commit()
@@ -70,6 +76,7 @@ def insert_data(sqlPath, dataPaths):
                     cnxn.rollback()
                     print("FAILED...")
         i += 1
+    
 
 
 def other_queries(sqlPath):
@@ -88,11 +95,10 @@ def other_queries(sqlPath):
     except:
         cnxn.rollback()
         print("FAILED...")
+    
 
 
 def main():
-    # create_db()
-    # create_table('./sql_commands/create_tables.sql')
 
     dataPaths = ['./datasets/user.csv',
                  './datasets/tag.csv',
@@ -100,8 +106,34 @@ def main():
                  './datasets/post.csv',
                  './datasets/attachedBy.csv',
                  './datasets/report.csv']
-    insert_data('./sql_commands/insert_data.sql', dataPaths)
-    # other_queries('./sql_commands/drop_tables.sql')
+
+    menu = ("Which of the following commands would you like to run: \n"
+            "Create Database - cd\n"
+            "Create Tables - ct\n"
+            "Insert Data - id\n"
+            "Other Queries - oq\n"
+            "Quit - q\n"
+            "Note: All SQL commands should be located in the ./sql_commands folder\n")
+
+    # create_db()
+    # create_table('./sql_commands/create_tables.sql')
+    while (True):
+        input_var = input(menu)
+        if input_var == 'cd':
+            databaseName = input("Specify the new database name: ")
+            create_db(databaseName)
+        elif input_var == 'ct':
+            create_tables('./sql_commands/create_tables.sql')
+        elif input_var == 'id':
+            insert_data('./sql_commands/insert_data.sql', dataPaths)
+        elif input_var == 'oq':
+            sqlPath = input("Specify the SQL command path of your query: ")
+            other_queries(sqlPath)
+        elif input_var == 'q':
+            break
+
+
+        print("------------------------------------------------------")
 
     cnxn.close()  # close conne
 

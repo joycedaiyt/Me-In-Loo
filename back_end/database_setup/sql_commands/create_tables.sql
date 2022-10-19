@@ -3,6 +3,7 @@ CREATE TABLE User (
     user_secret VARCHAR(300) NOT NULL,
     points INT NOT NULL
 );
+
 CREATE TABLE Profile (
     user_email VARCHAR(255) NOT NULL PRIMARY KEY,
     profile_pic_url VARCHAR(255),
@@ -10,6 +11,7 @@ CREATE TABLE Profile (
     post_count INT,
     FOREIGN KEY(user_email) REFERENCES User(user_email)
 );
+
 CREATE TABLE Post (
     user_email VARCHAR(255) NOT NULL,
     post_url VARCHAR(300) NOT NULL,
@@ -22,10 +24,12 @@ CREATE TABLE Post (
     PRIMARY KEY(user_email, post_url),
     FOREIGN KEY(user_email) REFERENCES User(user_email)
 );
+
 CREATE TABLE Tag (
     tag_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     category VARCHAR(255) NOT NULL
 );
+
 CREATE TABLE AttachedBy (
     user_email VARCHAR(255) NOT NULL,
     post_url VARCHAR(300) NOT NULL,
@@ -34,6 +38,7 @@ CREATE TABLE AttachedBy (
     FOREIGN KEY(user_email, post_url) REFERENCES Post(user_email, post_url),
     FOREIGN KEY(tag_id) REFERENCES Tag(tag_id)
 );
+
 CREATE TABLE Report (
     report_id INT NOT NULL AUTO_INCREMENT,
     user_email VARCHAR(255) NOT NULL,

@@ -9,6 +9,7 @@ The functions are called from `main()`, found at the bottom of the file, and run
 python database_maintain.py
 ```
 
+
 #### Create Database `create_db()`
 - Create a new database XXX by changing the database name in the function to XXX
 - Once a database is created, it'll appear in cloud and can be found [HERE](https://console.cloud.google.com/sql/instances/me-in-loo/databases?project=dynamic-branch-308302)
@@ -24,6 +25,7 @@ python database_maintain.py
 - The functions takes two parameters, sqlPath as the path to the SQL commands for the insert specifications, and a list of dataPaths as the path to the actual data that needs to be inserted
 - The dataset can be stored in a csv file, or just any file where each row corresponds to an entry, and each attribute is seperated by a comma. An example of the dataset is located in `./datasets/user.csv`
 ##### Note: SQL commands must be in order with dataPaths
+##### Note: NULL values are represented by 'None' in the datasets
 
 
 #### Other Queries `other_queries(sqlPath)`
