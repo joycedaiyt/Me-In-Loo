@@ -1,17 +1,17 @@
-INSERT INTO User (user_email, user_secret, points) 
+INSERT INTO User
 VALUES (%s, %s, %s);
 
-INSERT INTO Tag (tag_id, category) 
+INSERT INTO Tag
 VALUES (%s, %s);
 
-INSERT INTO Profile (user_email, profile_pic_url, prof_description, post_count) 
+INSERT INTO Profile
 VALUES (%s, %s, %s, %s);
 
-INSERT INTO Post (user_email, post_url, post_name, update_date, download_count, like_count, cost, report_count) 
+INSERT INTO Post
 VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
 
-INSERT INTO AttachedBy (user_email, post_url, tag_id) 
+INSERT INTO AttachedBy
 VALUES (%s, %s, %s);
 
-INSERT INTO Report (report_id, post_url, user_email, description, create_date) 
+INSERT INTO Report
 VALUES (%s, %s, %s, %s, %s);

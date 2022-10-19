@@ -36,9 +36,9 @@ CREATE TABLE AttachedBy (
 );
 CREATE TABLE Report (
     report_id INT NOT NULL AUTO_INCREMENT,
-    post_url VARCHAR(300) NOT NULL,
     user_email VARCHAR(255) NOT NULL,
-    description VARCHAR(255),
+    post_url VARCHAR(300) NOT NULL,
+    rep_description VARCHAR(255),
     create_date DATETIME NOT NULL,
     PRIMARY KEY(report_id, post_url, user_email),
     FOREIGN KEY(user_email, post_url) REFERENCES Post(user_email, post_url)

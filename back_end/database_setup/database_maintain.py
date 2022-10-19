@@ -50,20 +50,25 @@ def insert_data(sqlPath, dataPaths):
     fd.close()
 
     # all SQL commands
-    sqlCommands = sqlFile.split(';\n')
+    sqlCommands = sqlFile.split(';\n\n')
+
+    print(sqlCommands)
+
+    # print(datetime.datetime.now())
 
     for query in sqlCommands:
         print(query)
+        print(dataPaths[i])
         with open(dataPaths[i]) as csvfile:
             spamreader = csv.reader(csvfile)
-        try:
             for row in spamreader:
-                cursor.execute(query, row)
-            cnxn.commit()
-            print("SUCCESS")
-        except:
-            cnxn.rollback()
-            print("FAILED...")
+                try:
+                    cursor.execute(query, row)
+                    cnxn.commit()
+                    print("SUCCESS")
+                except:
+                    cnxn.rollback()
+                    print("FAILED...")
         i += 1
 
 
@@ -96,7 +101,7 @@ def main():
                  './datasets/attachedBy.csv',
                  './datasets/report.csv']
     insert_data('./sql_commands/insert_data.sql', dataPaths)
-    # other_queries('./sql_commands/drop_tables.sql)
+    # other_queries('./sql_commands/drop_tables.sql')
 
     cnxn.close()  # close conne
 
