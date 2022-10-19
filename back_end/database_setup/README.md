@@ -1,16 +1,17 @@
 ### Setting Up The Database
 
-##### Note that SQL Workbench is required to see the schema visually and GCP does not have this functionality
+##### Note that SQL Workbench is required to see the schema visually and GCP does not have this functionality (Instruction on Setting up the Workbench can be found below)
 
 #### Using `database_maintain.py` to Manage GCP MySQL
 The file provides `create_db()`, `create_table(sqlPath)`, `insert_data(sqlPath, dataPath)`, and `other_queries(sqlPath)` functions. \
+##### Note: Set the database to your desired database at line 5 `config['database'] = 'database'`
 The functions are called from `main()`, found at the bottom of the file, and running the file is done by:
 ```
 python database_maintain.py
 ```
 
 
-#### Create Database `create_db()`
+#### Create Database `create_db(databaseName)`
 - Create a new database XXX by changing the database name in the function to XXX
 - Once a database is created, it'll appear in cloud and can be found [HERE](https://console.cloud.google.com/sql/instances/me-in-loo/databases?project=dynamic-branch-308302)
 
@@ -30,3 +31,8 @@ python database_maintain.py
 
 #### Other Queries `other_queries(sqlPath)`
 - Serves as a playground to test the database with SQL commands from the sqlPath
+
+#### Setting Up MySqlWorkbench
+- Open MySqlWorkbench and add connection
+- Enter in the fields `HostName`, `user`, `password` as according to the `gcp_sql_config.py` file
+- Connected!

@@ -132,7 +132,6 @@ def main():
         elif input_var == 'q':
             break
 
-
         print("------------------------------------------------------")
 
     cnxn.close()  # close conne

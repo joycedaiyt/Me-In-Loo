@@ -1,18 +1,28 @@
 # Me-In-Loo
 
 ### Setup Virtual Env
-#### Generate requirements.txt
+#### Generate requirements.txt (Does not need to be set up again)
 ```
 pip install pipreqs
-pipreqs /path/to/project
+pipreqs /path/to/project --force
 ```
-#### To setup your virtualenv:
-```python
+#### To setup your virtualenv (Run it in the root folder of this project):
+For MacOS and Linus:
+```
 # https://docs.python.org/3/library/venv.html
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
+\
+For Windows:
+```
+# https://docs.python.org/3/library/venv.html
+python3 -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+```
+
 #### To deactivate your virtualenv:
 ```python
 deactivate
@@ -34,11 +44,12 @@ source venv/bin/activate
 #### Making the Connection
 Makesure mysql-connector-python sql Connector Library is installed:
 ```
+pip install mysql-connector-python
 python3 -m pip install mysql-connector
 ```
 - Connection configuration is located in the `gcp_sql_config.py` file. More information can be found [HERE](https://towardsdatascience.com/sql-on-the-cloud-with-python-c08a30807661)
 
-Connection can also be established using the following command:
+(Optional) Connection can also be established using the following command:
 ```
 mysql -uroot -p -h 35.193.141.203 --ssl-ca=server-ca.pem --ssl-cert=client-cert.pem --ssl-key=client-key.pem
 ```
