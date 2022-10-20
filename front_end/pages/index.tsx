@@ -10,6 +10,8 @@ import { LoginWindow } from "../components/LoginWindow";
 export default function WelcomePage() {
   const [windowWidth, setWindowWidth] = useState(1440);
   const [curQuery, setCurQuery] = useState("");
+  const [loginSuccess, setLoginSuccess] = useState(false);
+  const [signUpSuccess, setSignUpSuccess] = useState(false);
   useEffect(() => {
     function updateSize() {
       setWindowWidth(window.innerWidth);
@@ -78,7 +80,12 @@ export default function WelcomePage() {
         }}
       >
         {curQuery == "login" ? (
-          <LoginWindow curQuery={curQuery} setCurQuery={setCurQuery} />
+          <LoginWindow
+            curQuery={curQuery}
+            setCurQuery={setCurQuery}
+            loginSuccess={loginSuccess}
+            setLoginSuccess={setLoginSuccess}
+          />
         ) : (
           <></>
         )}
