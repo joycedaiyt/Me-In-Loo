@@ -1,6 +1,7 @@
 import csv
 import hashlib
 import os
+import random
 
 salt = os.urandom(32)  # Remember this
 # password = 'password123'
@@ -17,3 +18,7 @@ def produceHashKey(password):
         100000  # It is recommended to use at least 100,000 iterations of SHA-256
     )
     return key
+
+
+def productRandomPassWord():
+    return
