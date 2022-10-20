@@ -6,7 +6,7 @@ SELECT count(*) FROM user WHERE user_email = 'yiransun@gmail.com';
 -- initial points is 15 for new user
 INSERT INTO User 
 VALUES ('yiransun@gmail.com', 'D1e8a70b5ccab1dc2f56bbf7e99f064a660c08e361a35751b9c483c88943d082', 15);
-INSERT INTO PROFILE (user_email) VALUES ('yiransun@gmail.com');
+INSERT INTO PROFILE (user_email) VALUES ('yiransun@gmail.com', 0);
 
 -- fail signup due to duplicate
 SELECT count(*) FROM user WHERE user_email = 'yiransun@gmail.com';
