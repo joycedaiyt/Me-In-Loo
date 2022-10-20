@@ -2,12 +2,12 @@
 
 ##### Note that SQL Workbench is required to see the schema visually and GCP does not have this functionality (Instruction on Setting up the Workbench can be found below)
 
-#### Using `database_maintain.py` to Manage GCP MySQL
+#### Using `db_maintain.py` to Manage GCP MySQL
 The file provides `create_db()`, `create_table(sqlPath)`, `insert_data(sqlPath, dataPath)`, and `other_queries(sqlPath)` functions. \
 ##### Note: Set the database to your desired database at line 5 `config['database'] = 'database'`
 The functions are called from `main()`, found at the bottom of the file, and running the file is done by:
 ```
-python database_maintain.py
+python db_maintain.py
 ```
 
 
