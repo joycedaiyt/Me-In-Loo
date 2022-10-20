@@ -65,7 +65,7 @@ INSERT INTO Report (user_email, post_url, create_date) VALUES('example3@outlook.
 SELECT * FROM Report;
 UPDATE Post SET report_count = report_count + 1 
      WHERE post_url = 'thefat1.com';
-SELECT report_count FROM Post WHERE post_url = 'thefat2.com';
+SELECT report_count FROM Post WHERE post_url = 'thefat1.com';
 -- find the owner to post, and store that user_email in backend
 SELECT user_email FRO  Post WHERE post_url = 'thefat1.com';
 UPDATE User SET points = points - 10 WHERE user_email = 'example2@gmail.com';
@@ -73,9 +73,9 @@ SELECT points FROM user WHERE user_email = 'example2@gmail.com';
 DELETE FROM Report WHERE post_url = 'thefat1.com';
 DELETE FROM AttachedBy WHERE post_url = "thefat1.com";
 DELETE FROM Post WHERE post_url = "thefat1.com";
-SELECT count(*) FROM Report WHERE post_url = 'thefat2.com';
-SELECT count(*) FROM AttachedBy WHERE post_url = 'thefat2.com';
-SELECT count(*) FROM Post WHERE post_url = 'thefat2.com';
+SELECT count(*) FROM Report WHERE post_url = 'thefat1.com';
+SELECT count(*) FROM AttachedBy WHERE post_url = 'thefat1.com';
+SELECT count(*) FROM Post WHERE post_url = 'thefat1.com';
 
 --tag: for each tag use in frontend, it will call endpoints to run following queries:
 SELECT count(*) FROM Tag WHERE category='test';
