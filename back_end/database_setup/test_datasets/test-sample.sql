@@ -74,9 +74,9 @@ Select count(*) from Tag where category = 'test';
 -- otherwise do nothing
 
 -- Once all tags have been attached to post:
--- Suppose the tags selected are animal, celebrity, sport, school, other
-Select id in tags where category = 'animal' or category = 'celebrity' or category = 'sport' or category = 'school' or category = 'other';
-Insert into AttachedBy(user_email, post_url, tag_id) VALUES('example3@outlook.com', 'xyzahah.com', 1), ('example3@outlook.com', 'xyzahah.com', 2), ('example3@outlook.com', 'xyzahah.com', 3), ('example3@outlook.com', 'xyzahah.com', 4), ('example3@outlook.com', 'xyzahah.com', 5);
+-- Suppose the tags selected are animal, celebrity, sport, school, test
+Select tag_id from Tags where category = 'animal' or category = 'celebrity' or category = 'sport' or category = 'school' or category = 'test';
+Insert into AttachedBy(user_email, post_url, tag_id) VALUES('example3@outlook.com', 'xyzahah.com', 1), ('example3@outlook.com', 'xyzahah.com', 2), ('example3@outlook.com', 'xyzahah.com', 3), ('example3@outlook.com', 'xyzahah.com', 4), ('example3@outlook.com', 'xyzahah.com', 8);
 Select tag_id from AttachedBy where user_email = 'example3@outlook.com' and post_url = 'xyzahah.com';
 
 -- Select count(*) from user where user_secret = "D1e8a70b5ccab1dc2f56bbf7e99f064a660c08e361a35751b9c483c88943d082";
