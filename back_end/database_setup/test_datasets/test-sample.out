@@ -1,0 +1,376 @@
+// we will make the each row of table represented by an object, and each query represent by an array
+
+// sign up and sign in
+1.
+[
+    {
+        count(*): 0
+    }
+]
+
+2.
+[
+    {
+        Insert Successfully: one row added in User
+    }
+]
+3.
+[
+    {
+        Insert Successfully: one row added in Profile
+    }
+]
+
+4.
+[
+    {
+        count(*): 1
+    }
+]
+
+5.
+[
+    {
+        Insert Failure: Missing points field
+    }
+]
+
+6.
+[
+    {
+        user_secret: "D1e8a70b5ccab1dc2f56bbf7e99f064a660c08e361a35751b9c483c88943d082"
+    }
+]
+
+// Uploading Posts:
+1.
+[
+    {
+        Insert Failure: post_name field is missing
+    }
+]
+
+2.
+[
+    {
+        Insert Failure: Duplicate entry in Post table
+    }
+]
+
+3.
+
+[
+    {
+        count(*) for Post: 7  //The count will be the same in this case
+    }
+]
+
+4.
+[
+    {
+        Insert Successfully: A new row is added in Post table
+    }
+]
+
+5.
+[
+    {
+        user_email: "example2@gmail.com",
+        post_url: "newpic1.com",
+        post_name: "success_single",
+        update_date: "1000-01-01 00:00:00",
+        download_count: NULL,
+        like_count: NULL,
+        cost: 5,
+        report_count: 0
+    }
+]
+
+6.
+[
+    {
+        count(*) where user_email = "example2@gmail.com": 4 // +1 compare to before insertion
+    }
+]
+
+7.
+[
+    {
+        Update Successfully: Fields in User table have been updated
+    }
+]
+
+8.
+[
+    {
+        points: 3  //points should increment by 2 compare to before update
+    }
+]
+
+9.
+[
+    {
+        Update Successfully: Fields in Profile table have been updated
+    }
+]
+
+10.
+[
+    {
+        post_count: 3  //# of post_count in Profile table should increment by 1
+    }
+]
+
+
+// Report:
+
+1. 
+[
+    {
+        count(*) : 1 //stop report since already reported
+    }
+]
+
+2.
+[
+    {
+        Insert Successfully: A new Row added to Report table
+    }
+]
+
+3.
+
+[
+    {
+        user_email: "example4@qq.com",
+        post_url: "thefat2.com",
+        rep_description: NULL,
+        create_date: 1000-01-01 00:00:00
+    }
+]
+
+4.
+
+[
+    {
+        Update Successfully: A field in Post Table is updated
+    }
+]
+
+5.
+[
+    {
+        report_count: 1  //imcrement by 1 due to report
+    }
+]
+
+6.
+
+[
+    {
+        Insert Successfully: A new row is added to Report table
+    }
+]
+
+7.
+[
+    {
+        user_email: example1@xxx.com
+        post_url: thefat1.com
+        rep_description: description2
+        create_date: 1000-01-01 00:00:00
+    },
+    {
+        user_email: example1@xxx.com
+        post_url: zvideo.com
+        rep_description: descriptionlololsoso1
+        create_date: 1000-01-01 00:00:00
+    },
+    {
+        user_email: example2@gmail.com
+        post_url: abcd.com
+        rep_description: description1
+        create_date: 1000-01-01 00:00:00
+    },
+    {
+        user_email: example2@gmail.com
+        post_url: zvideo.com
+        rep_description: descriptionlololsoso2
+        create_date: 1000-01-01 00:00:00
+    },
+    {
+        user_email: example3@outlook.com
+        post_url: thefat1.com
+        rep_description: NULL
+        create_date: 1000-01-01 00:00:00
+    },
+    {
+        user_email: example3@outlook.com
+        post_url: zvideo.com
+        rep_description: NULL
+        create_date: 1000-01-01 00:00:00
+    },
+    {
+        user_email: example4@qq.com
+        post_url: thefat2.com
+        rep_description: NULL
+        create_date: 1000-01-01 00:00:00
+    },
+    {
+        user_email: example4@qq.com
+        post_url: xyzahah.com
+        rep_description: descrption3
+        create_date:
+    }
+] // the newly added report get added, whiles others remained same
+
+8.
+[
+    {
+        Update Successfully: There exists fields in Post Table being updated
+    }
+]
+
+9.
+[
+    {
+        report_count: 2 //increase by 1 compare to before, assume it reaches delete limit(actually not)
+    }
+]
+
+10.
+[
+    {
+        user_email: example2@gmail.com
+    }
+]
+
+11.
+[
+    {
+        Update Successfully: One row in User table is successfully updated
+    }
+]
+
+12.
+[
+    {
+        points: -7 //the points for user example2@gmail.com is deducted by 10
+    }
+]
+
+13.
+[
+    {
+        Delete Successfully: All post related rows in AttachedBy table are deleted
+    }
+]
+
+14.
+[
+    {
+        Delete Successfully: All post related rows in Report table are deleted
+    }
+]
+
+15.
+[
+    {
+        Delete Successfully: The post itself in Post table is deleted
+    }
+]
+
+16.
+[
+    {
+        count(*): 0 // All post related table(has foreignkey reference as post_url) does not have the deleted post related item
+    }
+]
+
+// Tags:
+
+1.
+[
+    {
+        count(*): 0  //Tag 'test' does not exist before insertion
+    }
+]
+
+2.
+[
+    {
+        Insert Successfully: A new Row is inserted in Tag table
+    }
+]
+
+3.
+[
+    {
+        count(*): 1  //After insertion, there is a tag 'test' in database
+    }
+]
+
+4.
+
+[
+    {
+        tag_id: 7,
+    },
+    {
+        tag_id: 5,
+    },
+    {
+        tag_id: 6,
+    },
+    {
+        tag_id: 4,
+    },
+    {
+        tag_id: 8,
+    },
+] // this query will return all tag ids which attached to certain post
+
+5.
+[
+    {
+        tag_id: 4,
+    },
+    {
+        tag_id: 5,
+    },
+]
+
+6.
+[
+    {
+        Insert Successfully: new rows are inserted in AttachedBy table
+    }
+]
+
+7.
+[
+    {
+        category: "animal"
+    },
+    {
+        category: "candy"
+    },
+    {
+        category: "celebrity"
+    },
+    {
+        category: "other"
+    },
+    {
+        category: "pet"
+    },
+    {
+        category: "school"
+    },
+    {
+        category: "sport"
+    },
+    {
+        category: "test"
+    },
+] // now, the post with unique url 'xyzahah.com' has all tags attached to it as required

@@ -1,15 +1,15 @@
 -- sign up and sign in
 
 -- success signup
-SELECT count(*) FROM user WHERE user_email = 'yiransun@gmail.com';
+SELECT count(*) FROM User WHERE user_email = 'yiransun@gmail.com';
 
 -- initial points is 15 for new user
 INSERT INTO User 
 VALUES ('yiransun@gmail.com', 'D1e8a70b5ccab1dc2f56bbf7e99f064a660c08e361a35751b9c483c88943d082', 15);
-INSERT INTO PROFILE (user_email) VALUES ('yiransun@gmail.com', 0);
+INSERT INTO Profile (user_email, post_count) VALUES ('yiransun@gmail.com', 0);
 
 -- fail signup due to duplicate
-SELECT count(*) FROM user WHERE user_email = 'yiransun@gmail.com';
+SELECT count(*) FROM User WHERE user_email = 'yiransun@gmail.com';
 
 -- fail signup due to frontend did not pass enough data:
 INSERT INTO User(user_email, user_secret) VALUES ("yiransun@gmail.com", "D1e8a70b5ccab1dc2f56bbf7e99f064a660c08e361a35751b9c483c88943d082"); -- fail
@@ -30,13 +30,16 @@ VALUES('example2@gmail.com', 'thefat1.com', 'failDueToNotUniqueUrl', '1000-01-01
 SELECT count(*) FROM Post;
 
 -- upload 1 picture successfull:
-INSERT INTO Post (user_email, post_url, post_name, update_date, cost, report_count) 
+INSERT INTO Post (user_email, post_url, post_name, update_date, cost, report_count)
 VALUES('example2@gmail.com', 'newpic1.com', 'success_single', '1000-01-01 00:00:00', 5, 0);
+
 SELECT * FROM Post WHERE post_url = "newpic1.com";
+
 SELECT count(*) FROM Post WHERE user_email = "example2@gmail.com";
 
 UPDATE User SET points = points + 2 
             WHERE user_email = 'example2@gmail.com';
+
 SELECT points FROM User WHERE user_email = "example2@gmail.com";
 
 UPDATE Profile SET post_count = post_count + 1 
@@ -46,18 +49,21 @@ SELECT post_count FROM Profile WHERE user_email = "example2@gmail.com";
 -- Report:
 -- Report submit failure due to same user report same post multiple times, and will only has one query
 SELECT count(*) FROM Report 
-WHERE user_email = 'example3@outlook.com' and post_url="xyzahah.com";
-INSERT INTO Report (user_email, post_url, create_date) 
-VALUES('example3@gmail.com', 'zvideo.com', ‘1000-01-01 00:00:00’);
-SELECT count(*) FROM Report 
-WHERE user_email = 'example3@outlook.com' and post_url="xyzahah.com";
+WHERE user_email = 'example2@gmail.com' and post_url="abcd.com"; -- fail
+-- INSERT INTO Report (user_email, post_url, create_date) 
+-- VALUES('example3@gmail.com', 'zvideo.com', ‘1000-01-01 00:00:00’);
+-- SELECT count(*) FROM Report 
+-- WHERE user_email = 'example3@outlook.com' and post_url="xyzahah.com";
 
 -- Report submit success, but the report count does not met delete requirement:
 INSERT INTO Report (user_email, post_url, create_date) 
 VALUES('example4@qq.com', 'thefat2.com', "1000-01-01 00:00:00");
+
 SELECT * FROM Report WHERE user_email = 'example4@qq.com' and post_url = 'thefat2.com';
+
 UPDATE Post SET report_count = report_count + 1 
      WHERE post_url = 'thefat2.com';
+
 SELECT report_count FROM Post WHERE post_url = 'thefat2.com';
 
 -- Report submit success, and the report count reach to be deleted:
@@ -69,11 +75,12 @@ SELECT report_count FROM Post WHERE post_url = 'thefat1.com';
 -- find the owner to post, and store that user_email in backend
 SELECT user_email FROM Post WHERE post_url = 'thefat1.com';
 UPDATE User SET points = points - 10 WHERE user_email = 'example2@gmail.com';
-SELECT points FROM user WHERE user_email = 'example2@gmail.com';
-DELETE FROM Report, AttachedBy WHERE post_url = 'thefat1.com';
--- DELETE FROM AttachedBy WHERE post_url = "thefat1.com";
+SELECT points FROM User WHERE user_email = 'example2@gmail.com';
+
+DELETE FROM AttachedBy WHERE post_url = "thefat1.com";
+DELETE FROM Report WHERE post_url = "thefat1.com";
 DELETE FROM Post WHERE post_url = "thefat1.com";
-SELECT count(*) FROM Report, AttachedBy, Post WHERE post_url = 'thefat1.com';
+SELECT count(*) FROM Report, AttachedBy, Post WHERE Post.post_url = 'thefat1.com' and Post.post_url = Report.post_url and Post.post_url = AttachedBy.post_url;
 -- SELECT count(*) FROM AttachedBy WHERE post_url = 'thefat1.com';
 -- SELECT count(*) FROM Post WHERE post_url = 'thefat1.com';
 
@@ -86,12 +93,21 @@ SELECT count(*) FROM Tag WHERE category = 'test';
 
 -- otherwise do nothing
 
--- Once all tags have been attached to post:
--- Suppose the tags selected are pet, candy
-SELECT tag_id IN Tag 
-WHERE category = 'pet' OR category = 'candy';
+-- Suppose the tags selected are pet, candy, test, other, and school
+SELECT tag_id FROM Tag 
+WHERE category = 'pet' OR category = 'candy' OR category = 'test'
+OR category = 'other' OR category = 'school';
+
+SELECT tag_id FROM AttachedBy WHERE tag_id IN (
+SELECT tag_id FROM Tag 
+WHERE category = 'pet' OR category = 'candy' OR category = 'test' OR category = 'other' OR category = 'school'
+) and post_url = 'xyzahah.com';
+
+-- insert tags which are newly added to the post(6, 7, 8) in this case
 INSERT INTO AttachedBy(post_url, tag_id) 
-VALUES('xyzahah.com', 6), ('xyzahah.com', 7);
+VALUES('xyzahah.com', 6), ('xyzahah.com', 7), ('xyzahah.com', 8);
+
+Select category from Tag where tag_id in (Select tag_id from AttachedBy where post_url = 'xyzahah.com');
 
 
 -- SELECT count(*) FROM user WHERE user_secret = "D1e8a70b5ccab1dc2f56bbf7e99f064a660c08e361a35751b9c483c88943d082";
