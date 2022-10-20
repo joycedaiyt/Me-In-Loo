@@ -1,5 +1,7 @@
 ### Using GCP Bucket
 
+#### Images are uploaded to the [GCP Bucket](https://console.cloud.google.com/storage/browser?referrer=search&project=dynamic-branch-308302&prefix=)
+
 #### Configuration
 Make sure that you have `dynamic-branch-308302-f0b255f61755.json` in your local repository in this folder to connect to GCP bucket. \
 \
