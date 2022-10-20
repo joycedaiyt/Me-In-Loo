@@ -75,7 +75,7 @@ Select count(*) from Tag where category = 'test';
 
 -- Once all tags have been attached to post:
 -- Suppose the tags selected are animal, celebrity, sport, school, test
-Select tag_id from Tags where (category = 'animal' or category = 'celebrity' or category = 'sport' or category = 'school' or category = 'test') and not in (Select tag_id from AttachedBy where post_url = 'xyzahah.com');
+Select tag_id from Tags where (category = 'animal' or category = 'celebrity' or category = 'sport' or category = 'school' or category = 'test') and tag_id not in (Select tag_id from AttachedBy where post_url = 'xyzahah.com');
 -- the above query will only return tags which have not been attached to given post
 Insert into AttachedBy(post_url, tag_id) VALUES ('xyzahah.com', 8);
 Select tag_id from AttachedBy where  post_url = 'xyzahah.com';
