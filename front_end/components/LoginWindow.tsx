@@ -92,7 +92,7 @@ export const LoginWindow = (props: { curQuery: any; setCurQuery: any }) => {
           </div>
           <div
             style={{
-              fontSize: "10px",
+              fontSize: "11px",
               marginLeft: 30,
               marginRight: 30,
               marginTop: 20,
