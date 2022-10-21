@@ -1,7 +1,11 @@
 import { Paper, Button, TextField } from "@mui/material";
 import styles from "./SignUpWindow.module.css";
+import { IoIosCloseCircleOutline } from "react-icons/io";
+import { createUser } from "../pages/api/userLogin";
 require("typeface-eb-garamond");
 import "@fontsource/montserrat";
+import { useState } from "react";
+import Router from "next/router";
 const axios = require("axios");
 export const SignUpWindow = () => {
   const options = {
@@ -13,6 +17,30 @@ export const SignUpWindow = () => {
       "X-RapidAPI-Host": "rapidprod-sendgrid-v1.p.rapidapi.com",
     },
     data: '{"personalizations":[{"to":[{"email":"yiransun068@gmail.com"}],"subject":"Confirmation Email for MeInLoo"}],"from":{"email":"from_address@example.com"},"content":[{"type":"text/plain","value":"here is the confirmation 222222"}]}',
+  };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
+  const [errorExist, setErrorExist] = useState(false);
+  const handleEmail = (el: any) => {
+    setEmail(el.target.value);
+    setErrorExist(false);
+  };
+  const handlePassword = (el: any) => {
+    setPassword(el.target.value);
+    setErrorExist(false);
+  };
+  const handleConfirm = (el: any) => {
+    setConfirmPass(el.target.value);
+    setErrorExist(false);
+  };
+  const handleSignUp = async () => {
+    try {
+      let output = await createUser(email, password);
+      Router.replace("/");
+    } catch (e) {
+      setErrorExist(true);
+    }
   };
   return (
     <div className="root" style={{ paddingTop: "6%", marginLeft: "26%" }}>
@@ -57,7 +85,7 @@ export const SignUpWindow = () => {
               <TextField
                 variant="outlined"
                 defaultValue=""
-                onChange={(el) => {}}
+                onChange={handleEmail}
                 style={{
                   margin: 6,
                   maxWidth: "200px",
@@ -65,6 +93,13 @@ export const SignUpWindow = () => {
                 }}
                 size="small"
               />
+              {email != "" ? (
+                ""
+              ) : (
+                <span style={{ position: "fixed", marginLeft: 375 }}>
+                  <IoIosCloseCircleOutline style={{ color: "red" }} size={20} />
+                </span>
+              )}
             </div>
             <div
               style={{
@@ -79,7 +114,7 @@ export const SignUpWindow = () => {
                 variant="outlined"
                 defaultValue=""
                 type="password"
-                onChange={(el) => {}}
+                onChange={handlePassword}
                 style={{
                   margin: 6,
                   maxWidth: "200px",
@@ -87,6 +122,13 @@ export const SignUpWindow = () => {
                 }}
                 size="small"
               />
+              {confirmPass == password && password != "" ? (
+                ""
+              ) : (
+                <span style={{ position: "fixed", marginLeft: 375 }}>
+                  <IoIosCloseCircleOutline style={{ color: "red" }} size={20} />
+                </span>
+              )}
             </div>
             <div
               style={{
@@ -101,7 +143,7 @@ export const SignUpWindow = () => {
                 variant="outlined"
                 defaultValue=""
                 type="password"
-                onChange={(el) => {}}
+                onChange={handleConfirm}
                 style={{
                   margin: 6,
                   maxWidth: "200px",
@@ -109,8 +151,15 @@ export const SignUpWindow = () => {
                 }}
                 size="small"
               />
+              {confirmPass == password && confirmPass != "" ? (
+                ""
+              ) : (
+                <span style={{ position: "fixed", marginLeft: 375 }}>
+                  <IoIosCloseCircleOutline style={{ color: "red" }} size={20} />
+                </span>
+              )}
             </div>
-            <div
+            {/* <div
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -132,7 +181,16 @@ export const SignUpWindow = () => {
                 }}
                 size="small"
               />
-            </div>
+            </div> */}
+            {errorExist ? (
+              <div
+                style={{ fontFamily: "montserrat", color: "red", fontSize: 12 }}
+              >
+                Sorry, our backend have some issues
+              </div>
+            ) : (
+              ""
+            )}
           </div>
           <Button
             variant="contained"
@@ -149,6 +207,13 @@ export const SignUpWindow = () => {
               marginTop: 25,
               marginBottom: 25,
             }}
+            disabled={
+              password != confirmPass ||
+              email == "" ||
+              password == "" ||
+              confirmPass == ""
+            }
+            onClick={handleSignUp}
           >
             Submit
           </Button>

@@ -10,9 +10,36 @@ import "@fontsource/montserrat";
 import styles from "./LoginWindow.module.css";
 import { IoCloseOutline } from "react-icons/io5";
 import Router from "next/router";
+import { useRef, useState } from "react";
+import { GiConsoleController } from "react-icons/gi";
+import { getUser } from "../pages/api/userLogin";
 
-export const LoginWindow = (props: { curQuery: any; setCurQuery: any }) => {
+export const LoginWindow = (props: {
+  curQuery: any;
+  setCurQuery: any;
+  loginSuccess: any;
+  setLoginSuccess: any;
+}) => {
   const { curQuery, setCurQuery } = props;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorExist, setErrorExist] = useState(false);
+  const handleLogin = async () => {
+    try {
+      let output = await getUser(email, password);
+      Router.push("/main");
+    } catch {
+      setErrorExist(true);
+    }
+  };
+  const handleEmail = (el: any) => {
+    setEmail(el.target.value);
+    setErrorExist(false);
+  };
+  const handlePassword = (el: any) => {
+    setPassword(el.target.value);
+    setErrorExist(false);
+  };
   return (
     <div className="root">
       <Paper
@@ -56,6 +83,7 @@ export const LoginWindow = (props: { curQuery: any; setCurQuery: any }) => {
             >
               <span style={{ paddingRight: 31.91 }}>email: </span>
               <TextField
+                id="emailLogin"
                 variant="outlined"
                 defaultValue=""
                 onChange={(el) => {}}
@@ -65,6 +93,7 @@ export const LoginWindow = (props: { curQuery: any; setCurQuery: any }) => {
                   //   borderColor: "black",
                 }}
                 size="small"
+                onChangeCapture={handleEmail}
               />
             </div>
             <div
@@ -77,6 +106,7 @@ export const LoginWindow = (props: { curQuery: any; setCurQuery: any }) => {
             >
               <span>password:</span>
               <TextField
+                id="passLogin"
                 variant="outlined"
                 defaultValue=""
                 type="password"
@@ -87,6 +117,7 @@ export const LoginWindow = (props: { curQuery: any; setCurQuery: any }) => {
                   //   borderColor: "black",
                 }}
                 size="small"
+                onChangeCapture={handlePassword}
               />
             </div>
           </div>
@@ -112,6 +143,15 @@ export const LoginWindow = (props: { curQuery: any; setCurQuery: any }) => {
             </span>
             &nbsp;and create an account for free!
           </div>
+          {errorExist ? (
+            <div
+              style={{ fontFamily: "montserrat", color: "red", fontSize: 12 }}
+            >
+              Invalid email or wrong password{" "}
+            </div>
+          ) : (
+            ""
+          )}
           <Button
             variant="contained"
             style={{
@@ -127,6 +167,7 @@ export const LoginWindow = (props: { curQuery: any; setCurQuery: any }) => {
               marginTop: 25,
               marginBottom: 25,
             }}
+            onClick={handleLogin}
           >
             Login
           </Button>
