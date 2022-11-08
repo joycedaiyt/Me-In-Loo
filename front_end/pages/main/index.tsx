@@ -1,5 +1,11 @@
+import HeadBar from "../../components/Header";
+
 export const MainPage = () => {
-  return <div style={{ justifyContent: "center" }}>Successful Login!</div>;
+  return (
+    <div>
+      <HeadBar></HeadBar>
+    </div>
+  );
 };
 
 export default MainPage;
