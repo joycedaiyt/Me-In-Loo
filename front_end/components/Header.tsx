@@ -94,7 +94,7 @@ export default function HeadBar() {
             borderColor: "#80774f",
             borderWidth: "2px",
             borderRadius: 0,
-            fontFamily: "Montserrat",
+            fontFamily: "serrat",
             fontSize: "13px",
             fontWeight: 600,
             height: "40px",
