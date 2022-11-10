@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    align-items: center;
+    font-family: "Montserrat";
+    font-size: 0.9rem;
+    background-color: white;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-left: 80px;
+    height: 60px;
+    max-width: 90vh;
+    min-width: 90vh;
+    cursor: pointer;
+    /* white-space: nowrap; */
+    font-weight: 400;
+    z-index: 2;
+}
+
+.buttonGold {
+    color: black;
+    border-color: goldenrod;
+    border-width: 5px;
+    border-radius: 0;
+    font-family: "Montserrat";
+    font-size: 13px;
+    font-weight: 600;
+    height: 40px;
+    margin-top: 10px;
+    width: 15%;
+    text-transform: none;
+}
