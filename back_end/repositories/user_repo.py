@@ -1,5 +1,4 @@
-from back_end import cursor
-from werkzeug.security import check_password_hash, generate_password_hash
+from back_end import cursor, cnxn
 
 
 def getUserByEmail(email):
@@ -18,3 +17,16 @@ def getUserCountByEmail(email):
     result = cursor.fetchone()
 
     return result
+
+
+def createUser(email, secret):
+    insert_stmt = "INSERT INTO User VALUES (%s, %s, %s)"
+    data = (email, secret, 15)
+    cursor.execute(insert_stmt, data)
+    cnxn.commit()
+
+
+def addUserPoint2(email):
+    update_stmt = "UPDATE User SET points = points + 2 WHERE user_email = %(email)s"
+    cursor.execute(update_stmt, {'email': email})
+

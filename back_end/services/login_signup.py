@@ -1,7 +1,7 @@
-from back_end import cursor, cnxn
 from flask import Response, session
 from werkzeug.security import check_password_hash, generate_password_hash
-from back_end.repositories.user_repo import getUserByEmail, getUserCountByEmail
+from back_end.repositories.user_repo import getUserByEmail, getUserCountByEmail, createUser
+from back_end.repositories.post_repo import insertPost
 
 
 def handleLogin(email, password):
@@ -29,11 +29,8 @@ def handleSignUp(email, password):
     result = getUserCountByEmail(email)
 
     if result[0] == 0:
-        insert_stmt = "INSERT INTO User VALUES (%s, %s, %s)"
-        print(password)
-        data = (email, generate_password_hash(password), 15)
-        cursor.execute(insert_stmt, data)
-        cnxn.commit()
+        createUser(email, generate_password_hash(password))
+        insertPost(email)
         return Response("create user success", status=200)
     else:
         return Response("user already exist", status=400)
