@@ -1,5 +1,5 @@
 config = {
-    'user': 'me-in-loo',
-    'password': 'uwaterloo348',
-    'host': '35.193.141.203'
+    'user': 'root',
+    'password': 'yutong1022',
+    'host': 'localhost'
 }
