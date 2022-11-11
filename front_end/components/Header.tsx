@@ -104,6 +104,7 @@ export default function HeadBar() {
             marginRight: 60,
             whiteSpace: "nowrap",
           }}
+          onClick={() => handleClick("/upload")}
         >
           Upload Image
         </Button>
