@@ -15,18 +15,46 @@ export const PageSwitch = (props: {
   const [input, setInput] = useState(pageNum + 1);
   const [openInputBox, setOpenInputBox] = useState(false);
   const handleNext = () => {
-    if (pageNum + 1 > countPage) {
+    if (pageNum + 1 >= countPage) {
       setPageNum(0);
+      setInput(1);
     } else {
+      setInput(pageNum + 2);
       setPageNum(pageNum + 1);
     }
   };
   const handlePrev = () => {
     if (pageNum - 1 < 0) {
-      setPageNum(countPage);
+      setPageNum(countPage - 1);
       setInput(countPage);
     } else {
       setPageNum(pageNum - 1);
+    }
+  };
+  const handleOpen = () => {
+    setOpenInputBox(true);
+  };
+
+  const handleIuputChange = (e: any) => {
+    if (/^[0-9]*$/.test(e.target.value)) {
+      console.log(e.target.value);
+      setInput(e.target.value);
+    }
+  };
+
+  const handleKeyDown = (e: any) => {
+    console.log(e);
+    if (e.keyCode != 13) {
+      // let input = parseInt(input);
+      if (0 < input && input <= countPage) {
+        setInput(input);
+      }
+    }
+    if (e.keyCode == 13) {
+      if (0 < input && input <= countPage) {
+        setPageNum(input - 1);
+      }
+      setOpenInputBox(false);
     }
   };
 
@@ -40,12 +68,47 @@ export const PageSwitch = (props: {
           alignItems: "center",
         }}
       >
-        <MdOutlineKeyboardArrowLeft style={{ marginTop: 5 }} />
-        <span style={{ marginRight: 20 }}>prev</span>
-        {!openInputBox ? <span>{pageNum + 1} </span> : <TextField></TextField>}
+        <MdOutlineKeyboardArrowLeft
+          style={{ marginTop: 5, cursor: "pointer" }}
+          onClick={handlePrev}
+        />
+        <span
+          style={{ marginRight: 20, cursor: "pointer" }}
+          onClick={handlePrev}
+        >
+          prev
+        </span>
+        {!openInputBox ? (
+          <span onClick={handleOpen}>{pageNum + 1} </span>
+        ) : (
+          <TextField
+            inputProps={{
+              style: {
+                paddingLeft: 5,
+                width: 35,
+                paddingRight: 5,
+                paddingTop: 0,
+                paddingBottom: 0,
+              },
+            }}
+            sx={{ cursor: "pointer" }}
+            variant="outlined"
+            value={input}
+            onChange={handleIuputChange}
+            onKeyDown={handleKeyDown}
+          ></TextField>
+        )}
         <span> &nbsp;{`/ ${countPage}`}</span>
-        <span style={{ marginLeft: 20 }}>next</span>
-        <MdOutlineKeyboardArrowRight style={{ marginTop: 5 }} />
+        <span
+          style={{ marginLeft: 20, cursor: "pointer" }}
+          onClick={handleNext}
+        >
+          next
+        </span>
+        <MdOutlineKeyboardArrowRight
+          style={{ marginTop: 5, cursor: "pointer" }}
+          onClick={handleNext}
+        />
       </span>
     </div>
   );

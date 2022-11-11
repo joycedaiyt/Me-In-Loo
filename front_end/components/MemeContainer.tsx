@@ -10,9 +10,8 @@ export const MemeContainer = (props: {
   cost: number;
 }) => {
   const { src, memeName, cost } = props;
-  const handleClick = (el: any) => {
-    console.log(el);
-  };
+  const handleClick = (el: any) => {};
+
   return (
     <div
       style={{
@@ -20,7 +19,8 @@ export const MemeContainer = (props: {
         paddingRight: 50,
         display: "flex",
         justifyContent: "space-between",
-        marginBottom: 100,
+        marginBottom: 50,
+        marginTop: 50,
       }}
     >
       <div
