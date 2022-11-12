@@ -57,11 +57,16 @@ mysql -uroot -p -h 35.193.141.203 --ssl-ca=server-ca.pem --ssl-cert=client-cert.
 - Interactions with the project GCP bucket for the GCP Storage API are located in the `back_end/gcpbucket_setup` folder
 
 ### Running Flask backend local server
-cd to ./back_end folder
-entering virtual environment (source venv/bin/activate or source env/bin/activate)
+Make sure you're in the root directory \
+entering virtual environment (source venv/bin/activate or source env/bin/activate) \
 run:
-python app.py
+```
+python run.py
+```
 The local host and port will show up in the terminal
+ ```
+ * Running on http://127.0.0.1:5000
+ ```
 
 ### Running Next.js frontend server
 cd to ./front_end folder

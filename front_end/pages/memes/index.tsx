@@ -3,9 +3,11 @@ require("typeface-eb-garamond");
 import testPhoto1 from "../../public/testPhoto1.jpeg";
 import "@fontsource/montserrat";
 import { MemeContainer } from "../../components/MemeContainer";
-import { useState, useEffect } from "react";
-import { strict } from "assert";
+import { useState, useEffect, useRef } from "react";
 import { PageSwitch } from "../../components/PageSwitch";
+import { IoMdArrowDropdown } from "react-icons/io";
+import { ClickAwayListener, Button } from "@mui/material";
+import { TagPopper } from "../../components/TagPopper";
 
 const arrayImage = [
   {
@@ -68,11 +70,25 @@ const arrayImage = [
   },
 ];
 
+const TagItems = [
+  "Tag 1",
+  "Tag 3",
+  "Tag 4",
+  "Tag 5",
+  "Tag 6",
+  "Tag 8",
+  "Tag 95",
+];
+
 export const MemePage = () => {
   const [windowWidth, setWindowWidth] = useState(1440);
   const [pageNum, setPageNum] = useState(0);
+  const [countPage, setCountPage] = useState(15);
   const count = 0;
   let limit = 9;
+  const tagRef = useRef(null);
+  const [tagPopOpen, setTagPopOpen] = useState(false);
+  const [selectedTags, setSelectedTags] = useState([] as Array<string>);
   // const size = window.innerWidth;
   useEffect(() => {
     function updateSize() {
@@ -94,35 +110,69 @@ export const MemePage = () => {
     curArr3 = curArr.slice(4, 8);
     curArr4 = curArr.slice(8, 12);
   }
-  let countPage = 15;
 
   return (
     <div>
       <HeadBar></HeadBar>
       <div
         style={{
-          paddingRight: 70,
-          paddingLeft: 40,
+          // paddingRight: 200,
+          paddingLeft: 70,
           fontSize: 80,
           fontWeight: 500,
           fontFamily: "EB Garamond",
           marginTop: 120,
           alignContent: "center",
+          alignItems: "center",
+          display: "flex",
           lineHeight: "57%",
-          marginBottom: 200,
+          marginBottom: 150,
+          justifyContent: "space-between",
         }}
       >
-        <span
-          style={{
-            borderBottomColor: "rgb(251, 235, 79)",
-            borderBottomStyle: "solid",
-            borderBottomWidth: 10,
-            position: "absolute",
-          }}
-        >
-          Find Memes
+        <span>
+          <span
+            style={{
+              borderBottomColor: "rgb(251, 235, 79)",
+              borderBottomStyle: "solid",
+              borderBottomWidth: 10,
+              position: "absolute",
+            }}
+          >
+            Find Memes
+          </span>
+          <span style={{ marginLeft: 400 }}>You Want!</span>
         </span>
-        <span style={{ marginLeft: 400 }}>You Want!</span>
+        <span>
+          <Button
+            variant="outlined"
+            style={{
+              borderRadius: 0,
+              borderColor: "#80774f",
+              borderWidth: 2,
+              fontFamily: "montserret",
+              color: "black",
+              textTransform: "none",
+            }}
+            onClick={() => {
+              setTagPopOpen(true);
+            }}
+            ref={tagRef}
+          >
+            <span style={{ display: "flex", alignItems: "center" }}>
+              <span>Filter By Tags</span>
+              <IoMdArrowDropdown style={{ marginLeft: 10 }} />
+            </span>
+          </Button>
+        </span>
+        <TagPopper
+          anchorEl={tagRef}
+          tagPopOpen={tagPopOpen}
+          setTagPopOpen={setTagPopOpen}
+          TagItems={TagItems}
+          selectedTags={selectedTags}
+          setSelectedTags={setSelectedTags}
+        ></TagPopper>
       </div>
       <div
         style={{
@@ -184,11 +234,13 @@ export const MemePage = () => {
           );
         })}
       </div>
-      <PageSwitch
-        pageNum={pageNum}
-        setPageNum={setPageNum}
-        countPage={countPage}
-      />
+      <div style={{ marginLeft: "75%", marginBottom: 50 }}>
+        <PageSwitch
+          pageNum={pageNum}
+          setPageNum={setPageNum}
+          countPage={countPage}
+        />
+      </div>
     </div>
   );
 };
