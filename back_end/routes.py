@@ -1,5 +1,5 @@
 from flask import request, Blueprint
-from back_end.services import login_signup, posts
+from back_end.services import login_signup, posts, tags
 
 
 # In Flask, a blueprint is just a group of related routes (the functions below), it helps organize your code
@@ -31,7 +31,7 @@ def getMeme():
     # upload a post to 
     # need a post name
     # cost
-    # post url
+    # post url,,
     pass
 
 
@@ -41,3 +41,11 @@ def createPost():
     content = request.json
 
     return posts.uploadMeme(content)
+
+
+@routes.route('/tags', methods=['POSTS'])
+def addTagsToPost():
+    # Retrieve user entered upload post info
+    content = request.json
+
+    return tags.addTagsToPost(content)
