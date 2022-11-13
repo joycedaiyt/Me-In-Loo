@@ -52,7 +52,7 @@ export const UploadPage = () => {
       <div>
         <div
           style={{
-            paddingLeft: 150,
+            paddingLeft: "12.5%",
             paddingRight: "25%",
             justifyContent: "left",
             alignContent: "center",
@@ -67,7 +67,7 @@ export const UploadPage = () => {
               color: "white",
               borderRadius: 0,
               textTransform: "none",
-              height: 55,
+              height: 52,
               fontSize: 15,
               fontFamily: "montserrat",
               fontWeight: "bolder",
@@ -97,9 +97,9 @@ export const UploadPage = () => {
             <span>Choose Memes From Your Local Machine And </span>
             <div>Customize their uploaded information</div>
           </span>
-          <div>
-            <Button>submit </Button>
-          </div>
+        </div>
+        <div style={{ paddingLeft: "12.5%" }}>
+          <Button>submit </Button>
         </div>
       </div>
     </div>
