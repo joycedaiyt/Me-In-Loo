@@ -24,11 +24,6 @@ export default function WelcomePage() {
     router.push("?page=login");
     setCurQuery("login");
   };
-  // useEffect(() => {
-  //   const query = router.asPath;
-  //   console.log(router.asPath);
-  //   setCurQuery(query as any);
-  // }, [router.asPath]);
   return (
     <div>
       <div

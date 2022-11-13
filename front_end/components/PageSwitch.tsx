@@ -37,13 +37,11 @@ export const PageSwitch = (props: {
 
   const handleIuputChange = (e: any) => {
     if (/^[0-9]*$/.test(e.target.value)) {
-      console.log(e.target.value);
       setInput(e.target.value);
     }
   };
 
   const handleKeyDown = (e: any) => {
-    console.log(e);
     if (e.keyCode != 13) {
       // let input = parseInt(input);
       if (0 < input && input <= countPage) {
