@@ -40,7 +40,6 @@ export const UploadInfo = (props: {
     let capSearchWords = searchWords.toUpperCase();
     return capWords.includes(capSearchWords) && !postTags.includes(el);
   });
-  console.log(postTags);
   const handlePostName = (el: any) => {
     setPostName(el.target.value);
   };
@@ -64,14 +63,9 @@ export const UploadInfo = (props: {
   };
   const handleInsertTags = (el: any) => {
     let newArr = postTags;
-    // console.log(newArr, el);
-    // console.log(el.target.innerText);
     newArr.push(el.target.innerText);
-    // console.log(newArr);
     setPostTags(newArr);
     setSearchWords("");
-    // menuRef.current ? (menuRef.current.value = "") : "";
-    // document.getElementById()
   };
 
   const handleClickAway = () => {
@@ -79,7 +73,6 @@ export const UploadInfo = (props: {
   };
 
   const handleRemove = (e: any) => {
-    console.log(e.current.innerText);
     let newArr = postTags.filter((el) => {
       return el != e.current.innerText;
     });
