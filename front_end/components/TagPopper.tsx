@@ -26,7 +26,6 @@ export const TagPopper = (props: {
     setSelectedTags,
   } = props;
   const handleChange = (el: any) => {
-    console.log(el);
     if (el.target.checked === true) {
       selectedTags.push(el.target.id);
       setSelectedTags(selectedTags);
@@ -40,7 +39,6 @@ export const TagPopper = (props: {
 
   const handleConfirm = () => {
     setTagPopOpen(false);
-    console.log(selectedTags);
     setSelectedTags([]);
   };
   const handleClickAway = () => {
