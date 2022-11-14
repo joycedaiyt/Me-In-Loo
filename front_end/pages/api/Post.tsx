@@ -10,7 +10,8 @@ const postAxios = axios.create({
 export const createPost = async (
   file: File,
   postCost: number,
-  postName: string
+  postName: string,
+  tags: Array<string>
 ) => {
   try {
     const res = await postAxios({
@@ -20,6 +21,7 @@ export const createPost = async (
         meme: file,
         cost: postCost,
         post_name: postName,
+        tags: tags,
       },
     });
   } catch (e) {

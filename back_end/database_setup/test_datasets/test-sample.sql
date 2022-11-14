@@ -110,6 +110,19 @@ VALUES('xyzahah.com', 6), ('xyzahah.com', 7), ('xyzahah.com', 8);
 Select category from Tag where tag_id in (Select tag_id from AttachedBy where post_url = 'xyzahah.com');
 
 
+-- ranking information for rank page
+-- select user with 10 points
+Select user_email from User order by points Desc LIMIT 10;
+
+-- select user with 10 most uploaded pictures
+Select user_email from Profile order by post_count Desc LIMIT 10;
+
+-- select pictures wuth 10 most like
+Select post_name from Post order by like_count Desc Limit 10;
+
+-- select pictures with 10 most download
+Select post_name from Post order by download_count Desc Limit 10;
+
 -- SELECT count(*) FROM user WHERE user_secret = "D1e8a70b5ccab1dc2f56bbf7e99f064a660c08e361a35751b9c483c88943d082";
 
 -- SELECT count(*) FROM user WHERE points = 100;
