@@ -174,6 +174,7 @@ export const UploadPage = () => {
             postCost={postCost}
             setPostCost={setPostCost}
             allTags={allTags}
+            uploadMeme={uploadMeme}
           />
         </div>
       </div>
