@@ -7,18 +7,26 @@ const postAxios = axios.create({
   },
 });
 
-export const createPost = async (file: Blob) => {
+export const createPost = async (
+  file: File,
+  postCost: number,
+  postName: string
+) => {
   try {
     const res = await postAxios({
       method: "POST",
       url: "/posts",
       data: {
         meme: file,
-        cost: 5,
-        post_name: "post_name",
+        cost: postCost,
+        post_name: postName,
       },
     });
   } catch (e) {
     console.log(e);
   }
 };
+
+// export const getPost = async (
+
+// )
