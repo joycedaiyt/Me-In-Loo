@@ -110,7 +110,7 @@ VALUES('xyzahah.com', 6), ('xyzahah.com', 7), ('xyzahah.com', 8);
 Select category from Tag where tag_id in (Select tag_id from AttachedBy where post_url = 'xyzahah.com');
 
 
--- ranking information for rank page
+-- ranking information for rank page(without index)
 -- select user with 10 points
 Select user_email from User order by points Desc LIMIT 10;
 
