@@ -1,13 +1,13 @@
 import os
 import uuid
 import datetime
+import mysql.connector
 from minio import Minio
 from flask import Response
 from sessionData import session
-from mysql.connector import Error as err
 from endpoints.repositories.user_repo import addUserPoint2
 from endpoints.repositories.profile_repo import addPostCount
-from endpoints.repositories.post_repo import getPostByUrl, insertPost
+from endpoints.repositories.post_repo import insertPost
 
 def uploadMeme(meme, cost, post_name, tags):
     # check if content has all required data
@@ -28,31 +28,32 @@ def uploadMeme(meme, cost, post_name, tags):
     if not found:
         minioClient.make_bucket(bucket_name)
 
-    fileName = "meme/"+str(uuid.uuid4())
+    fileName = "meme/"+str(uuid.uuid4())+"."+meme.filename.split('.')[1]
     size = os.fstat(meme.fileno()).st_size
 
     minioClient.put_object(
         bucket_name, fileName, meme, size
     )
 
-    post_url = "http://127.0.0.1:9000/"+bucket_name+"/"+fileName,
+    post_url = "http://127.0.0.1:9000/"+bucket_name+"/"+fileName
 
     try:
-        email = session.get("email")
+        email = session.get("user_email")
         print(email)
         content = {
+            'user_email': email,
             'cost': cost,
             'email': email,
             'post_url': post_url,
             'post_name': post_name,
-            'update_date': datetime.datetime.utcnow()
+            'update_date': str(datetime.datetime.utcnow())
         }
         insertPost(content)
         addPostCount(email)
         addUserPoint2(email)
-
         return Response("Meme successfully uploaded", status=200)
-    except err:
-        return Response("Something went wrong: {}".format(err), status=400)
+
+    except mysql.connector.Error as err:
+        return Response("Something went wrong: {}".format(err.msg), status=400)
 
 

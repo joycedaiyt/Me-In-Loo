@@ -18,7 +18,7 @@ def handleLogin(email, password):
         if check_password_hash(hashed_password, password):
             # Create session data, we can access this data in other routes
             session['loggedin'] = True
-            session['email'] = user[0]
+            session['user_email'] = user[0]
             return Response("good", status=200, mimetype='application/json')
         else:
             return Response("Incorrect password", status=400)
