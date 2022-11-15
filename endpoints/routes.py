@@ -37,7 +37,7 @@ def getMeme():
 @routes.route('/posts', methods=['POST'])
 def createPost():
     # Retrieve user entered upload post info
-    meme = request.files["meme"]
+    meme = request.files
     cost = int(request.form.get('cost'))
     post_name = request.form.get('post_name')
     tags = request.form.get('tags')

@@ -5,14 +5,17 @@ import mysql.connector
 from minio import Minio
 from flask import Response
 from sessionData import session
+from endpoints.services.tags import addTagsToPost
+from endpoints.repositories.post_repo import insertPost
 from endpoints.repositories.user_repo import addUserPoint2
 from endpoints.repositories.profile_repo import addPostCount
-from endpoints.repositories.post_repo import insertPost
 
 def uploadMeme(meme, cost, post_name, tags):
     # check if content has all required data
-    if meme == None or cost == None or post_name == None or tags == None:
+    if not meme or cost == None or post_name == None or tags == None:
         return Response("Missing input value", status=400)
+    
+    meme = meme['meme']
 
     # setup MinIO connection
     minioClient = Minio(
@@ -48,9 +51,12 @@ def uploadMeme(meme, cost, post_name, tags):
             'post_name': post_name,
             'update_date': str(datetime.datetime.utcnow())
         }
+
         insertPost(content)
         addPostCount(email)
         addUserPoint2(email)
+        addTagsToPost(post_url, tags)
+        
         return Response("Meme successfully uploaded", status=200)
 
     except mysql.connector.Error as err:

@@ -2,7 +2,7 @@ import csv
 import mysql.connector
 from gcp_sql_config import config
 
-config['database'] = 'test_mile_stone'  # assign which database to connect to
+config['database'] = 'joyce'  # assign which database to connect to
 cnxn = mysql.connector.connect(**config)
 print("Established Connection...")
 cursor = cnxn.cursor()
