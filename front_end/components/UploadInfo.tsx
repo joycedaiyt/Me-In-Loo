@@ -38,8 +38,8 @@ export const UploadInfo = (props: {
   } = props;
   const [searchWords, setSearchWords] = useState("");
   const menuRef = useRef(null);
-  const allTagsCopy = allTags.slice();
-  const tagsRemained = allTagsCopy.filter((el) => {
+  const allTagsCopy = allTags?.slice();
+  const tagsRemained = allTagsCopy?.filter((el) => {
     let capWords = el.toUpperCase();
     let capSearchWords = searchWords.toUpperCase();
     return capWords.includes(capSearchWords) && !postTags.includes(el);
@@ -182,7 +182,7 @@ export const UploadInfo = (props: {
                 overflow: "scroll",
               }}
             >
-              {tagsRemained.map((el, idx) => {
+              {tagsRemained?.map((el, idx) => {
                 return (
                   <MenuItem key={idx} value={el} onClick={handleInsertTags}>
                     {el}

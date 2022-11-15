@@ -1,4 +1,4 @@
 session = {
-    "loggedIn": "False",
-    "user_email": "None"
+    "loggedIn": "True",
+    "user_email": "tess2T2@gmail.com"
 }

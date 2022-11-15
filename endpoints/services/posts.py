@@ -45,7 +45,7 @@ def uploadMeme(meme, cost, post_name, tags):
             'email': email,
             'post_url': post_url,
             'post_name': post_name,
-            'update_date': datetime.datetime.Now()
+            'update_date': datetime.datetime.utcnow()
         }
         insertPost(content)
         addPostCount(email)
