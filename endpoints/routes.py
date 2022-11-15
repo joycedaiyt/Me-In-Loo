@@ -25,13 +25,11 @@ def userSignUp():
 
 
 @routes.route('/posts', methods=['GET'])
-def getMeme():
-
-    # upload a post to
-    # need a post name
-    # cost
-    # post url,,
-    pass
+def displayPosts():
+    page = request.args.get('page')
+    per_page = request.arg.get('per_page')
+    
+    return posts.getPostsOnPage(page, per_page)
 
 
 @routes.route('/posts', methods=['POST'])
@@ -46,11 +44,13 @@ def createPost():
 
 
 @routes.route('/tags', methods=['POST'])
-def addTagsToPost():
+def addTags():
     # Retrieve user entered upload post info
-    content = request.args
+    content = request.get_json()
+    post_url = content['post_url']
+    taglist = content['tags']
 
-    return tags.addTagsToPost(content)
+    return tags.addTagsToPost(post_url, taglist)
 
 
 @routes.route("/tags", methods=['GET'])

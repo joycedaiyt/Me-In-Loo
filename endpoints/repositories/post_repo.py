@@ -22,4 +22,12 @@ def getPostByUrl(post_url):
     post = cursor.fetchone()
 
     return post
-    
+
+
+def getPostsByPage(startat, per_page):
+    select_stmt = "SELECT post_url, post_name, cost FROM Post ORDER BY update_date DESC LIMIT %s, %s;"
+    data = (startat, per_page)
+    cursor.execute(select_stmt, data)
+    posts = cursor.fetchall()
+
+    return posts

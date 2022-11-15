@@ -4,7 +4,6 @@ from endpoints.repositories.attachedBy_repo import getMissingTagIdsFromPost, att
 
 def addTagsToPost(post_url, tags):
     categories = tags.split(",")
-    print(categories[0])
 
     tag_ids = []
     for category in categories:
@@ -15,7 +14,6 @@ def addTagsToPost(post_url, tags):
         tag_ids.append(tag_id)
 
     missing_tag_ids = getMissingTagIdsFromPost(post_url, tag_ids)
-    print(missing_tag_ids)
     attachTagsToPostByIds(post_url, missing_tag_ids)
 
 
