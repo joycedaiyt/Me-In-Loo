@@ -1,6 +1,6 @@
 from flask import Response
-from back_end.repositories.tag_repo import (createTag, getAllTagIdsByCategories, 
-                                            getMissingTagIdsFromPost, getTagByCategory, 
+from endpoints.repositories.tag_repo import (createTag, getAllTagIdsByCategories, 
+                                            getMissingTagIdsFromPost, getTagIdByCategory, 
                                             attachTagsToPostByIds)
                                             
 

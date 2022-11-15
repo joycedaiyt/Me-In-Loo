@@ -1,4 +1,4 @@
-from back_end import create_app
+from endpoints import create_app
 
 app = create_app()
     

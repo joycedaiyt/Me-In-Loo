@@ -1,5 +1,5 @@
 from flask import session
-from back_end import cursor, cnxn
+from endpoints import cursor, cnxn
 
 
 def insertPost(content):

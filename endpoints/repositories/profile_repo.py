@@ -1,4 +1,4 @@
-from back_end import cursor, cnxn
+from endpoints import cursor, cnxn
 
 
 def createProfile(email):

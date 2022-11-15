@@ -1,7 +1,7 @@
 from flask import Response, session
 from werkzeug.security import check_password_hash, generate_password_hash
-from back_end.repositories.user_repo import getUserByEmail, getUserCountByEmail, createUser
-from back_end.repositories.post_repo import insertPost
+from endpoints.repositories.user_repo import getUserByEmail, getUserCountByEmail, createUser
+from endpoints.repositories.post_repo import insertPost
 
 
 def handleLogin(email, password):

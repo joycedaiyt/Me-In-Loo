@@ -1,6 +1,6 @@
 from flask import Flask
 import mysql.connector
-from back_end.database_setup.gcp_sql_config import config
+from database.database_setup.gcp_sql_config import config
 # from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
 from flask_cors import CORS
@@ -10,7 +10,7 @@ bootstrap = Bootstrap()
 
 # login_manager = LoginManager()
 
-config['database'] = 'test'
+config['database'] = 'joyce'
 cnxn = mysql.connector.connect(**config)
 cursor = cnxn.cursor()
 
@@ -30,7 +30,7 @@ def create_app():
     # login_manager.init_app(app)
 
     # Register the API endpoints we defined in back_end/routes.py
-    from back_end.routes import routes
+    from endpoints.routes import routes
     app.register_blueprint(routes)
     return app
     

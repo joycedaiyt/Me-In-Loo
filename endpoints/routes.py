@@ -1,5 +1,5 @@
 from flask import request, Blueprint
-from back_end.services import login_signup, posts, tags
+from endpoints.services import login_signup, posts, tags
 
 
 # In Flask, a blueprint is just a group of related routes (the functions below), it helps organize your code

@@ -1,7 +1,7 @@
 from flask import Response
-from back_end.repositories.user_repo import addUserPoint2
-from back_end.repositories.profile_repo import addPostCount
-from back_end.repositories.post_repo import getPostByUrl, insertPost
+from endpoints.repositories.user_repo import addUserPoint2
+from endpoints.repositories.profile_repo import addPostCount
+from endpoints.repositories.post_repo import getPostByUrl, insertPost
 
 def uploadMeme(content):
     # check if content has all required data
