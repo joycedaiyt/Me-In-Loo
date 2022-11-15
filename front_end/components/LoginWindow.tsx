@@ -25,12 +25,12 @@ export const LoginWindow = (props: {
   const [password, setPassword] = useState("");
   const [errorExist, setErrorExist] = useState(false);
   const handleLogin = async () => {
-    // try {
-    //   let output = await getUser(email, password);
-    //   Router.push("/main");
-    // } catch {
-    //   setErrorExist(true);
-    // }
+    try {
+      let output = await getUser(email, password);
+      Router.push("/main");
+    } catch {
+      setErrorExist(true);
+    }
     Router.push("/main");
   };
   const handleEmail = (el: any) => {

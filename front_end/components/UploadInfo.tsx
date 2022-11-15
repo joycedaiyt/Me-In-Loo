@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { TagsCard } from "./TagsCard";
+import { createPost } from "../pages/api/Post";
 require("typeface-eb-garamond");
 
 export const UploadInfo = (props: {
@@ -18,6 +19,7 @@ export const UploadInfo = (props: {
   postCost: number;
   setPostCost: any;
   postTags: Array<string>;
+  uploadMeme: File;
   setPostTags: any;
   allTags: Array<string>;
   overFlowName?: boolean;
@@ -32,6 +34,7 @@ export const UploadInfo = (props: {
     postTags,
     setPostTags,
     allTags,
+    uploadMeme,
   } = props;
   const [searchWords, setSearchWords] = useState("");
   const menuRef = useRef(null);
@@ -78,6 +81,14 @@ export const UploadInfo = (props: {
       return el != e.current.innerText;
     });
     setPostTags(newArr);
+  };
+
+  const uploadMemes = async () => {
+    try {
+      const res = await createPost(uploadMeme, postCost, postName, postTags);
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     <div style={{ fontFamily: "montserrat", fontSize: 14 }}>
@@ -196,6 +207,7 @@ export const UploadInfo = (props: {
             borderRadius: 0,
             // fontFamily: "EB Garamond",
           }}
+          onClick={async () => await uploadMemes()}
         >
           SUBMIT{" "}
         </Button>
