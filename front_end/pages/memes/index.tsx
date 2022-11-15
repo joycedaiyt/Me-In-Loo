@@ -8,6 +8,7 @@ import { PageSwitch } from "../../components/PageSwitch";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { ClickAwayListener, Button } from "@mui/material";
 import { TagPopper } from "../../components/TagPopper";
+import { getAllTags } from "../api/Tags";
 
 const arrayImage = [
   {
@@ -89,6 +90,8 @@ export const MemePage = () => {
   const tagRef = useRef(null);
   const [tagPopOpen, setTagPopOpen] = useState(false);
   const [selectedTags, setSelectedTags] = useState([] as Array<string>);
+  const [allTags, setAllTags] = useState([] as Array<string>);
+  const [calledAllTags, setCalledAllTags] = useState(false);
   // const size = window.innerWidth;
   useEffect(() => {
     function updateSize() {
@@ -101,6 +104,17 @@ export const MemePage = () => {
   if (windowWidth >= 1600) {
     limit = 12;
   }
+
+  useEffect(() => {
+    const tagsWrapper = async () => {
+      if (calledAllTags == false) {
+        const data = await getAllTags();
+        setAllTags(data?.data);
+        setCalledAllTags(true);
+      }
+    };
+    tagsWrapper();
+  }, [allTags]);
   const curArr = arrayImage.slice(pageNum * limit, (pageNum + 1) * limit);
   let curArr2 = curArr.slice(0, 3);
   let curArr3 = curArr.slice(3, 6);
@@ -169,7 +183,7 @@ export const MemePage = () => {
           anchorEl={tagRef}
           tagPopOpen={tagPopOpen}
           setTagPopOpen={setTagPopOpen}
-          TagItems={TagItems}
+          TagItems={allTags}
           selectedTags={selectedTags}
           setSelectedTags={setSelectedTags}
         ></TagPopper>

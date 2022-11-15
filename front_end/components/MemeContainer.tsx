@@ -3,6 +3,8 @@ import "@fontsource/montserrat";
 import styles from "./MemeContainer.module.css";
 import { FiThumbsUp, FiThumbsDown, FiDownloadCloud } from "react-icons/fi";
 import { Button, IconButton } from "@mui/material";
+import { CgDanger } from "react-icons/cg";
+import { MdOutlineReportGmailerrorred } from "react-icons/md";
 
 export const MemeContainer = (props: {
   src: string;
@@ -101,7 +103,7 @@ export const MemeContainer = (props: {
               <FiThumbsUp />
             </IconButton>
             <IconButton>
-              <FiThumbsDown />
+              <CgDanger style={{ fontSize: 28 }} />
             </IconButton>
           </span>
         </div>

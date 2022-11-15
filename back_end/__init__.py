@@ -10,7 +10,7 @@ bootstrap = Bootstrap()
 
 # login_manager = LoginManager()
 
-config['database'] = 'test'
+config['database'] = 'test_mile_stone'
 cnxn = mysql.connector.connect(**config)
 cursor = cnxn.cursor()
 
@@ -33,4 +33,3 @@ def create_app():
     from back_end.routes import routes
     app.register_blueprint(routes)
     return app
-    
