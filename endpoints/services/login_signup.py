@@ -1,7 +1,9 @@
-from flask import Response, session
+from flask import Response
+from sessionData import session
 from werkzeug.security import check_password_hash, generate_password_hash
 from endpoints.repositories.user_repo import getUserByEmail, getUserCountByEmail, createUser
-from endpoints.repositories.post_repo import insertPost
+from endpoints.repositories.profile_repo import createProfile
+from mysql.connector import Error as err
 
 
 def handleLogin(email, password):
@@ -27,10 +29,11 @@ def handleLogin(email, password):
 def handleSignUp(email, password):
     # Select the user from the database
     result = getUserCountByEmail(email)
-
+    print(result[0])
     if result[0] == 0:
         createUser(email, generate_password_hash(password))
-        insertPost(email)
+        createProfile(email)
         return Response("create user success", status=200)
     else:
         return Response("user already exist", status=400)
+

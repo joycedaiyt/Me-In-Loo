@@ -29,4 +29,5 @@ def createUser(email, secret):
 def addUserPoint2(email):
     update_stmt = "UPDATE User SET points = points + 2 WHERE user_email = %(email)s"
     cursor.execute(update_stmt, {'email': email})
-
+    cnxn.commit()
+    

@@ -13,6 +13,7 @@ bootstrap = Bootstrap()
 config['database'] = 'joyce'
 cnxn = mysql.connector.connect(**config)
 cursor = cnxn.cursor()
+print("connection established")
 
 
 def create_app():
