@@ -17,7 +17,8 @@ def createTag(category):
 
 
 def getAllTagIdsByCategories(categories):
-    select_ids = "SELECT tag_id FROM Tag WHERE category IN {}".format(categories)
+    select_ids = "SELECT tag_id FROM Tag WHERE category IN {}".format(
+        categories)
     cursor.execute(select_ids)
     tag_ids = cursor.fetchall()
     ids = ()
@@ -38,7 +39,7 @@ def getMissingTagIdsFromPost(post_url, tag_ids):
     ids = ()
     for tag_id in tag_ids:
         ids += (tag_id,)
-    
+
     return ids
 
 
@@ -47,4 +48,10 @@ def attachTagsToPostByIds(post_url, tag_ids):
         attach_stmt = "INSERT INTO AttachedBy VALUES(%s, %s)"
         data = (post_url, tag_id)
         cursor.execute(attach_stmt, data)
-    
+
+
+def getAllTags():
+    select_stmt = "SELECT category FROM Tag ORDER BY category DESC"
+    cursor.execute(select_stmt)
+    all_tags = cursor.fetchall()
+    return all_tags

@@ -2,7 +2,7 @@ import csv
 import mysql.connector
 from gcp_sql_config import config
 
-config['database'] = 'test'  # assign which database to connect to
+config['database'] = 'test_mile_stone'  # assign which database to connect to
 cnxn = mysql.connector.connect(**config)
 print("Established Connection...")
 cursor = cnxn.cursor()
@@ -31,7 +31,7 @@ def create_tables(sqlPath):
     try:
         for query in sqlCommands:
             # create tables using sql commands
-            cursor.execute(query)  
+            cursor.execute(query)
 
         cnxn.commit()
         print("successfully created tables")
@@ -65,7 +65,7 @@ def insert_data(sqlPath, dataPaths):
         with open(dataPaths[i]) as csvfile:
             spamreader = csv.reader(csvfile)
             for row in spamreader:
-                row = [None if item== 'None' else item for item in row]
+                row = [None if item == 'None' else item for item in row]
                 # print(row)
                 try:
                     cursor.execute(query, row)
@@ -77,7 +77,6 @@ def insert_data(sqlPath, dataPaths):
                     print(row)
                     return
         i += 1
-    
 
 
 def other_queries(sqlPath):
@@ -96,7 +95,6 @@ def other_queries(sqlPath):
     except:
         cnxn.rollback()
         print("FAILED...")
-    
 
 
 def main():

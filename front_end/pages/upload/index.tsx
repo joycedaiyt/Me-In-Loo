@@ -6,16 +6,17 @@ import "@fontsource/montserrat";
 import { useEffect, useRef, useState } from "react";
 import { UploadInfo } from "../../components/UploadInfo";
 import { IoCloseOutline } from "react-icons/io5";
+import { getAllTags } from "../api/Tags";
 
-const allTags = [
-  "Tag 1",
-  "Tag 3",
-  "Tag 4",
-  "Tag 5",
-  "Tag 6",
-  "Tag 8",
-  "Tag 95",
-];
+// const allTags = [
+//   "Tag 1",
+//   "Tag 3",
+//   "Tag 4",
+//   "Tag 5",
+//   "Tag 6",
+//   "Tag 8",
+//   "Tag 95",
+// ];
 
 export const UploadPage = () => {
   const [uploadMeme, setUploadedMeme] = useState(null as any);
@@ -26,6 +27,8 @@ export const UploadPage = () => {
   const [postCost, setPostCost] = useState(1);
   const [countFile, setCountFile] = useState(0);
   const [fileUrl, setFileUrl] = useState("");
+  const [allTags, setAllTags] = useState([] as Array<string>);
+  const [called, setCalled] = useState(false);
 
   const uploadRef = useRef(null);
 
@@ -36,6 +39,17 @@ export const UploadPage = () => {
     const objectUrl = URL.createObjectURL(uploadMeme);
     setFileUrl(objectUrl);
   }, [uploadMeme]);
+
+  useEffect(() => {
+    const func = async () => {
+      const data = await getAllTags();
+      if (data?.data !== allTags) {
+        setAllTags(data?.data);
+        setCalled(true);
+      }
+    };
+    func();
+  }, [called]);
 
   const handleUpload = (ref: any) => {
     ref.current.value = "";

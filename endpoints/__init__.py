@@ -10,6 +10,7 @@ bootstrap = Bootstrap()
 
 # login_manager = LoginManager()
 
+
 config['database'] = 'joyce'
 cnxn = mysql.connector.connect(**config)
 cursor = cnxn.cursor()
@@ -34,4 +35,3 @@ def create_app():
     from endpoints.routes import routes
     app.register_blueprint(routes)
     return app
-    

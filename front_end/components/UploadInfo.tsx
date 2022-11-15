@@ -38,7 +38,8 @@ export const UploadInfo = (props: {
   } = props;
   const [searchWords, setSearchWords] = useState("");
   const menuRef = useRef(null);
-  const tagsRemained = allTags.filter((el) => {
+  const allTagsCopy = allTags.slice();
+  const tagsRemained = allTagsCopy.filter((el) => {
     let capWords = el.toUpperCase();
     let capSearchWords = searchWords.toUpperCase();
     return capWords.includes(capSearchWords) && !postTags.includes(el);
