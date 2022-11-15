@@ -23,4 +23,10 @@ def getPostByUrl(post_url):
     post = cursor.fetchone()
 
     return post
-    
+
+
+def liked(post_url):
+    # update post from database
+    update_stmt = "UPDATE Post SET like_count = like_count + 1 WHERE post_url = %(post_url)s"
+    cursor.execute(update_stmt, {'post_url': post_url})
+    cnxn.commit()

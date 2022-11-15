@@ -1,9 +1,10 @@
 from flask import request, Blueprint
-from endpoints.services import login_signup, posts, tags
+from endpoints.services import login_signup, posts, tags, like
 
 
 # In Flask, a blueprint is just a group of related routes (the functions below), it helps organize your code
 routes = Blueprint('api', __name__)
+
 
 @routes.route('/users', methods=['GET'])
 def userLogin():
@@ -27,8 +28,8 @@ def userSignUp():
 
 @routes.route('/posts', methods=['POSTS'])
 def getMeme():
-    
-    # upload a post to 
+
+    # upload a post to
     # need a post name
     # cost
     # post url,,
@@ -41,6 +42,12 @@ def createPost():
     content = request.json
 
     return posts.uploadMeme(content)
+
+
+@routes.route('/posts', methods=['POSTS'])
+def likePost():
+    content = request.json
+    return like.handleLike(content)
 
 
 @routes.route('/tags', methods=['POSTS'])
