@@ -7,11 +7,12 @@ def addTagsToPost(post_url, tags):
 
     tag_ids = []
     for category in categories:
-        tag_id = getTagIdByCategory(category)[0]
+        tag_id = getTagIdByCategory(category)
         if (tag_id == None):
             createTag(category)
-            tag_id = getTagIdByCategory(category)[0]
-        tag_ids.append(tag_id)
+            tag_id = getTagIdByCategory(category)
+            
+        tag_ids.append(tag_id[0])
 
     missing_tag_ids = getMissingTagIdsFromPost(post_url, tag_ids)
     attachTagsToPostByIds(post_url, missing_tag_ids)
