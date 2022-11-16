@@ -29,7 +29,7 @@ def displayPosts():
     page = request.args.get('page')
     per_page = request.arg.get('per_page')
     
-    return posts.getPostsOnPage(page, per_page)
+    return posts.getPostsOnPage(int(page), int(per_page))
 
 
 @routes.route('/posts', methods=['POST'])
