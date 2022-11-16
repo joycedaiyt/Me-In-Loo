@@ -118,7 +118,7 @@ def main():
             "Create Tables - ct\n"
             "Insert Sample Data - isd\n"
             "Insert Production Data - ipd\n"
-            "Drop tables - dt"
+            "Drop tables - dt\n"
             "Other Queries - oq\n"
             "Quit - q\n"
             "Note: All SQL commands should be located in the ./sql_commands folder\n")

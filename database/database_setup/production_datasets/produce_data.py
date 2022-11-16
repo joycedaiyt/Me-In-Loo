@@ -94,8 +94,9 @@ def generateProfile(user_email):
     [(start, stop)] = choices(possible_counts, prob)
     post_count = randrange(start, stop + 1, 1)
 
-    profileinstance = user_email+","+profile_pic_url+","+profile_description+","+str(post_count)+"\n"
-    return (post_count, profileinstance)
+    profileinstance = [user_email, profile_pic_url, profile_description, post_count]
+
+    return profileinstance
 
 
 def generatePost(user_email):
@@ -138,10 +139,10 @@ def generatePost(user_email):
     [(start, stop)] = choices(possible_reports, prob)
     report_count = randrange(start, stop + 1, 1)
 
-    postinstance = (user_email+","+post_url+","+post_name+","+str(update_date)+","+
-                  download_count+","+like_count+","+cost+","+str(report_count)+"\n")
+    postinstance = [user_email, post_url, post_name, update_date, 
+                    download_count, like_count, cost, report_count]
     
-    return (report_count, post_url, update_date, postinstance)
+    return postinstance
 
 
 def generateReport(user_email, post_url, post_date):
@@ -212,16 +213,19 @@ def generateDataset(n):
     for user_email in tqdm(user_emails):
         # generate profile table
         profiledata = generateProfile(user_email)
-        post_count = profiledata[0]
-        profileinstances += profiledata[1]
+        post_count = profiledata[3]
+
+        postnum = 0
 
         # generate post table
         for _ in range(post_count):
             postdata = generatePost(user_email)
-            report_count = postdata[0]
+            report_count = postdata[7]
             post_url = postdata[1]
-            post_date = postdata[2]
-            postinstances += postdata[3]
+            post_date = postdata[3]
+
+            if post_url == "None":
+                break
 
             # generate attachedBy table
             attachedByinstances += generateAttachedBy(post_url, n-1)
@@ -234,6 +238,12 @@ def generateDataset(n):
 
                 reportinstances += generateReport(user_emails[reporterIdx], post_url, post_date)
                 reporterIdx += 1
+
+            postinstances += (postdata[0]+","+postdata[1]+","+postdata[2]+","+str(postdata[3])+","+
+                            postdata[4]+","+postdata[5]+","+postdata[6]+","+str(postdata[7])+"\n")
+            postnum += 1
+        
+        profileinstances += profiledata[0]+","+profiledata[1]+","+profiledata[2]+","+str(postnum)+"\n"
     
     profilefile.write(profileinstances)
     postfile.write(postinstances)
