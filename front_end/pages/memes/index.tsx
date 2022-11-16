@@ -94,6 +94,7 @@ export const MemePage = () => {
   const [allTags, setAllTags] = useState([] as Array<string>);
   const [calledAllTags, setCalledAllTags] = useState(false);
   const [limitPerPage, setLimitPerPage] = useState(9);
+  const [memeInPage, setMemeInPage] = useState([] as Array<any>);
   // const size = window.innerWidth;
   useEffect(() => {
     function updateSize() {
@@ -127,12 +128,16 @@ export const MemePage = () => {
     const func = async () => {
       console.log(pageNum, limitPerPage);
       const data = await getPostByPage(pageNum, limitPerPage);
-      console.log(data);
+      setMemeInPage(data?.data[1]);
+      setCountPage(data?.data[0]);
+      if (pageNum >= data?.data[0]) {
+        setPageNum(data?.data[0] - 1);
+      }
     };
     func();
-  }, [pageNum]);
+  }, [pageNum, limitPerPage]);
 
-  const curArr = arrayImage.slice(pageNum * limit, (pageNum + 1) * limit);
+  const curArr = memeInPage.slice(0, limitPerPage);
   let curArr2 = curArr.slice(0, 3);
   let curArr3 = curArr.slice(3, 6);
   let curArr4 = curArr.slice(6, 9);

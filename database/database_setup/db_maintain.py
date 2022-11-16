@@ -2,7 +2,8 @@ import csv
 import mysql.connector
 from gcp_sql_config import config
 
-config['database'] = 'joyce'  # assign which database to connect to
+# assign which database to connect to
+config['database'] = 'test_milestone_2_production'
 cnxn = mysql.connector.connect(**config)
 print("Established Connection...")
 cursor = cnxn.cursor()
@@ -100,18 +101,18 @@ def other_queries(sqlPath):
 def main():
 
     sample_dataPaths = ['./sample_datasets/user.csv',
-                 './sample_datasets/tag.csv',
-                 './sample_datasets/profile.csv',
-                 './sample_datasets/post.csv',
-                 './sample_datasets/attachedBy.csv',
-                 './sample_datasets/report.csv']
+                        './sample_datasets/tag.csv',
+                        './sample_datasets/profile.csv',
+                        './sample_datasets/post.csv',
+                        './sample_datasets/attachedBy.csv',
+                        './sample_datasets/report.csv']
 
     production_dataPaths = ['./production_datasets/user.csv',
-                 './production_datasets/tag.csv',
-                 './production_datasets/profile.csv',
-                 './production_datasets/post.csv',
-                 './production_datasets/attachedBy.csv',
-                 './production_datasets/report.csv']
+                            './production_datasets/tag.csv',
+                            './production_datasets/profile.csv',
+                            './production_datasets/post.csv',
+                            './production_datasets/attachedBy.csv',
+                            './production_datasets/report.csv']
 
     menu = ("Which of the following commands would you like to run: \n"
             "Create Database - cd\n"

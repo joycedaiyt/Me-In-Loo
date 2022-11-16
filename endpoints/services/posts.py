@@ -7,7 +7,7 @@ from minio import Minio
 from flask import Response
 from sessionData import session
 from endpoints.services.tags import addTagsToPost
-from endpoints.repositories.post_repo import insertPost, getPostsByPage
+from endpoints.repositories.post_repo import insertPost, getPostsByPage, getPostCount
 from endpoints.repositories.user_repo import addUserPoint2
 from endpoints.repositories.profile_repo import addPostCount
 
@@ -16,7 +16,7 @@ def uploadMeme(meme, cost, post_name, tags):
     # check if content has all required data
     if not meme or cost == None or post_name == None or tags == None:
         return Response("Missing input value", status=400)
-    
+
     meme = meme['meme']
 
     # setup MinIO connection
@@ -26,7 +26,7 @@ def uploadMeme(meme, cost, post_name, tags):
         access_key="minioadmin",
         secret_key='minioadmin'
     )
-    
+
     bucket_name = "me-in-loo"
     found = minioClient.bucket_exists(bucket_name)
 
@@ -58,22 +58,23 @@ def uploadMeme(meme, cost, post_name, tags):
         addPostCount(email)
         addUserPoint2(email)
         addTagsToPost(post_url, tags)
-        
+
         return Response("Meme successfully uploaded", status=200)
 
     except mysql.connector.Error as err:
         return Response("Something went wrong: {}".format(err.msg), status=400)
 
 
-def getPostsOnPage(page, per_page):
+def getPostsOnPage(page, per_page, include_tag):
     try:
         startat = page * per_page
         print(startat)
         posts = getPostsByPage(startat, per_page)
+        count = getPostCount(include_tag, per_page)
 
     except mysql.connector.Error as err:
         return Response("Something went wrong: {}".format(err.msg), status=400)
-    
+
     postsDto = []
     for post in posts:
         postdata = {
@@ -82,6 +83,9 @@ def getPostsOnPage(page, per_page):
             'cost': post[2]
         }
         postsDto.append(postdata)
+        # retval = {
+        #     'count': count,
+        #     'memes': postsDto
+        # }
 
-    return Response(json.dumps(postsDto), status=200)
-
+    return Response(json.dumps([count, postsDto]), status=200)
