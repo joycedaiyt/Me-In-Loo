@@ -136,7 +136,11 @@ Update Profile set prof_description = "new Description" where user_email = "exam
 -- To check the update command
 Select * from Profile where user_email = "example2@gmail.com";
 
+-- users are able to change their profile picture
 Update Profile set profile_pic_url = "new_profile_url" where user_email = "example2@gmail.com";
+
+-- To check the update command
+Select * from Profile where user_mail;
 
 
 
