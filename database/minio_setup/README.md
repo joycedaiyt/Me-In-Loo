@@ -11,7 +11,7 @@ Start MinIO server
 Minio server start
 ```
 You should see something like 
-zsh```
+```zsh
 MinIO Object Storage Server
 Copyright: 2015-2022 MinIO, Inc.
 License: GNU AGPLv3 <https://www.gnu.org/licenses/agpl-3.0.html>
@@ -34,21 +34,21 @@ Documentation: https://min.io/docs/minio/linux/index.html
 You can now access MinIO and its interface via `http://127.0.0.1:9000`
 
 #### Minio Object Attributes
--bucket_name
--content_type
--etag
--fromxml
--is_delete_marker
--is_dir
--is_latest
--last_modified
--metadata
--object_name
--owner_id
--owner_name
--size
--storage_class
--version_id
+- bucket_name
+- content_type
+- etag
+- fromxml
+- is_delete_marker
+- is_dir
+- is_latest
+- last_modified
+- metadata
+- object_name
+- owner_id
+- owner_name
+- size
+- storage_class
+- version_id
 
 #### minio_pics.py File
 `uploadFile(directory)`
