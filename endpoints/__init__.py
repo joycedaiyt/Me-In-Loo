@@ -11,7 +11,7 @@ bootstrap = Bootstrap()
 # login_manager = LoginManager()
 
 
-config['database'] = 'joyce'
+config['database'] = 'test_mile_stone'
 cnxn = mysql.connector.connect(**config)
 cursor = cnxn.cursor()
 print("connection established")
