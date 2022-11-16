@@ -453,11 +453,11 @@ Milestone 2:
 1.
 [
     {
-        points: 1,
-        user_email: example2@gmail.com,
-        profile_pic_url: ashjd.com,
-        prof_description: description2,
-        post_count: 2
+        points: 11,
+        user_email: HermanCruz188@gmail.com,
+        profile_pic_url: profile_pic_url,
+        prof_description: description,
+        post_count: 0
     }
 ] //get the account information for current user
 
