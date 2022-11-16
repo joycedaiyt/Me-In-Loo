@@ -27,9 +27,9 @@ def userSignUp():
 @routes.route('/posts', methods=['GET'])
 def displayPosts():
     page = request.args.get('page')
-    per_page = request.arg.get('per_page')
-    
-    return posts.getPostsOnPage(page, per_page)
+    per_page = request.args.get('per_page')
+
+    return posts.getPostsOnPage(int(page), int(per_page), False)
 
 
 @routes.route('/posts', methods=['POST'])
