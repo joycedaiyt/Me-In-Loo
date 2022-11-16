@@ -137,7 +137,7 @@ export const MemePage = () => {
     func();
   }, [pageNum, limitPerPage]);
 
-  const curArr = memeInPage.slice(0, limitPerPage);
+  const curArr = memeInPage?.slice(0, limitPerPage);
   let curArr2 = curArr.slice(0, 3);
   let curArr3 = curArr.slice(3, 6);
   let curArr4 = curArr.slice(6, 9);
