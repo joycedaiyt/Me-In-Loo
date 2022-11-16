@@ -461,15 +461,15 @@
 
 
 -- Features for Account Info for current account:
--- Suppose that current user is example2@gmail.com
+-- Suppose that current user is KarenWestmark138@gmail.com
 1.
 [
     {
-        points: 1,
-        user_email: example2@gmail.com,
-        profile_pic_url: ashjd.com,
-        prof_description: description2,
-        post_count: 2
+        points: 0,
+        user_email: KarenWestmark138@gmail.com,
+        profile_pic_url: profile_pic_url,
+        prof_description: prof_description,
+        post_count: 238
     }
 ] //get the account information for current user
 
@@ -477,8 +477,8 @@
 
 [
     {
-        post_url: thefat2.com,
-        post_name: meme3
+        post_url: http://localhost:9000/me-in-loo/posts/710.jpg,
+        post_name: nocturnal
     },
 ] // get the most popular meme post by this user
 
@@ -493,10 +493,10 @@
 
 [
     {
-        user_email: example2@gmail.com,
-        profile_pic_url: ashjd.com,
-        prof_description: new Description,
-        post_count: 2
+        user_email: KarenWestmark138@gmail.com,
+        profile_pic_url: profile_pic_url,
+        prof_description: Perhaps data tend name effect lot give.,
+        post_count: 238
     }
 ] // the profile description
 
@@ -510,10 +510,10 @@
 6.
 [
     {
-        user_email: example2@gmail.com,
-        profile_pic_url: new_profile_url,
-        prof_description: new Description,
-        post_count: 2
+        user_email: KarenWestmark138@gmail.com,
+        profile_pic_url: http://localhost:9000/me-in-loo/profile_pics/174.jpg,
+        prof_description: Perhaps data tend name effect lot give.,
+        post_count: 238
     }
 ] //the profile_pic_url is updated as expected
 

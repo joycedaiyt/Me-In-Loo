@@ -131,7 +131,7 @@ Select points, User.user_email, profile_pic_url, prof_description, post_count fr
 Select post_url, post_name from Post where user_email = "KarenWestmark138@gmail.com" order by like_count, download_count Desc Limit 1;
 
 -- Users are able to update their personal information if needed
-Update Profile set prof_description = "Area suggest own garden five enter factor." where user_email = "KarenWestmark138@gmail.com";
+Update Profile set prof_description = "Perhaps data tend name effect lot give." where user_email = "KarenWestmark138@gmail.com";
 
 -- To check the update command
 Select * from Profile where user_email = "KarenWestmark138@gmail.com";
