@@ -31,7 +31,7 @@ export const LoginWindow = (props: {
     } catch {
       setErrorExist(true);
     }
-    Router.push("/main");
+    // Router.push("/main");
   };
   const handleEmail = (el: any) => {
     setEmail(el.target.value);

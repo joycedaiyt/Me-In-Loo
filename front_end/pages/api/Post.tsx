@@ -13,21 +13,18 @@ export const createPost = async (
   postName: string,
   tags: Array<string>
 ) => {
-  try {
-    let form = new FormData();
-    form.append("meme", file);
-    form.append("cost", postCost.toString());
-    form.append("post_name", postName);
-    form.append("tags", tags.toString());
+  let form = new FormData();
+  form.append("meme", file);
+  form.append("cost", postCost.toString());
+  form.append("post_name", postName);
+  form.append("tags", tags.toString());
 
-    const res = await postAxios({
-      method: "POST",
-      url: `/posts`,
-      data: form,
-    });
-  } catch (e) {
-    console.log(e);
-  }
+  const res = await postAxios({
+    method: "POST",
+    url: `/posts`,
+    data: form,
+  });
+  return res;
 };
 
 export const getPostByPage = async (pageNum: number, limitPerPage: number) => {
