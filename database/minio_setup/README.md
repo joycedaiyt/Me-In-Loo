@@ -3,7 +3,7 @@
 #### Configuration
 Install MinIO
 ``` 
-Minio server start
+brew install minio
 ```
 
 Start MinIO server
