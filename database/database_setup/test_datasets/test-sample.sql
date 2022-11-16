@@ -111,17 +111,39 @@ Select category from Tag where tag_id in (Select tag_id from AttachedBy where po
 
 
 -- ranking information for rank page
--- select user with 10 points
-Select user_email from User order by points Desc LIMIT 10;
+-- select user with top 3 most points
+Select user_email, profile_pic_url, prof_description from User, Profile where User.user_email = Profile.user_email order by points Desc LIMIT 3;
 
--- select user with 10 most uploaded pictures
-Select user_email from Profile order by post_count Desc LIMIT 10;
+-- select user with top 3 most uploaded pictures
+Select user_email, profile_pic_url, prof_description from Profile order by post_count Desc LIMIT 3;
 
--- select pictures wuth 10 most like
-Select post_name from Post order by like_count Desc Limit 10;
+-- select pictures wuth 3 most like
+Select post_name, post_url from Post order by like_count Desc Limit 3;
 
--- select pictures with 10 most download
-Select post_name from Post order by download_count Desc Limit 10;
+-- select pictures with 3 most download
+Select post_name, post_url from Post order by download_count Desc Limit 3;
+
+-- Queries need for setting account info page
+-- given that the current user is example2@gmail.com
+Select points, User.user_email, profile_pic_url, prof_description, post_count from User, Profile where User.user_email ="example2@gmail.com" and User.user_email = Profile.user_email;
+
+-- show the most popular(like most) post from that user
+Select post_url, post_name from Post where user_email = "example2@gmail.com" order by like_count, download_count Desc Limit 1;
+
+-- Users are able to update their personal information if needed
+Update Profile set prof_description = "new Description" where user_email = "example2@gmail.com";
+
+-- To check the update command
+Select * from Profile where user_email = "example2@gmail.com";
+
+-- users are able to change their profile picture
+Update Profile set profile_pic_url = "new_profile_url" where user_email = "example2@gmail.com";
+
+-- To check the update command
+Select * from Profile where user_mail;
+
+
+
 
 -- SELECT count(*) FROM user WHERE user_secret = "D1e8a70b5ccab1dc2f56bbf7e99f064a660c08e361a35751b9c483c88943d082";
 

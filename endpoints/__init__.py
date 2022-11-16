@@ -8,7 +8,7 @@ from database.database_setup.gcp_sql_config import config
 bootstrap = Bootstrap()
 
 
-config['database'] = 'joyce'
+config['database'] = 'test_mile_stone'
 cnxn = mysql.connector.connect(**config)
 cursor = cnxn.cursor()
 print("connection established")

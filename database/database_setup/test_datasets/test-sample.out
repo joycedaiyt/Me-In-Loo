@@ -374,3 +374,133 @@
         category: "test"
     },
 ] // now, the post with unique url 'xyzahah.com' has all tags attached to it as required
+
+
+Milestone 2:
+// ranking Info:
+1.
+[
+    {
+        user_email: yiransun068@gmail.com,
+        profile_pic_url: NULL,
+        prof_description: NULL
+    },
+    {
+        user_email: example4@qq.com,
+        profile_pic_url: NULL,
+        prof_description: NULL
+    },
+    {
+        user_email: example3@outlook.com,
+        profile_pic_url: waterloo.com,
+        prof_description: description3
+    }
+] // the top 3 most points user
+
+2.
+[
+    {
+        user_email: example3@outlook.com,
+        profile_pic_url: waterloo.com,
+        prof_description: description3
+    },
+    {
+        user_email: example2@gmail.com,
+        profile_pic_url: ashjd.com
+        prof_description: description2
+    },
+    {
+        user_email: example1@xxx.com,
+        profile_pic_url: abcd.com,
+        prof_description: description1
+    }
+]  // the top 3 users with most uploaded memes
+
+3.
+[
+    {
+        post_name: meme5,
+        post_url: xyzahah.com
+    },
+     {
+        post_name: meme6,
+        post_url: zvideo.com
+    },
+     {
+        post_name: meme2,
+        post_url: thefat1.com
+    },
+] // the top 3 memes with most liked
+
+4.
+[
+    {
+        post_name: meme6
+        post_url: zvideo.com
+    },
+        {
+        post_name: meme5
+        post_url: xyzahah.com
+    },
+        {
+        post_name: meme2
+        post_url: thefat1.com
+    },
+] // the top 3 memes with most download_count
+
+-- Features for Account Info for current account:
+-- Suppose that current user is example2@gmail.com
+1.
+[
+    {
+        points: 1,
+        user_email: example2@gmail.com,
+        profile_pic_url: ashjd.com,
+        prof_description: description2,
+        post_count: 2
+    }
+] //get the account information for current user
+
+2.
+
+[
+    {
+        post_url: thefat2.com,
+        post_name: meme3
+    },
+] // get the most popular meme post by this user
+
+3.
+[
+    {
+        Update Successfully: 1 row is changed in Profile table
+    }
+] // update profile description of current user
+
+4. 
+
+[
+    {
+        user_email: example2@gmail.com,
+        profile_pic_url: ashjd.com,
+        prof_description: new Description,
+        post_count: 2
+    }
+] // the profile description
+
+5.
+[
+    {
+        Update Successfully: 1 row is changed in Profile table
+    }
+] // upload the new profile picture
+
+6.
+[
+    {
+        user_email: example2@gmail.com,
+        profile_pic_url: new_profile_url,
+        prof_description: new Description,
+        post_count: 2
+    }
+] //the profile_pic_url is updated as expected
