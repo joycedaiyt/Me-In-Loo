@@ -3,7 +3,7 @@ import mysql.connector
 from gcp_sql_config import config
 
 # assign which database to connect to
-config['database'] = 'joyce'
+config['database'] = 'test_milestone_2_production'
 cnxn = mysql.connector.connect(**config)
 print("Established Connection...")
 cursor = cnxn.cursor()
