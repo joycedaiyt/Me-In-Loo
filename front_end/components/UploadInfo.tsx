@@ -264,7 +264,10 @@ export const UploadInfo = (props: {
             borderRadius: 0,
             // fontFamily: "EB Garamond",
           }}
-          onClick={async () => await uploadMemes()}
+          onClick={async () => {
+            await uploadMemes();
+            console.log("ehreanyway");
+          }}
           disabled={disableButton || disableButton1 || disableButton2}
         >
           SUBMIT{" "}
