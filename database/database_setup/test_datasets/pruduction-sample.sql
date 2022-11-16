@@ -1,0 +1,151 @@
+-- sign up and sign in
+
+-- success signup
+SELECT count(*) FROM User WHERE user_email = 'WilliamAllan1@gmail.com';
+
+-- initial points is 15 for new user
+INSERT INTO User 
+VALUES ('WilliamAllan1@gmail.com', 'pbkdf2:sha256:260000$VU66EONBpZ1Nj1Uy$9636be746e5ee6334919b3ce2a567bb146b71c37d5191412706425506838ae28', 15);
+INSERT INTO Profile (user_email, post_count) VALUES ('WilliamAllan1@gmail.com', 0);
+
+-- fail signup due to duplicate
+SELECT count(*) FROM User WHERE user_email = 'WilliamAllan1@gmail.com';
+
+-- fail signup due to frontend did not pass enough data:
+INSERT INTO User(user_email, user_secret) VALUES ('WilliamAllan1@gmail.com", "pbkdf2:sha256:260000$VU66EONBpZ1Nj1Uy$9636be746e5ee6334919b3ce2a567bb146b71c37d5191412706425506838ae28'); -- fail
+
+-- successful signin or not
+SELECT user_secret FROM User WHERE user_email = 'WilliamAllan1@gmail.com';
+
+-- if the result query is empty, raise incorrect user name error, if not check secret
+-- check user secret to see if it equals to the secret which passed in as frontend, if so allow user to login, otherwise raise incorrect password error
+
+
+-- Upload Post:
+-- upload picture failure:
+INSERT INTO Post (user_email, post_url, update_date, cost) 
+VALUES('WilliamAllan1@gmail.com', 'http://localhost:9000/me-in-loo/meme/02574f2d-5e85-4348-bfcb-07971f695732.jpg','2022-06-17 17:38:09', 5); -- fail if user does not provide name or frontend does not pass enough data
+INSERT INTO Post (user_email, post_url, post_name, update_date, cost, report_count) 
+VALUES('WilliamAllan1@gmail.com', 'http://localhost:9000/me-in-loo/meme/02574f2d-5e85-4348-bfcb-07971f695732.jpg', 'failDueToNotUniqueUrl', '2022-06-17 17:38:09', 5, 0); -- fail due to replicate url
+SELECT count(*) FROM Post;
+
+-- upload 1 picture successfull:
+INSERT INTO Post 
+VALUES('RobertMendez320@gmail.com', 'http://localhost:9000/me-in-loo/profile_pics/zuo0JIIflQM.jpg', 'judicious', '2022-08-03 23:42:51', 624, 751, 22, 0);
+
+SELECT * FROM Post WHERE post_url = "http://localhost:9000/me-in-loo/profile_pics/zuo0JIIflQM.jpg";
+
+SELECT count(*) FROM Post WHERE user_email = "RobertMendez320@gmail.com";
+
+UPDATE User SET points = points + 2 
+            WHERE user_email = 'RobertMendez320@gmail.com';
+
+SELECT points FROM User WHERE user_email = "RobertMendez320@gmail.com";
+
+UPDATE Profile SET post_count = post_count + 1 
+               WHERE user_email = 'RobertMendez320@gmail.com';
+SELECT post_count FROM Profile WHERE user_email = "RobertMendez320@gmail.com";
+
+
+-- Display Post:
+-- Get posts given a page and per_page count
+SELECT post_url, post_name, cost FROM Post ORDER BY update_date DESC LIMIT 5, 5;
+
+
+-- tag:
+-- for each tag use in frontend, it will call endpoints to run following queries:
+SELECT count(*) FROM Tag WHERE category='bug';
+
+-- if = 0, then new tag:
+INSERT INTO Tag (category) VALUES('bug');
+SELECT count(*) FROM Tag WHERE category = 'bug';
+
+-- otherwise do nothing
+
+-- Suppose the tags selected are perfect, delicate, singing, amazing, and dark
+SELECT tag_id FROM Tag 
+WHERE category = 'perfect' OR category = 'delicate' OR category = 'singing'
+OR category = 'amazing' OR category = 'dark';
+
+SELECT tag_id FROM AttachedBy WHERE tag_id IN (
+SELECT tag_id FROM Tag 
+WHERE category = 'pet' OR category = 'candy' OR category = 'test' OR category = 'other' OR category = 'school'
+) and post_url = 'xyzahah.com';
+
+-- insert tags which are newly added to the post(6, 7, 8) in this case
+INSERT INTO AttachedBy(post_url, tag_id) 
+VALUES('xyzahah.com', 6), ('xyzahah.com', 7), ('xyzahah.com', 8);
+
+Select category from Tag where tag_id in (Select tag_id from AttachedBy where post_url = 'xyzahah.com');
+
+
+-- Report:
+-- Report submit failure due to same user report same post multiple times, and will only has one query
+SELECT count(*) FROM Report 
+WHERE user_email = 'example2@gmail.com' and post_url="abcd.com"; -- fail
+-- INSERT INTO Report (user_email, post_url, create_date) 
+-- VALUES('example3@gmail.com', 'zvideo.com', ‘1000-01-01 00:00:00’);
+-- SELECT count(*) FROM Report 
+-- WHERE user_email = 'example3@outlook.com' and post_url="xyzahah.com";
+
+-- Report submit success, but the report count does not met delete requirement:
+INSERT INTO Report (user_email, post_url, create_date) 
+VALUES('example4@qq.com', 'thefat2.com', "1000-01-01 00:00:00");
+
+SELECT * FROM Report WHERE user_email = 'example4@qq.com' and post_url = 'thefat2.com';
+
+UPDATE Post SET report_count = report_count + 1 
+     WHERE post_url = 'thefat2.com';
+
+SELECT report_count FROM Post WHERE post_url = 'thefat2.com';
+
+-- Report submit success, and the report count reach to be deleted:
+INSERT INTO Report (user_email, post_url, create_date) VALUES('example3@outlook.com', 'thefat1.com', "1000-01-01 00:00:00");
+SELECT * FROM Report;
+UPDATE Post SET report_count = report_count + 1 
+     WHERE post_url = 'thefat1.com';
+SELECT report_count FROM Post WHERE post_url = 'thefat1.com';
+-- find the owner to post, and store that user_email in backend
+SELECT user_email FROM Post WHERE post_url = 'thefat1.com';
+UPDATE User SET points = points - 10 WHERE user_email = 'example2@gmail.com';
+SELECT points FROM User WHERE user_email = 'example2@gmail.com';
+
+DELETE FROM AttachedBy WHERE post_url = "thefat1.com";
+DELETE FROM Report WHERE post_url = "thefat1.com";
+DELETE FROM Post WHERE post_url = "thefat1.com";
+SELECT count(*) FROM Report, AttachedBy, Post WHERE Post.post_url = 'thefat1.com' and Post.post_url = Report.post_url and Post.post_url = AttachedBy.post_url;
+-- SELECT count(*) FROM AttachedBy WHERE post_url = 'thefat1.com';
+-- SELECT count(*) FROM Post WHERE post_url = 'thefat1.com';
+
+
+-- ranking information for rank page
+-- select user with top 3 most points
+Select user_email, profile_pic_url, prof_description from User, Profile where User.user_email = Profile.user_email order by points Desc LIMIT 3;
+
+-- select user with top 3 most uploaded pictures
+Select user_email, profile_pic_url, prof_description from Profile order by post_count Desc LIMIT 3;
+
+-- select pictures wuth 3 most like
+Select post_name, post_url from Post order by like_count Desc Limit 3;
+
+-- select pictures with 3 most download
+Select post_name, post_url from Post order by download_count Desc Limit 3;
+
+-- Queries need for setting account info page
+-- given that the current user is example2@gmail.com
+Select points, User.user_email, profile_pic_url, prof_description, post_count from User, Profile where User.user_email ="example2@gmail.com" and User.user_email = Profile.user_email;
+
+-- show the most popular(like most) post from that user
+Select post_url, post_name from Post where user_email = "example2@gmail.com" order by like_count, download_count Desc Limit 1;
+
+-- Users are able to update their personal information if needed
+Update Profile set prof_description = "new Description" where user_email = "example2@gmail.com";
+
+-- To check the update command
+Select * from Profile where user_email = "example2@gmail.com";
+
+-- users are able to change their profile picture
+Update Profile set profile_pic_url = "new_profile_url" where user_email = "example2@gmail.com";
+
+-- To check the update command
+Select * from Profile where user_mail;

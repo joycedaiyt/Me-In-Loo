@@ -21,10 +21,10 @@ client = Minio(
     secret_key='minioadmin'
     )
 
-first_profilepic = "None"
-prev_profilepic = "None"
-first_post = "None"
-prev_post = "None"
+first_profilepic = "profile_pics/0.jpg"
+prev_profilepic = "profile_pics/0.jpg"
+first_post = "posts/0.jpg"
+prev_post = "posts/0.jpg"
 tag_set = set()
 
 userfile = open('user.csv', 'w')
@@ -53,32 +53,34 @@ def generateUser(n):
     return (email, userinstance, secretinstance)
 
 
+profilefirst = True
+
 def generateProfile(user_email):
     global prev_profilepic
     global first_profilepic
+    global profilefirst
 
     # profiles can have no profile pic
     have = [True, False]
     weights = [0.7, 0.3]
     have_profile_pic = choices(have, weights)[0]
 
-    objects = client.list_objects("me-in-loo", recursive=True, start_after=prev_profilepic)
 
-    profile_pic_url = "None"
+    if profilefirst and have_profile_pic:
+        profile_pic_url = "http://localhost:9000/me-in-loo/"+first_profilepic
+        profilefirst = False
     
-    for obj in objects:
-        if have_profile_pic:
-            # assigned all available profile pics
-            if prev_profilepic != "None" and first_profilepic == obj.object_name:
-                break
+    else:
+        objects = client.list_objects("me-in-loo", prefix="profile_pics/", recursive=True, start_after=prev_profilepic)
 
-            if first_profilepic == "None":
-                first_profilepic = obj.object_name
-
-            profile_pic_url = "http://localhost:9000/me-in-loo/"+ obj.object_name
-            prev_profilepic = obj.object_name
+        profile_pic_url = "None"
         
-        break
+        for obj in objects:
+            if have_profile_pic:
+                profile_pic_url = "http://localhost:9000/me-in-loo/"+ obj.object_name
+                prev_profilepic = obj.object_name
+            
+            break
 
     # profiles can have no profile description
     have_description = choices(have, weights)[0]
@@ -99,28 +101,26 @@ def generateProfile(user_email):
     return profileinstance
 
 
+postfirst = True
+
 def generatePost(user_email):
     global prev_post
     global first_post
     global report_count
+    global postfirst
 
     # get post url
-    objects = client.list_objects("me-in-loo", recursive=True, start_after=prev_post)
-    post_url = "None"
-    
-    for obj in objects:
-        # assigned all available memes
-        if prev_post != "None" and first_post == obj.object_name:
-            break
-
-        # first assignment
-        if first_post == "None":
-            first_post = obj.object_name
+    if postfirst:
+        post_url = "http://localhost:9000/me-in-loo/"+ first_post
+        postfirst = False
+    else:
+        objects = client.list_objects("me-in-loo", prefix = "posts/", recursive=True, start_after=prev_post)
+        post_url = "None"
         
-        post_url = "http://localhost:9000/me-in-loo/"+ obj.object_name
-        prev_post = obj.object_name
-
-        break
+        for obj in objects:
+            post_url = "http://localhost:9000/me-in-loo/"+ obj.object_name
+            prev_post = obj.object_name
+            break
 
     # generate random post name
     post_name = generate()[0]
@@ -230,6 +230,7 @@ def generateDataset(n):
             # generate attachedBy table
             attachedByinstances += generateAttachedBy(post_url, n-1)
 
+            # print("report: " + str(report_count))
             # generate Report table
             reporterIdx = randint(0, n-report_count-1)
             for _ in range(report_count):

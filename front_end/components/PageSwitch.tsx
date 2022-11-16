@@ -91,9 +91,10 @@ export const PageSwitch = (props: {
             }}
             sx={{ cursor: "pointer" }}
             variant="outlined"
-            value={input}
+            // value={input}
             onChange={handleIuputChange}
             onKeyDown={handleKeyDown}
+            autoComplete="off"
           ></TextField>
         )}
         <span> &nbsp;{`/ ${countPage}`}</span>
