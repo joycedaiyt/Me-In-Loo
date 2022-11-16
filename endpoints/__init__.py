@@ -10,7 +10,7 @@ bootstrap = Bootstrap()
 
 # login_manager = LoginManager()
 
-config['database'] = 'joyce'
+config['database'] = 'test'
 cnxn = mysql.connector.connect(**config)
 cursor = cnxn.cursor()
 

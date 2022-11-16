@@ -30,3 +30,6 @@ def addUserPoint2(email):
     update_stmt = "UPDATE User SET points = points + 2 WHERE user_email = %(email)s"
     cursor.execute(update_stmt, {'email': email})
 
+def minusUserPoint(email):
+    update_stmt = "UPDATE User SET points = points - 10 WHERE user_email = %(email)s"
+    cursor.execute(update_stmt, {'email': email})
