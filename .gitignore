@@ -6,4 +6,3 @@ test.py
 gcp_sql_config.py
 start
 .gitignore
-sessionData.py

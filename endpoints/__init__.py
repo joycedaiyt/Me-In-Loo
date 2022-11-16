@@ -1,14 +1,11 @@
 from flask import Flask
 import mysql.connector
-from database.database_setup.gcp_sql_config import config
-# from flask_login import LoginManager
-from flask_bootstrap import Bootstrap
 from flask_cors import CORS
+from flask_bootstrap import Bootstrap
+from database.database_setup.gcp_sql_config import config
 
 
 bootstrap = Bootstrap()
-
-# login_manager = LoginManager()
 
 
 config['database'] = 'test_mile_stone'
@@ -18,7 +15,7 @@ print("connection established")
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask("Me-In-Loo")
     app.debug = True
 
     CORS(app)
@@ -29,7 +26,6 @@ def create_app():
     #
     # This is used by Flask for various tasks, like signing cookies
     app.config['SECRET_KEY'] = 'a super secret key'
-    # login_manager.init_app(app)
 
     # Register the API endpoints we defined in back_end/routes.py
     from endpoints.routes import routes
