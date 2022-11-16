@@ -23,8 +23,27 @@ export const createPost = async (
     const res = await postAxios({
       method: "POST",
       url: `/posts`,
-      data: form
+      data: form,
     });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getPostByPage = async (pageNum: number, limitPerPage: number) => {
+  try {
+    console.log("herer2");
+    const res = await postAxios({
+      method: "GET",
+      url: `/posts?page=${pageNum}&per_page=${limitPerPage}`,
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Accept: "application/json",
+      //   },
+    });
+    // console.log(res);
+    // return res.data;
+    return res;
   } catch (e) {
     console.log(e);
   }
