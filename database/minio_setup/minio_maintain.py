@@ -40,10 +40,14 @@ def listImages(directory):
 
 
 if __name__ == "__main__":
-  upload_directories = ['posts', 'profile_pics']
+  # upload_directories = ['posts', 'profile_pics']
   try:
-    for directory in upload_directories:
-      uploadFile(directory)
+    # for directory in upload_directories:
+    #   uploadFile(directory)
+
+    objects = client.list_objects("me-in-loo", prefix="profile_pics/", start_after="profile_pics/999.jpg")
+    for obj in objects:
+      print(obj.object_name)
 
     # listImages("posts")
   except S3Error as exc:

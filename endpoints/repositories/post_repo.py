@@ -1,4 +1,5 @@
 from endpoints import cursor, cnxn
+import math
 
 
 def insertPost(content):
@@ -31,3 +32,11 @@ def getPostsByPage(startat, per_page):
     posts = cursor.fetchall()
 
     return posts
+
+
+def getPostCount(include_tag, per_page):
+    select_stmt = "SELECT count(*) FROM Post"
+    cursor.execute(select_stmt)
+    count = cursor.fetchone()
+    print(count)
+    return math.ceil(count[0] / int(per_page))

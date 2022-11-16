@@ -112,3 +112,120 @@
         post_count: 198  //# of post_count in Profile table should increment by 1
     }
 ]
+
+// Display posts by page:
+1.
+[
+	{
+		"post_url": "http://localhost:9000/me-in-loo/profile_pics/EN7JIJsBAg4.jpg",
+		"post_name": "incredible",
+		"cost": 52
+	},
+	{
+		"post_url": "http://localhost:9000/me-in-loo/profile_pics/gxjYqKWQ5Y0.jpg",
+		"post_name": "therapeutic",
+		"cost": 53
+	},
+	{
+		"post_url": "http://localhost:9000/me-in-loo/profile_pics/aDrJ0V78L28.jpg",
+		"post_name": "venomous",
+		"cost": 83
+	},
+	{
+		"post_url": "http://localhost:9000/me-in-loo/posts/927.jpg",
+		"post_name": "discerning",
+		"cost": 1
+	},
+	{
+		"post_url": "http://localhost:9000/me-in-loo/posts/1.jpg",
+		"post_name": "hot",
+		"cost": 79
+	}
+]
+
+// Tags:
+1.
+[
+    {
+        count(*): 0  //Tag 'bug' does not exist before insertion
+    }
+]
+
+2.
+[
+    {
+        Insert Successfully: A new Row is inserted in Tag table
+    }
+]
+
+3.
+[
+    {
+        count(*): 1  //After insertion, there is a tag 'bug' in database
+    }
+]
+
+4.
+
+[
+    {
+        tag_id: 7,
+    },
+    {
+        tag_id: 5,
+    },
+    {
+        tag_id: 6,
+    },
+    {
+        tag_id: 4,
+    },
+    {
+        tag_id: 8,
+    },
+] // this query will return all tag ids which attached to certain post
+
+5.
+[
+    {
+        tag_id: 4,
+    },
+    {
+        tag_id: 5,
+    },
+]
+
+6.
+[
+    {
+        Insert Successfully: new rows are inserted in AttachedBy table
+    }
+]
+
+7.
+[
+    {
+        category: "animal"
+    },
+    {
+        category: "candy"
+    },
+    {
+        category: "celebrity"
+    },
+    {
+        category: "other"
+    },
+    {
+        category: "pet"
+    },
+    {
+        category: "school"
+    },
+    {
+        category: "sport"
+    },
+    {
+        category: "test"
+    },
+] // now, the post with unique url 'xyzahah.com' has all tags attached to it as required
