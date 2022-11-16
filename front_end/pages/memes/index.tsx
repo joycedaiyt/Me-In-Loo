@@ -9,6 +9,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { ClickAwayListener, Button } from "@mui/material";
 import { TagPopper } from "../../components/TagPopper";
 import { getAllTags } from "../api/Tags";
+import { getPostByPage } from "../api/Post";
 
 const arrayImage = [
   {
@@ -92,6 +93,7 @@ export const MemePage = () => {
   const [selectedTags, setSelectedTags] = useState([] as Array<string>);
   const [allTags, setAllTags] = useState([] as Array<string>);
   const [calledAllTags, setCalledAllTags] = useState(false);
+  const [limitPerPage, setLimitPerPage] = useState(9);
   // const size = window.innerWidth;
   useEffect(() => {
     function updateSize() {
@@ -101,9 +103,14 @@ export const MemePage = () => {
     updateSize();
     return () => window.removeEventListener("resize", updateSize);
   }, []);
-  if (windowWidth >= 1600) {
-    limit = 12;
-  }
+
+  useEffect(() => {
+    if (windowWidth >= 1600) {
+      setLimitPerPage(12);
+    } else {
+      setLimitPerPage(9);
+    }
+  }, [windowWidth]);
 
   useEffect(() => {
     const tagsWrapper = async () => {
@@ -115,6 +122,16 @@ export const MemePage = () => {
     };
     tagsWrapper();
   }, [allTags]);
+
+  useEffect(() => {
+    const func = async () => {
+      console.log(pageNum, limitPerPage);
+      const data = await getPostByPage(pageNum, limitPerPage);
+      console.log(data);
+    };
+    func();
+  }, [pageNum]);
+
   const curArr = arrayImage.slice(pageNum * limit, (pageNum + 1) * limit);
   let curArr2 = curArr.slice(0, 3);
   let curArr3 = curArr.slice(3, 6);
