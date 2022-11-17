@@ -19,7 +19,7 @@ def handleLogin(email, password):
             # Create session data, we can access this data in other routes
             session['loggedin'] = True
             session['user_email'] = user[0]
-            return Response("good", status=200, mimetype='application/json')
+            return Response("Successful Login!", status=200, mimetype='application/json')
         else:
             return Response("Incorrect password", status=400)
     else:

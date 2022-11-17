@@ -6,7 +6,7 @@ SELECT count(*) FROM User WHERE user_email = 'KarlJohnson1000@gmail.com';
 -- initial points is 15 for new user
 INSERT INTO User 
 VALUES ('KarlJohnson1000@gmail.com', 'pbkdf2:sha256:260000$TA9mSuP8Mgnm8hsw$eaa4c71d10dc136b3d51c1cb96dc90ee4d7c91fa5e301b30d40a4c6621d06ece', 28);
-INSERT INTO Profile VALUES ('KarlJohnson1000@gmail.com', 'Care recognize production nor for as full.', 0);
+INSERT INTO Profile VALUES ('KarlJohnson1000@gmail.com', NULL, 'Care recognize production nor for as full.', 0);
 
 -- fail signup due to duplicate
 SELECT count(*) FROM User WHERE user_email = 'KarlJohnson1000@gmail.com';
@@ -22,6 +22,7 @@ SELECT user_secret FROM User WHERE user_email = 'KarlJohnson1000@gmail.com';
 
 
 -- Upload Post:
+
 -- upload picture failure:
 INSERT INTO Post (user_email, post_url, update_date, cost) 
 VALUES('KarlJohnson1000@gmail.com', 'http://localhost:9000/me-in-loo/meme/02574f2d-5e85-4348-bfcb-07971f695732.jpg','2022-06-17 17:38:09', 5); -- fail if user does not provide name or frontend does not pass enough data
@@ -124,10 +125,11 @@ Select post_name, post_url from Post order by download_count Desc Limit 3;
 
 
 -- Queries need for setting account info page
--- given that the current user is KarenWestmark138@gmail.com
+
+-- Given that the current user is KarenWestmark138@gmail.com
 Select points, User.user_email, profile_pic_url, prof_description, post_count from User, Profile where User.user_email ="KarenWestmark138@gmail.com" and User.user_email = Profile.user_email;
 
--- show the most popular(like most) post from that user
+-- Show the most popular(like most) post from that user
 Select post_url, post_name from Post where user_email = "KarenWestmark138@gmail.com" order by like_count, download_count Desc Limit 1;
 
 -- Users are able to update their personal information if needed
@@ -136,7 +138,7 @@ Update Profile set prof_description = "Perhaps data tend name effect lot give." 
 -- To check the update command
 Select * from Profile where user_email = "KarenWestmark138@gmail.com";
 
--- users are able to change their profile picture
+-- Users are able to change their profile picture
 Update Profile set profile_pic_url = "http://localhost:9000/me-in-loo/profile_pics/174.jpg" where user_email = "KarenWestmark138@gmail.com";
 
 -- To check the update command

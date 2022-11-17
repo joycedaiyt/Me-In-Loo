@@ -468,8 +468,8 @@
         points: 0,
         user_email: KarenWestmark138@gmail.com,
         profile_pic_url: profile_pic_url,
-        prof_description: prof_description,
-        post_count: 238
+        prof_description: perhals data tend name effect,
+        post_count: 283
     }
 ] //get the account information for current user
 

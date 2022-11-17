@@ -15,7 +15,8 @@ from endpoints.repositories.report_repo import deleteFromReport
 
 def uploadMeme(meme, cost, post_name, tags):
     # check if content has all required data
-    if not meme or cost == None or post_name == None or tags == None:
+    print(cost)
+    if not meme or cost == "" or post_name == "" or tags == None:
         return Response("Missing input value", status=400)
 
     meme = meme['meme']

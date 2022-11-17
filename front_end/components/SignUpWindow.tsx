@@ -43,7 +43,7 @@ export const SignUpWindow = () => {
     }
   };
   return (
-    <div className="root" style={{ paddingTop: "6%", marginLeft: "26%" }}>
+    <div className="root" style={{ paddingTop: "10%", marginLeft: "35%" }}>
       <Paper
         className="paper"
         elevation={3}
@@ -92,6 +92,7 @@ export const SignUpWindow = () => {
                   //   borderColor: "black",
                 }}
                 size="small"
+                autoComplete="off"
               />
               {email != "" ? (
                 ""
@@ -121,6 +122,7 @@ export const SignUpWindow = () => {
                   //   borderColor: "black",
                 }}
                 size="small"
+                autoComplete="off"
               />
               {confirmPass == password && password != "" ? (
                 ""
@@ -150,6 +152,7 @@ export const SignUpWindow = () => {
                   //   borderColor: "black",
                 }}
                 size="small"
+                autoComplete="off"
               />
               {confirmPass == password && confirmPass != "" ? (
                 ""
@@ -186,7 +189,7 @@ export const SignUpWindow = () => {
               <div
                 style={{ fontFamily: "montserrat", color: "red", fontSize: 12 }}
               >
-                Sorry, our backend have some issues
+                Sorry, User already Exist
               </div>
             ) : (
               ""
