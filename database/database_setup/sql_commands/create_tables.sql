@@ -47,3 +47,9 @@ CREATE TABLE Report (
     FOREIGN KEY(post_url) REFERENCES Post(post_url),
     FOREIGN KEY(user_email) REFERENCES User(user_email)
 );
+
+CREATE INDEX RankingPoints ON User (points);
+
+CREATE INDEX ProfilePosts ON Profile (post_count);
+
+CREATE INDEX DisplayPostByDate ON POST (update_date);

@@ -80,6 +80,21 @@ def insert_data(sqlPath, dataPaths):
         i += 1
 
 
+def create_triggers(sqlPath):
+    fd = open(sqlPath, 'r')
+    sqlFile = fd.read()
+    fd.close()
+
+    try:
+        cursor.execute("DROP TRIGGER IF EXISTS ReachedMaxReport;")
+        cnxn.commit()
+        cursor.execute(sqlFile)
+        cnxn.commit()
+        print("SUCCESS")
+    except mysql.connector.Error as err:
+        print(err)
+
+
 def other_queries(sqlPath):
     fd = open(sqlPath, 'r')
     sqlFile = fd.read()
@@ -115,11 +130,12 @@ def main():
                             './production_datasets/report.csv']
 
     menu = ("Which of the following commands would you like to run: \n"
-            "Create Database - cd\n"
-            "Create Tables - ct\n"
+            "Create Database - cda\n"
+            "Create Tables - cta\n"
+            "Create Triggers - ctr\n"
             "Insert Sample Data - isd\n"
             "Insert Production Data - ipd\n"
-            "Drop tables - dt\n"
+            "Drop tables - dta\n"
             "Other Queries - oq\n"
             "Quit - q\n"
             "Note: All SQL commands should be located in the ./sql_commands folder\n")
@@ -128,16 +144,18 @@ def main():
     # create_table('./sql_commands/create_tables.sql')
     while (True):
         input_var = input(menu)
-        if input_var == 'cd':
+        if input_var == 'cda':
             databaseName = input("Specify the new database name: ")
             create_db(databaseName)
-        elif input_var == 'ct':
+        elif input_var == 'cta':
             create_tables('./sql_commands/create_tables.sql')
+        elif input_var == 'ctr':
+            create_triggers('./sql_commands/create_triggers.sql')
         elif input_var == 'isd':
             insert_data('./sql_commands/insert_data.sql', sample_dataPaths)
         elif input_var == 'ipd':
             insert_data('./sql_commands/insert_data.sql', production_dataPaths)
-        elif input_var == 'dt':
+        elif input_var == 'dta':
             other_queries('./sql_commands/drop_tables.sql')
         elif input_var == 'oq':
             sqlPath = input("Specify the SQL command path of your query: ")

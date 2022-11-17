@@ -28,6 +28,11 @@ python db_maintain.py
 - Specific tables are created based on ./sql_commands/create_tables.sql
 
 
+#### Create Table `create_triggers(sqlPath)`
+- sqlPath is the path to the SQL commmands file that creates tables in the database 
+- If the trigger exists already, it will be removed and the new trigger will be created
+- Specific triggers are created based on ./sql_commands/create_triggers.sql
+
 #### Insert Sample Data `insert_data(sqlPath, dataPaths)`
 - The functions takes two parameters, sqlPath as the path to the SQL commands for the insert specifications, and a list of sample dataPaths as the path to the actual data that needs to be inserted
 - The dataset can be stored in a csv file, or just any file where each row corresponds to an entry, and each attribute is seperated by a comma. An example of the dataset is located in `./sample_datasets/user.csv`
