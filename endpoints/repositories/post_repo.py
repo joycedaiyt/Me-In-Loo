@@ -24,6 +24,7 @@ def getPostByUrl(post_url):
 
     return post
 
+
 def getPostsByPage(startat, per_page):
     select_stmt = "SELECT post_url, post_name, cost FROM Post ORDER BY update_date DESC LIMIT %s, %s;"
     data = (startat, per_page)
@@ -40,6 +41,7 @@ def getPostCount(include_tag, per_page):
     print(count)
     return math.ceil(count[0] / int(per_page))
 
+
 def getUserByUrl(post_url):
     # Fetch post from database
     select_stmt = "SELECT user_email FROM Post WHERE post_url = %(post_url)s"
@@ -47,6 +49,7 @@ def getUserByUrl(post_url):
     user_email = cursor.fetchone()
 
     return user_email
+
 
 def getReportCount(post_url):
     # Fetch post from database
@@ -56,17 +59,26 @@ def getReportCount(post_url):
 
     return report_count
 
+
 def deleteFromPost(post_url):
+    delete_attach = "DELETE FROM AttachedBy WHERE post_url = %(post_url)s"
     delete_stmt = "DELETE FROM Post WHERE post_url = %(post_url)s"
+    cursor.execute(delete_attach, {'post_url': post_url})
+    cnxn.commit()
     cursor.execute(delete_stmt, {'post_url': post_url})
+    cnxn.commit()
+
 
 def addReportCount(post_url):
     update_stmt = "UPDATE Post SET report_count = report_count + 1 WHERE post_url = %(post_url)s"
     cursor.execute(update_stmt, {'post_url': post_url})
-    
+    cnxn.commit()
+
+
 def checkReport(user_email, post_url):
-    select_stmt = "SELECT user_email FROM Post WHERE user_email = %(user_email)s and post_url = %(post_url)s"
-    cursor.execute(select_stmt, {'post_url': post_url})
+    select_stmt = "SELECT user_email FROM Report WHERE user_email = %(user_email)s and post_url = %(post_url)s"
+    cursor.execute(
+        select_stmt, {'user_email': user_email, 'post_url': post_url})
     user_email = cursor.fetchone()
 
     return user_email is None
