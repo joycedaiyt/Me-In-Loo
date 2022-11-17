@@ -99,13 +99,11 @@ SELECT * FROM Report LIMIT 10;
 UPDATE Post SET report_count = report_count + 1 
      WHERE post_url = 'http://localhost:9000/me-in-loo/posts/998.jpg';
 SELECT report_count FROM Post WHERE post_url = 'http://localhost:9000/me-in-loo/posts/998.jpg';
+
 -- find the owner to post, and store that user_email in backend
 SELECT user_email FROM Post WHERE post_url = 'http://localhost:9000/me-in-loo/posts/998.jpg';
-UPDATE User SET points = points - 10 WHERE user_email = 'ChristinaTakaki156@gmail.com';
 SELECT points FROM User WHERE user_email = 'ChristinaTakaki156@gmail.com';
 
-DELETE FROM AttachedBy WHERE post_url = "http://localhost:9000/me-in-loo/posts/998.jpg";
-DELETE FROM Report WHERE post_url = "http://localhost:9000/me-in-loo/posts/998.jpg";
 DELETE FROM Post WHERE post_url = "http://localhost:9000/me-in-loo/posts/998.jpg";
 SELECT count(*) FROM Report, AttachedBy, Post WHERE Post.post_url = 'http://localhost:9000/me-in-loo/posts/998.jpg' and Post.post_url = Report.post_url and Post.post_url = AttachedBy.post_url;
 

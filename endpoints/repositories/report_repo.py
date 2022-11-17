@@ -2,11 +2,7 @@ from sessionData import session
 from endpoints import cursor, cnxn
 
 
-def createReport(content):
-    user_email = session['user_email']
-    post_url = content['post_url']
-    create_date = content['create_date']
-    rep_description = content['rep_description']
+def createReport(user_email, post_url, create_date, rep_description):
     insert_stmt = "INSERT INTO Report VALUES (%s, %s, %s, %s)"
     data = (user_email, post_url, rep_description, create_date)
     cursor.execute(insert_stmt, data)

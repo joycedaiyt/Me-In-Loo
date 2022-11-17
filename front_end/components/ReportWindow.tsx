@@ -1,17 +1,26 @@
 import { Paper, Button, TextField } from "@mui/material";
+import { createReport } from "../pages/api/Report";
 require("typeface-eb-garamond");
 import "@fontsource/montserrat";
 import { useRef, useState } from "react";
 import Router from "next/router";
 
 export const ReportWindow = (props: {}) => {
-  //   const inputRef = useRef(null);
   const [reportDes, setReportDes] = useState("");
-  const handleSubmit = () => {};
+  const [errorExist, setErrorExist] = useState(false);
+  const handleSubmit = async (el: any) => {
+    try {
+      let output = await createReport(Router.query['post_url'] as string, reportDes);
+    } catch (e) {
+      setErrorExist(true);
+    }
+    
+  };
   const handleChange = (el: any) => {
     setReportDes(el.target.value);
+    
   };
-  console.log(Router.query);
+
   return (
     <div style={{ paddingTop: "8%", marginLeft: "35%" }}>
       <Paper

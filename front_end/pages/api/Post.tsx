@@ -29,7 +29,6 @@ export const createPost = async (
 
 export const getPostByPage = async (pageNum: number, limitPerPage: number) => {
   try {
-    console.log("herer2");
     const res = await postAxios({
       method: "GET",
       url: `/posts?page=${pageNum}&per_page=${limitPerPage}`,
