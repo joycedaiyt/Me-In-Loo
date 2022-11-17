@@ -48,3 +48,9 @@ def addReportCount(post_url):
     update_stmt = "UPDATE Post SET report_count = report_count + 1 WHERE post_url = %(post_url)s"
     cursor.execute(update_stmt, {'post_url': post_url})
     
+def checkReport(user_email, post_url):
+    select_stmt = "SELECT user_email FROM Post WHERE user_email = %(user_email)s and post_url = %(post_url)s"
+    cursor.execute(select_stmt, {'post_url': post_url})
+    user_email = cursor.fetchone()
+
+    return user_email is None

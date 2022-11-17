@@ -1,6 +1,6 @@
 from flask import Response
 from endpoints.repositories.report_repo import createReport
-from endpoints.repositories.post_repo import getPostByUrl, addReportCount
+from endpoints.repositories.post_repo import getPostByUrl, addReportCount, checkReport
 
 def reportMeme(content):
     # check if content has post url
@@ -10,7 +10,7 @@ def reportMeme(content):
     # check if the post_url already exists
     post = getPostByUrl(content['post_url'])
 
-    if post:
+    if post and checkReport(content['user_email'], content['post_url']):
         post = content['post_url']
         createReport(content)
         addReportCount(post)
