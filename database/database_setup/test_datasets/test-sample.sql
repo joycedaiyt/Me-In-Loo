@@ -117,7 +117,7 @@ SELECT post_url, post_name, cost FROM Post ORDER BY update_date DESC LIMIT 5, 5;
 
 -- ranking information for rank page
 -- select user with top 3 most points
-Select user_email, profile_pic_url, prof_description from User, Profile where User.user_email = Profile.user_email order by points Desc LIMIT 3;
+Select User.user_email, profile_pic_url, prof_description from User, Profile where User.user_email = Profile.user_email order by points Desc LIMIT 3;
 
 -- select user with top 3 most uploaded pictures
 Select user_email, profile_pic_url, prof_description from Profile order by post_count Desc LIMIT 3;
