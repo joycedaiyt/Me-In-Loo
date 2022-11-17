@@ -5,6 +5,7 @@ import { FiThumbsUp, FiThumbsDown, FiDownloadCloud } from "react-icons/fi";
 import { Button, IconButton } from "@mui/material";
 import { CgDanger } from "react-icons/cg";
 import { MdOutlineReportGmailerrorred } from "react-icons/md";
+import Router from "next/router";
 
 export const MemeContainer = (props: {
   src: string;
@@ -103,7 +104,10 @@ export const MemeContainer = (props: {
               <FiThumbsUp />
             </IconButton>
             <IconButton>
-              <CgDanger style={{ fontSize: 28 }} />
+              <CgDanger
+                style={{ fontSize: 28 }}
+                onClick={() => Router.push(`/report?post_url=${src}`)}
+              />
             </IconButton>
           </span>
         </div>
