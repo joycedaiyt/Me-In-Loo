@@ -1,4 +1,5 @@
 import { ReportWindow } from "../../components/ReportWindow";
+import Router from "next/router";
 export const ReportPage = () => {
   return (
     <div
