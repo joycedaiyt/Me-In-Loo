@@ -1,5 +1,5 @@
 config = {
     'user': 'root',
-    'password': '115286270Zxcvbn',
+    'password': 'yutong1022',
     'host': 'localhost'
 }

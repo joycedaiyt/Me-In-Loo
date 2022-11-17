@@ -5,20 +5,32 @@ import "@fontsource/montserrat";
 import { useRef, useState } from "react";
 import Router from "next/router";
 
-export const ReportWindow = (props: {}) => {
+export const ReportWindow = (props: {
+  overHasReported?: boolean;
+  setHasReported: any;
+  reportSuccess: boolean;
+  setReportSuccess: any;
+}) => {
+  const {
+    overHasReported,
+    setHasReported,
+    reportSuccess,
+    setReportSuccess
+    
+  } = props;
   const [reportDes, setReportDes] = useState("");
-  const [errorExist, setErrorExist] = useState(false);
   const handleSubmit = async (el: any) => {
     try {
       let output = await createReport(Router.query['post_url'] as string, reportDes);
+      setHasReported(false)
+      setReportSuccess(true);
     } catch (e) {
-      setErrorExist(true);
+      setHasReported(true);
+      setReportSuccess(false);
     }
-    
   };
   const handleChange = (el: any) => {
     setReportDes(el.target.value);
-    
   };
 
   return (

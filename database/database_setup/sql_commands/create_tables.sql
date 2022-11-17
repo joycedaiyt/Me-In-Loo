@@ -48,6 +48,4 @@ CREATE TABLE Report (
     FOREIGN KEY(user_email) REFERENCES User(user_email)
 );
 
-CREATE INDEX ProfilePosts ON Profile (post_count);
-
 CREATE INDEX DisplayPostByUser ON POST (user_email);

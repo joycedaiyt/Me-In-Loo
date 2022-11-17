@@ -6,19 +6,15 @@ from endpoints.repositories.post_repo import getPostByUrl, addReportCount, check
 
 
 def reportMeme(content):
-    print(session.get("user_email"))
     # check if content has post url
     if 'post_url' and 'create_date' and 'rep_description' not in content:
         return Response("Missing input value", status=400)
     
     # check if the post_url al
     post_url = content['post_url']
-    print(content)
-    post = getPostByUrl(post_url)
-    print(post)
+    hasReported = checkReport(session['user_email'], content['post_url'])
 
-    if post and checkReport(session['user_email'], content['post_url']):
-        print("1111111111")
+    if hasReported:
         user_email = session['user_email']
         create_date = content['create_date']
         rep_description = content['rep_description']
@@ -33,7 +29,6 @@ def reportMeme(content):
             # deleteFromReport(content['post_url']) included in triggers
             deleteFromPost(post_url)
         
-        print("here")
         return Response("report success", status=200)
     else:
         return Response("You have reported on this meme already", status=400)
