@@ -93,12 +93,20 @@ export const MemePage = () => {
   const [selectedTags, setSelectedTags] = useState([] as Array<string>);
   const [allTags, setAllTags] = useState([] as Array<string>);
   const [calledAllTags, setCalledAllTags] = useState(false);
-  const [limitPerPage, setLimitPerPage] = useState(9);
+  const [limitPerPage, setLimitPerPage] = useState(
+    window.innerWidth < 1700 ? 9 : 12
+  );
+  console.log(window.innerWidth);
   const [memeInPage, setMemeInPage] = useState([] as Array<any>);
   // const size = window.innerWidth;
   useEffect(() => {
     function updateSize() {
       setWindowWidth(window.innerWidth);
+      //   if (window.innerWidth >= 1700) {
+      //     setLimitPerPage(12);
+      //   } else {
+      //     setLimitPerPage(9);
+      //   }
     }
     window.addEventListener("resize", updateSize);
     updateSize();
@@ -106,7 +114,7 @@ export const MemePage = () => {
   }, []);
 
   useEffect(() => {
-    if (windowWidth >= 1600) {
+    if (windowWidth >= 1700) {
       setLimitPerPage(12);
     } else {
       setLimitPerPage(9);

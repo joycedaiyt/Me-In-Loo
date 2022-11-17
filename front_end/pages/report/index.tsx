@@ -4,7 +4,7 @@ export const ReportPage = () => {
       style={{
         minHeight: "100vh",
         backgroundColor: "black",
-        minWidth: "250vh",
+        minWidth: "100vw",
       }}
     ></div>
   );
