@@ -186,7 +186,7 @@ export const SignUpWindow = () => {
               <div
                 style={{ fontFamily: "montserrat", color: "red", fontSize: 12 }}
               >
-                Sorry, our backend have some issues
+                Sorry, User already Exist
               </div>
             ) : (
               ""

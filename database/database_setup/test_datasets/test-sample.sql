@@ -110,6 +110,11 @@ VALUES('xyzahah.com', 6), ('xyzahah.com', 7), ('xyzahah.com', 8);
 Select category from Tag where tag_id in (Select tag_id from AttachedBy where post_url = 'xyzahah.com');
 
 
+-- Display Post:
+-- Get posts given a page and per_page count
+SELECT post_url, post_name, cost FROM Post ORDER BY update_date DESC LIMIT 5, 5;
+
+
 -- ranking information for rank page
 -- select user with top 3 most points
 Select user_email, profile_pic_url, prof_description from User, Profile where User.user_email = Profile.user_email order by points Desc LIMIT 3;
@@ -123,11 +128,13 @@ Select post_name, post_url from Post order by like_count Desc Limit 3;
 -- select pictures with 3 most download
 Select post_name, post_url from Post order by download_count Desc Limit 3;
 
+
 -- Queries need for setting account info page
--- given that the current user is example2@gmail.com
+
+-- Given that the current user is example2@gmail.com
 Select points, User.user_email, profile_pic_url, prof_description, post_count from User, Profile where User.user_email ="example2@gmail.com" and User.user_email = Profile.user_email;
 
--- show the most popular(like most) post from that user
+-- Show the most popular(like most) post from that user
 Select post_url, post_name from Post where user_email = "example2@gmail.com" order by like_count, download_count Desc Limit 1;
 
 -- Users are able to update their personal information if needed
@@ -140,7 +147,7 @@ Select * from Profile where user_email = "example2@gmail.com";
 Update Profile set profile_pic_url = "new_profile_url" where user_email = "example2@gmail.com";
 
 -- To check the update command
-Select * from Profile where user_mail;
+Select * from Profile where user_mail = "example2@gmail.com";
 
 
 
