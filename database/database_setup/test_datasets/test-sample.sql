@@ -112,7 +112,7 @@ Select category from Tag where tag_id in (Select tag_id from AttachedBy where po
 
 -- ranking information for rank page
 -- select user with top 3 most points
-Select user_email, profile_pic_url, prof_description from User, Profile where User.user_email = Profile.user_email order by points Desc LIMIT 3;
+Select User.user_email, profile_pic_url, prof_description from User, Profile where User.user_email = Profile.user_email order by points Desc LIMIT 3;
 
 -- select user with top 3 most uploaded pictures
 Select user_email, profile_pic_url, prof_description from Profile order by post_count Desc LIMIT 3;
@@ -140,7 +140,7 @@ Select * from Profile where user_email = "example2@gmail.com";
 Update Profile set profile_pic_url = "new_profile_url" where user_email = "example2@gmail.com";
 
 -- To check the update command
-Select * from Profile where user_mail;
+Select * from Profile where user_mail = "example2@gmail.com";
 
 
 
