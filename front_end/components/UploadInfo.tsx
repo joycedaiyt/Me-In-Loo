@@ -7,6 +7,7 @@ import {
   Popper,
   Paper,
   ClickAwayListener,
+  Alert,
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { TagsCard } from "./TagsCard";
@@ -24,7 +25,19 @@ export const UploadInfo = (props: {
   allTags: Array<string>;
   overFlowName?: boolean;
   overCost?: boolean;
+  setOverCost: any;
   overTags?: boolean;
+  setOverTags: any;
+  overName: boolean;
+  setOverName: any;
+  disableButton: boolean;
+  setDisableButton: any;
+  disableButton1: boolean;
+  setDisableButton1: any;
+  disableButton2: boolean;
+  setDisableButton2: any;
+  submitSuccess: boolean;
+  setSubmitSuccess: any;
 }) => {
   const {
     postName,
@@ -35,19 +48,48 @@ export const UploadInfo = (props: {
     setPostTags,
     allTags,
     uploadMeme,
+    overTags,
+    setOverTags,
+    overCost,
+    setOverCost,
+    overName,
+    setOverName,
+    disableButton,
+    setDisableButton1,
+    disableButton1,
+    setDisableButton2,
+    disableButton2,
+    setDisableButton,
+    submitSuccess,
+    setSubmitSuccess,
   } = props;
   const [searchWords, setSearchWords] = useState("");
   const menuRef = useRef(null);
-  const tagsRemained = allTags.filter((el) => {
+  const allTagsCopy = allTags?.slice();
+  const tagsRemained = allTagsCopy?.filter((el) => {
     let capWords = el.toUpperCase();
     let capSearchWords = searchWords.toUpperCase();
     return capWords.includes(capSearchWords) && !postTags.includes(el);
   });
   const handlePostName = (el: any) => {
-    setPostName(el.target.value);
+    if (el.target.value.length < 15) {
+      setPostName(el.target.value);
+      setOverName(false);
+      setDisableButton(false);
+    } else {
+      setOverName(true);
+      setDisableButton(true);
+    }
   };
   const handlePostCost = (el: any) => {
-    setPostCost(el.target.value);
+    if (/^[0-9]*$/.test(el.target.value) && el.target.value <= 100) {
+      setPostCost(el.target.value);
+      setOverCost(false);
+      setDisableButton1(false);
+    } else {
+      setOverCost(true);
+      setDisableButton1(true);
+    }
   };
   const handleSearch = (el: any) => {
     setSearchWords(el.target.value);
@@ -58,17 +100,30 @@ export const UploadInfo = (props: {
     }
     if (el.keyCode == 13) {
       let newArr = postTags;
-      newArr.push(searchWords);
-      setPostTags(newArr);
-      el.target.value = "";
-      setSearchWords("");
+      if (newArr.length < 5) {
+        newArr.push(searchWords);
+        setPostTags(newArr);
+        el.target.value = "";
+        setSearchWords("");
+      } else {
+        setOverTags(true);
+        el.target.value = "";
+        setSearchWords("");
+      }
     }
   };
   const handleInsertTags = (el: any) => {
     let newArr = postTags;
-    newArr.push(el.target.innerText);
-    setPostTags(newArr);
-    setSearchWords("");
+    if (newArr.length < 5) {
+      newArr.push(el.target.innerText);
+      setPostTags(newArr);
+      setSearchWords("");
+      setDisableButton2(false);
+    } else {
+      setOverTags(true);
+      setSearchWords("");
+      setDisableButton2(true);
+    }
   };
 
   const handleClickAway = () => {
@@ -80,13 +135,16 @@ export const UploadInfo = (props: {
       return el != e.current.innerText;
     });
     setPostTags(newArr);
+    setOverTags(false);
   };
 
   const uploadMemes = async () => {
     try {
       const res = await createPost(uploadMeme, postCost, postName, postTags);
+      setSubmitSuccess(true);
     } catch (e) {
       console.log(e);
+      setSubmitSuccess(false);
     }
   };
   return (
@@ -181,7 +239,7 @@ export const UploadInfo = (props: {
                 overflow: "scroll",
               }}
             >
-              {tagsRemained.map((el, idx) => {
+              {tagsRemained?.map((el, idx) => {
                 return (
                   <MenuItem key={idx} value={el} onClick={handleInsertTags}>
                     {el}
@@ -206,7 +264,11 @@ export const UploadInfo = (props: {
             borderRadius: 0,
             // fontFamily: "EB Garamond",
           }}
-          onClick={async () => await uploadMemes()}
+          onClick={async () => {
+            await uploadMemes();
+            console.log("ehreanyway");
+          }}
+          disabled={disableButton || disableButton1 || disableButton2}
         >
           SUBMIT{" "}
         </Button>

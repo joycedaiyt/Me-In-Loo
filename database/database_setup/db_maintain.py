@@ -2,7 +2,8 @@ import csv
 import mysql.connector
 from gcp_sql_config import config
 
-config['database'] = 'test'  # assign which database to connect to
+# assign which database to connect to
+config['database'] = 'test_milestone_2_production'
 cnxn = mysql.connector.connect(**config)
 print("Established Connection...")
 cursor = cnxn.cursor()
@@ -31,7 +32,7 @@ def create_tables(sqlPath):
     try:
         for query in sqlCommands:
             # create tables using sql commands
-            cursor.execute(query)  
+            cursor.execute(query)
 
         cnxn.commit()
         print("successfully created tables")
@@ -65,7 +66,7 @@ def insert_data(sqlPath, dataPaths):
         with open(dataPaths[i]) as csvfile:
             spamreader = csv.reader(csvfile)
             for row in spamreader:
-                row = [None if item== 'None' else item for item in row]
+                row = [None if item == 'None' else item for item in row]
                 # print(row)
                 try:
                     cursor.execute(query, row)
@@ -77,7 +78,6 @@ def insert_data(sqlPath, dataPaths):
                     print(row)
                     return
         i += 1
-    
 
 
 def other_queries(sqlPath):
@@ -96,31 +96,30 @@ def other_queries(sqlPath):
     except:
         cnxn.rollback()
         print("FAILED...")
-    
 
 
 def main():
 
     sample_dataPaths = ['./sample_datasets/user.csv',
-                 './sample_datasets/tag.csv',
-                 './sample_datasets/profile.csv',
-                 './sample_datasets/post.csv',
-                 './sample_datasets/attachedBy.csv',
-                 './sample_datasets/report.csv']
+                        './sample_datasets/tag.csv',
+                        './sample_datasets/profile.csv',
+                        './sample_datasets/post.csv',
+                        './sample_datasets/attachedBy.csv',
+                        './sample_datasets/report.csv']
 
     production_dataPaths = ['./production_datasets/user.csv',
-                 './production_datasets/tag.csv',
-                 './production_datasets/profile.csv',
-                 './production_datasets/post.csv',
-                 './production_datasets/attachedBy.csv',
-                 './production_datasets/report.csv']
+                            './production_datasets/tag.csv',
+                            './production_datasets/profile.csv',
+                            './production_datasets/post.csv',
+                            './production_datasets/attachedBy.csv',
+                            './production_datasets/report.csv']
 
     menu = ("Which of the following commands would you like to run: \n"
             "Create Database - cd\n"
             "Create Tables - ct\n"
             "Insert Sample Data - isd\n"
             "Insert Production Data - ipd\n"
-            "Drop tables - dt"
+            "Drop tables - dt\n"
             "Other Queries - oq\n"
             "Quit - q\n"
             "Note: All SQL commands should be located in the ./sql_commands folder\n")

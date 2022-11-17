@@ -1,0 +1,519 @@
+// we will make the each row of table represented by an object, and each query represent by an array
+
+// sign up and sign in
+1.
+[
+    {
+        count(*): 0
+    }
+]
+
+2.
+[
+    {
+        Insert Successfully: one row added in User
+    }
+]
+3.
+[
+    { 
+        Insert Successfully: one row added in Profile
+    }
+]
+
+4.
+[
+    {
+        count(*): 1
+    }
+]
+
+5.
+[
+    {
+        Insert Failure: Missing points field
+    }
+]
+
+6.
+[
+    {
+        user_secret: "pbkdf2:sha256:260000$TA9mSuP8Mgnm8hsw$eaa4c71d10dc136b3d51c1cb96dc90ee4d7c91fa5e301b30d40a4c6621d06ece"
+    }
+]
+
+// Uploading Posts:
+1.
+[
+    {
+        Insert Failure: post_name field is missing
+    }
+]
+
+2.
+[
+    {
+        count(*) for Post: 1115  //The count will be the same in this case
+    }
+]
+
+3.
+[
+    {
+        Insert Successfully: A new row is added in Post table
+    }
+]
+
+4.
+[
+    {
+        user_email: "ChristinaTakaki156@gmail.com",
+        post_url: "http://localhost:9000/me-in-loo/posts/999.jpg",
+        post_name: "tacky",
+        update_date: "2020-08-22 04:44:10",
+        download_count: 943,
+        like_count: 109,
+        cost: 8,
+        report_count: 0
+    }
+
+]
+
+5.
+[
+    {
+        count(*) where user_email = "ChristinaTakaki156@gmail.com": 76 // +1 compare to before insertion
+    }
+]
+
+7.
+[
+    {
+        Update Successfully: Fields in User table have been updated
+    }
+]
+
+8.
+[
+    {
+        points: 141  //points should increment by 2 compare to before update
+    }
+]
+
+9.
+[
+    {
+        Update Successfully: Fields in Profile table have been updated
+    }
+]
+
+10.
+[
+    {
+        post_count: 76  //# of post_count in Profile table should increment by 1
+    }
+]
+
+// Display posts by page:
+1.
+[
+	{
+		"post_url": "http://localhost:9000/me-in-loo/posts/253.jpg",
+		"post_name": "careful",
+		"cost": 94
+	},
+	{
+		"post_url": "http://localhost:9000/me-in-loo/posts/656.jpg",
+		"post_name": "aspiring",
+		"cost": 82
+	},
+	{
+		"post_url": "http://localhost:9000/me-in-loo/posts/230.jpg",
+		"post_name": "nostalgic",
+		"cost": 29
+	},
+	{
+		"post_url": "http://localhost:9000/me-in-loo/posts/506.jpg",
+		"post_name": "jasmine",
+		"cost": 59
+	},
+	{
+		"post_url": "http://localhost:9000/me-in-loo/posts/402.jpg",
+		"post_name": "meticulous",
+		"cost": 28
+	}
+]
+
+// Tags:
+1.
+[
+    {
+        count(*): 0  //Tag 'python' does not exist before insertion
+    }
+]
+
+2.
+[
+    {
+        Insert Successfully: A new Row is inserted in Tag table
+    }
+]
+
+3.
+[
+    {
+        count(*): 1  //After insertion, there is a tag 'python' in database
+    }
+]
+
+4.
+
+[
+    {
+        tag_id: 364,
+    },
+    {
+        tag_id: 86,
+    },
+    {
+        tag_id: 589,
+    }
+]
+
+5.
+[
+    {
+        tag_id: 86,
+    },
+    {
+        tag_id: 589,
+    },
+]
+
+6.
+[
+    {
+        Insert Successfully: new rows are inserted in AttachedBy table
+    }
+]
+
+7.
+[
+    {
+        category: "gentle"
+    },
+    {
+        category: "able"
+    },
+    {
+        category: "flashy"
+    }
+] // now, the post with unique url 'http://localhost:9000/me-in-loo/posts/1055' has all tags attached to it as required
+
+
+// Report:
+1. 
+[
+    {
+        count(*) : 1 //stop report since already reported
+    }
+]
+
+2.
+[
+    {
+        Insert Successfully: A new Row added to Report table
+    }
+]
+
+3.
+
+[
+    {
+        user_email: "WillieLiriano692@gmail.com",
+        post_url: "http://localhost:9000/me-in-loo/posts/998.jpg",
+        rep_description: NULL,
+        create_date: 2022-10-15 05:15:31
+    }
+]
+
+4.
+
+[
+    {
+        Update Successfully: A field in Post Table is updated
+    }
+]
+
+5.
+[
+    {
+        report_count: 3  //imcrement by 1 due to report
+    }
+]
+
+6.
+
+[
+    {
+        Insert Successfully: A new row is added to Report table
+    }
+]
+
+7.
+[
+    {
+        user_email: AdaCameron597@gmail.com
+        post_url: http://localhost:9000/me-in-loo/posts/126.jpg
+        rep_description: Most ten cup far training opportunity difficult candidate.
+        create_date: 2020-11-20 11:30:58
+    },
+    {
+        user_email: AdaCameron597@gmail.com
+        post_url: http://localhost:9000/me-in-loo/posts/730.jpg
+        rep_description: Their form job fall do movie.
+        create_date: 2022-09-02 23:52:32
+    },
+    {
+        user_email: AdaCameron597@gmail.com
+        post_url: http://localhost:9000/me-in-loo/posts/724.jpg
+        rep_description: Movie daughter day nature example report foot.
+        create_date: 2022-08-30 21:28:35
+    },
+    {
+        user_email: AdaPerez54@gmail.com
+        post_url: http://localhost:9000/me-in-loo/posts/1066.jpg
+        rep_description: NULL
+        create_date: 2021-03-09 23:01:29
+    },
+    {
+        user_email: AdaPerez54@gmail.com
+        post_url: http://localhost:9000/me-in-loo/posts/241.jpg
+        rep_description: NULL
+        create_date: 2021-03-23 17:13:38
+    },
+    {
+        user_email: AdaPerez54@gmail.com
+        post_url: http://localhost:9000/me-in-loo/posts/376.jpg
+        rep_description: Try wait side part west hold.
+        create_date: 2022-05-14 22:00:26
+    },
+    {
+        user_email: AdaPerez54@gmail.com
+        post_url: http://localhost:9000/me-in-loo/posts/453.jpg
+        rep_description: Billion reality land happen.
+        create_date: 2021-08-23 18:49:31
+    },
+    {
+        user_email: AdaPerez54@gmail.com
+        post_url:http://localhost:9000/me-in-loo/posts/746.jpg
+        rep_description: Of list raise especially consumer owner charge market.
+        create_date: 2022-05-16 21:03:23
+    },
+    {
+        user_email: AdaPerez54@gmail.com
+        post_url: http://localhost:9000/me-in-loo/posts/996.jpg
+        rep_description: Far college early student money cover.
+        create_date: 2022-08-15 12:24:32
+    },
+    {
+        user_email: AddieMeyer685@gmail.com
+        post_url: http://localhost:9000/me-in-loo/posts/277.jpg
+        rep_description: Walk school word year establish.
+        create_date: 2022-08-28 12:17:12
+    }
+] // the newly added report get added, whiles others remained same
+
+8.
+[
+    {
+        Update Successfully: There exists fields in Post Table being updated
+    }
+]
+
+9.
+[
+    {
+        report_count: 3 //increase by 1 compare to before, assume it reaches delete limit(actually not)
+    }
+]
+
+10.
+[
+    {
+        user_email: ChristinaTakaki156@gmail.com
+    }
+]
+
+11.
+[
+    {
+        Update Successfully: One row in User table is successfully updated
+    }
+]
+
+12.
+[
+    {
+        points: 0 //the points for user ChristinaTakaki156@gmail.com is deducted by 10
+    }
+]
+
+13.
+[
+    {
+        Delete Successfully: All post related rows in AttachedBy table are deleted
+    }
+]
+
+14.
+[
+    {
+        Delete Successfully: All post related rows in Report table are deleted
+    }
+]
+
+15.
+[
+    {
+        Delete Successfully: The post itself in Post table is deleted
+    }
+]
+
+16.
+[
+    {
+        count(*): 0 // All post related table(has foreignkey reference as post_url) does not have the deleted post related item
+    }
+]
+
+// ranking Info:
+1.
+[
+    {
+        user_email: JackCorbin725@gmail.com,
+        profile_pic_url: NULL,
+        prof_description: NULL
+    },
+    {
+        user_email: JackCorbin725@gmail.com,
+        profile_pic_url: http://localhost:9000/me-in-loo/profile_pics/662.jpg
+        prof_description: These force relationship ask behavior attack.'
+
+    },
+    {
+        user_email: JackCorbin725@gmail.com,
+        profile_pic_url: http://localhost:9000/me-in-loo/profile_pics/506.jpg
+        prof_description: NULL
+    }
+] // the top 3 most points user
+
+2.
+[
+    {
+        user_email: KarenWestmark138@gmail.com,
+        profile_pic_url: http://localhost:9000/me-in-loo/profile_pics/174.jpg,
+        prof_description: Perhaps data tend name effect lot give.
+    },
+    {
+        user_email: SandraBoldosser81@gmail.com,
+        profile_pic_url: http://localhost:9000/me-in-loo/profile_pics/140.jpg,
+        prof_description: NULL
+    },
+    {
+        user_email: GeorgeMckinney135@gmail.com,
+        profile_pic_url: NULL,
+        prof_description: NULL
+    }
+]  // the top 3 users with most uploaded memes
+
+3.
+[
+    {
+        post_name: precise,
+        post_url: http://localhost:9000/me-in-loo/posts/532.jpg
+    },
+     {
+        post_name: fair,
+        post_url: http://localhost:9000/me-in-loo/posts/43.jpg
+    },
+     {
+        post_name: talented,
+        post_url: http://localhost:9000/me-in-loo/posts/613.jpg
+    },
+] // the top 3 memes with most liked
+
+4.
+[
+    {
+        post_name: fine
+        post_url: http://localhost:9000/me-in-loo/posts/246.jpg
+    },
+        {
+        post_name: faithful
+        post_url: http://localhost:9000/me-in-loo/posts/191.jpg
+    },
+        {
+        post_name: bizarre
+        post_url: http://localhost:9000/me-in-loo/posts/703.jpg
+    },
+] // the top 3 memes with most download_count
+
+
+-- Features for Account Info for current account:
+-- Suppose that current user is KarenWestmark138@gmail.com
+1.
+[
+    {
+        points: 0,
+        user_email: KarenWestmark138@gmail.com,
+        profile_pic_url: profile_pic_url,
+        prof_description: prof_description,
+        post_count: 238
+    }
+] //get the account information for current user
+
+2.
+
+[
+    {
+        post_url: http://localhost:9000/me-in-loo/posts/710.jpg,
+        post_name: nocturnal
+    },
+] // get the most popular meme post by this user
+
+3.
+[
+    {
+        Update Successfully: 1 row is changed in Profile table
+    }
+] // update profile description of current user
+
+4. 
+
+[
+    {
+        user_email: KarenWestmark138@gmail.com,
+        profile_pic_url: profile_pic_url,
+        prof_description: Perhaps data tend name effect lot give.,
+        post_count: 238
+    }
+] // the profile description
+
+5.
+[
+    {
+        Update Successfully: 1 row is changed in Profile table
+    }
+] // upload the new profile picture
+
+6.
+[
+    {
+        user_email: KarenWestmark138@gmail.com,
+        profile_pic_url: http://localhost:9000/me-in-loo/profile_pics/174.jpg,
+        prof_description: Perhaps data tend name effect lot give.,
+        post_count: 238
+    }
+] //the profile_pic_url is updated as expected
+

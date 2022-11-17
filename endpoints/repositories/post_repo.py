@@ -1,10 +1,10 @@
-from flask import session
 from endpoints import cursor, cnxn
+import math
 
 
 def insertPost(content):
     cost = content['cost']
-    user_email = session['email']
+    user_email = content['user_email']
     post_url = content['post_url']
     post_name = content['post_name']
     update_date = content['update_date']
@@ -23,6 +23,22 @@ def getPostByUrl(post_url):
     post = cursor.fetchone()
 
     return post
+
+def getPostsByPage(startat, per_page):
+    select_stmt = "SELECT post_url, post_name, cost FROM Post ORDER BY update_date DESC LIMIT %s, %s;"
+    data = (startat, per_page)
+    cursor.execute(select_stmt, data)
+    posts = cursor.fetchall()
+
+    return posts
+
+
+def getPostCount(include_tag, per_page):
+    select_stmt = "SELECT count(*) FROM Post"
+    cursor.execute(select_stmt)
+    count = cursor.fetchone()
+    print(count)
+    return math.ceil(count[0] / int(per_page))
 
 def getUserByUrl(post_url):
     # Fetch post from database

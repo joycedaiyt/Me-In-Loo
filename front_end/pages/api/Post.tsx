@@ -1,10 +1,10 @@
 import axios from "axios";
 const postAxios = axios.create({
-  baseURL: "http://127.0.0.1:5000",
-  headers: {
-    "Content-Type": "application/json",
-    Accept: "application/json",
-  },
+  baseURL: "http://127.0.0.1:8000",
+  // headers: {
+  //   "Content-Type": "application/json",
+  //   Accept: "application/json",
+  // },
 });
 
 export const createPost = async (
@@ -13,17 +13,34 @@ export const createPost = async (
   postName: string,
   tags: Array<string>
 ) => {
+  let form = new FormData();
+  form.append("meme", file);
+  form.append("cost", postCost.toString());
+  form.append("post_name", postName);
+  form.append("tags", tags.toString());
+
+  const res = await postAxios({
+    method: "POST",
+    url: `/posts`,
+    data: form,
+  });
+  return res;
+};
+
+export const getPostByPage = async (pageNum: number, limitPerPage: number) => {
   try {
+    console.log("herer2");
     const res = await postAxios({
-      method: "POST",
-      url: "/posts",
-      data: {
-        meme: file,
-        cost: postCost,
-        post_name: postName,
-        tags: tags,
-      },
+      method: "GET",
+      url: `/posts?page=${pageNum}&per_page=${limitPerPage}`,
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Accept: "application/json",
+      //   },
     });
+    // console.log(res);
+    // return res.data;
+    return res;
   } catch (e) {
     console.log(e);
   }

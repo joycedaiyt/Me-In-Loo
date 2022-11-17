@@ -19,4 +19,5 @@ def updateProfileDesciprtion():
 def addPostCount(email):
     update_stmt = "UPDATE Profile SET post_count = post_count + 1 WHERE user_email = %(email)s"
     cursor.execute(update_stmt, {'email': email})
+    cnxn.commit()
 

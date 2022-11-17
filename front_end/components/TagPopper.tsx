@@ -61,7 +61,7 @@ export const TagPopper = (props: {
                 overflow: "scroll",
               }}
             >
-              {TagItems.map((el, idx) => {
+              {TagItems?.map((el, idx) => {
                 return (
                   <MenuItem key={idx}>
                     <div style={{ marginLeft: "5%", marginRight: "5%" }}>
