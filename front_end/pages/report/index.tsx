@@ -1,3 +1,4 @@
+import { ReportWindow } from "../../components/ReportWindow";
 export const ReportPage = () => {
   return (
     <div
@@ -6,7 +7,9 @@ export const ReportPage = () => {
         backgroundColor: "black",
         minWidth: "100vw",
       }}
-    ></div>
+    >
+      <ReportWindow></ReportWindow>
+    </div>
   );
 };
 
