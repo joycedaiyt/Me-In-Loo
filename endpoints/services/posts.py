@@ -92,6 +92,7 @@ def getPostsOnPage(page, per_page, include_tag):
 
     return Response(json.dumps([count, postsDto]), status=200)
 
+
 def deleteMeme(content):
     # check if content has all required data
     if 'post_url' and 'report_count' not in content:

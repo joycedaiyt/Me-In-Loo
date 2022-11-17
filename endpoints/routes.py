@@ -56,3 +56,9 @@ def addTags():
 @routes.route("/tags", methods=['GET'])
 def getAllTags():
     return tags.getTagsAll()
+
+
+@routes.route("/reports", methods=["POST"])
+def createReport():
+    content = request.get_json()
+    return reports.reportMeme(content)
