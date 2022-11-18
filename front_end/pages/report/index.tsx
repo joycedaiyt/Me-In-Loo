@@ -12,10 +12,11 @@ export const ReportPage = () => {
         minHeight: "100vh",
         backgroundColor: "black",
         minWidth: "100vw",
+        alignItems: "center",
       }}
     >
-      <ReportWindow 
-        overHasReported={overHasReported} 
+      <ReportWindow
+        overHasReported={overHasReported}
         setHasReported={setHasReported}
         reportSuccess={reportSuccess}
         setReportSuccess={setReportSuccess}
@@ -25,7 +26,7 @@ export const ReportPage = () => {
           open={overHasReported}
           autoHideDuration={6000}
           onClose={() => setHasReported(false)}
-          style={{ marginLeft: "37%", marginBottom: 100 }}
+          style={{ marginLeft: "37%", marginBottom: 20 }}
         >
           <Alert
             severity="error"
@@ -43,7 +44,7 @@ export const ReportPage = () => {
           open={reportSuccess}
           autoHideDuration={6000}
           onClose={() => setReportSuccess(false)}
-          style={{ marginLeft: "37%", marginBottom: 100 }}
+          style={{ marginLeft: "37%", marginBottom: 20 }}
         >
           <Alert
             onClose={() => setReportSuccess(false)}

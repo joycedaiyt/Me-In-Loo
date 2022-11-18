@@ -6,27 +6,23 @@ import { useRef, useState } from "react";
 import Router from "next/router";
 
 export const ReportWindow = (props: {
-  overHasReported?: boolean;
+  overHasReported: boolean;
   setHasReported: any;
   reportSuccess: boolean;
   setReportSuccess: any;
 }) => {
-  const {
-    overHasReported,
-    setHasReported,
-    reportSuccess,
-    setReportSuccess
-    
-  } = props;
+  const { overHasReported, setHasReported, reportSuccess, setReportSuccess } =
+    props;
   const [reportDes, setReportDes] = useState("");
   const handleSubmit = async (el: any) => {
     try {
-      let output = await createReport(Router.query['post_url'] as string, reportDes);
-      setHasReported(false)
+      let output = await createReport(
+        Router.query["post_url"] as string,
+        reportDes
+      );
       setReportSuccess(true);
     } catch (e) {
       setHasReported(true);
-      setReportSuccess(false);
     }
   };
   const handleChange = (el: any) => {
@@ -34,7 +30,7 @@ export const ReportWindow = (props: {
   };
 
   return (
-    <div style={{ paddingTop: "8%", marginLeft: "35%" }}>
+    <div style={{ paddingTop: "8%", marginLeft: "35.8%" }}>
       <Paper
         elevation={3}
         style={{
