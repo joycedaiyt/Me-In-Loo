@@ -1,3 +1,4 @@
+import datetime
 from flask import request, Blueprint
 from endpoints.services import login_signup, posts, tags, reports
 
@@ -61,4 +62,5 @@ def getAllTags():
 @routes.route("/reports", methods=["POST"])
 def createReport():
     content = request.get_json()
+    content['create_date'] = datetime.datetime.utcnow()
     return reports.reportMeme(content)

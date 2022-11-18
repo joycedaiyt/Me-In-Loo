@@ -103,12 +103,14 @@ export const MemeContainer = (props: {
             >
               <FiThumbsUp />
             </IconButton>
+            <a href={`/report?post_url=${src}`} target="_blank" style={{cursor: "pointer"}}>
             <IconButton>
               <CgDanger
                 style={{ fontSize: 28 }}
-                onClick={() => Router.push(`/report?post_url=${src}`)}
+                // onClick={() => Router.push(`/report?post_url=${src}`)}
               />
             </IconButton>
+            </a>
           </span>
         </div>
       </div>

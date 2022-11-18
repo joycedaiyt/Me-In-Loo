@@ -74,11 +74,8 @@ UPDATE Post SET report_count = report_count + 1
 SELECT report_count FROM Post WHERE post_url = 'thefat1.com';
 -- find the owner to post, and store that user_email in backend
 SELECT user_email FROM Post WHERE post_url = 'thefat1.com';
-UPDATE User SET points = points - 10 WHERE user_email = 'example2@gmail.com';
 SELECT points FROM User WHERE user_email = 'example2@gmail.com';
 
-DELETE FROM AttachedBy WHERE post_url = "thefat1.com";
-DELETE FROM Report WHERE post_url = "thefat1.com";
 DELETE FROM Post WHERE post_url = "thefat1.com";
 SELECT count(*) FROM Report, AttachedBy, Post WHERE Post.post_url = 'thefat1.com' and Post.post_url = Report.post_url and Post.post_url = AttachedBy.post_url;
 -- SELECT count(*) FROM AttachedBy WHERE post_url = 'thefat1.com';
