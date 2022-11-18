@@ -43,7 +43,7 @@ python3 -m pip install mysql-connector
 
 #### Details regarding the enpoints are located in the `endpoints` folder [HERE](https://github.com/joycedaiyt/Me-In-Loo/tree/main/endpoints)
 
-#### Interactions with the project MinIO bucket are located in the `database/minio_setup` folder [HERE](https://github.com/joycedaiyt/Me-In-Loo/tree/database/minio_setup)
+#### Interactions with the project MinIO bucket are located in the `database/minio_setup` folder [HERE](https://github.com/joycedaiyt/Me-In-Loo/tree/main/database/minio_setup)
 
 #### Interactions with the MySQL database and generation of the datasets are located in the `database/database_setup` folder [HERE](https://github.com/joycedaiyt/Me-In-Loo/tree/main/database/database_setup)
 
