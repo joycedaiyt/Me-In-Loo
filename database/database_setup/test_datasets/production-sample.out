@@ -355,7 +355,7 @@
 12.
 [
     {
-        points: 0 //the points for user ChristinaTakaki156@gmail.com is deducted by 10
+        points: -10 //the points for user ChristinaTakaki156@gmail.com is deducted by 10
     }
 ]
 
