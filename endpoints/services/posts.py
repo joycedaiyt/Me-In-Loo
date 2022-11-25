@@ -8,9 +8,8 @@ from flask import Response
 from sessionData import session
 from endpoints.services.tags import addTagsToPost
 from endpoints.repositories.post_repo import insertPost, getPostsByPage, getPostCount, getUserByUrl, getReportCount, deleteFromPost
-from endpoints.repositories.user_repo import addUserPoint2, minusUserPoint
+from endpoints.repositories.user_repo import addUserPoint2
 from endpoints.repositories.profile_repo import addPostCount
-from endpoints.repositories.report_repo import deleteFromReport
 
 
 def uploadMeme(meme, cost, post_name, tags):

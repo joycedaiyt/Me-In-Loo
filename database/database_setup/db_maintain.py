@@ -8,7 +8,6 @@ cnxn = mysql.connector.connect(**config)
 print("Established Connection...")
 cursor = cnxn.cursor()
 
-
 # create a new database with databaseName
 def create_db(databaseName):
     try:

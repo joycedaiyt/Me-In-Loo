@@ -6,12 +6,7 @@ from database.database_setup.gcp_sql_config import config
 
 
 bootstrap = Bootstrap()
-
-
 config['database'] = "test_milestone_2_production"
-cnxn = mysql.connector.connect(**config)
-cursor = cnxn.cursor()
-print("connection established")
 
 
 def create_app():

@@ -10,7 +10,6 @@ from endpoints.repositories.user_repo import getUserPoints
 
 
 def updateProfile(new_pic, new_description):
-    print("updateiong=-============")
     # check which column needs to update
     if new_description == "" and not new_pic:
         return Response("Missing input value", status=400)
