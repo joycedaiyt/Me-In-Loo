@@ -8,12 +8,18 @@ def createProfile(email):
     cnxn.commit()
 
 
-def updateProfilePic():
-    raise NotImplemented
+def updateProfileDesciprtion(new_description, user_email):
+    update_stmt = "Update Profile set prof_description = %s where user_email = %s"
+    data = (new_description, user_email)
+    cursor.execute(update_stmt, data)
+    cnxn.commit()
 
 
-def updateProfileDesciprtion():
-    raise NotImplemented
+def updateProfilePic(new_pic_url, user_email):
+    update_stmt = "Update Profile set profile_pic_url = %s where user_email = %s"
+    data = (new_pic_url, user_email)
+    cursor.execute(update_stmt, data)
+    cnxn.commit()
 
 
 def addPostCount(email):
@@ -21,3 +27,10 @@ def addPostCount(email):
     cursor.execute(update_stmt, {'email': email})
     cnxn.commit()
 
+
+def getProfile(user_email):
+    select_stmt = "Select * from Profile where user_email = %(user_email)s"
+    cursor.execute(select_stmt, {'user_email': user_email})
+    profile = cursor.fetchone()
+
+    return profile

@@ -15,7 +15,6 @@ from endpoints.repositories.report_repo import deleteFromReport
 
 def uploadMeme(meme, cost, post_name, tags):
     # check if content has all required data
-    print(cost)
     if not meme or cost == "" or post_name == "" or tags == None:
         return Response("Missing input value", status=400)
 
@@ -70,7 +69,6 @@ def uploadMeme(meme, cost, post_name, tags):
 def getPostsOnPage(page, per_page, include_tag):
     try:
         startat = page * per_page
-        print(startat)
         posts = getPostsByPage(startat, per_page)
         count = getPostCount(include_tag, per_page)
 
@@ -106,9 +104,8 @@ def deleteMeme(content):
 
     if user_email:
         if report_count == 15:
-            minusUserPoint(content['user_email'])
-            # delete post from Report, AttachedBy, and Post, missing AttachedBy endpoint
-            deleteFromReport(content['post_url'])
+            # new trigger delete post from Report, AttachedBy
+            # need to manually depete post
             deleteFromPost(content['post_url'])
     else:
         return Response("User email cannot found", status=400)

@@ -36,3 +36,11 @@ def minusUserPoint(email):
     update_stmt = "UPDATE User SET points = points - 10 WHERE user_email = %(email)s"
     cursor.execute(update_stmt, {'email': email})
     cnxn.commit()
+
+
+def getUserPoints(email):
+    select_stmt = "SELECT points FROM User WHERE user_email = %(email)s"
+    cursor.execute(select_stmt, {'email': email})
+    points = cursor.fetchone()
+
+    return points
