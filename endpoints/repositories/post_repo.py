@@ -118,3 +118,25 @@ def checkReport(user_email, post_url):
     cnxn.close()
 
     return user_email is None
+
+
+def addDownloadCount(post_url):
+    cnxn = mysql.connector.connect(**config)
+    cursor = cnxn.cursor()
+
+    update_stmt = "UPDATE Post SET download_count = download_count + 1 WHERE post_url = %(post_url)s"
+    cursor.execute(update_stmt, {'post_url': post_url})
+    cnxn.commit()
+    cnxn.close()
+
+
+def getPostCost(post_url):
+    cnxn = mysql.connector.connect(**config)
+    cursor = cnxn.cursor()
+
+    select_stmt = "SELECT cost FROM Post WHERE post_url = %(post_url)s"
+    cursor.execute(select_stmt, {'post_url': post_url})
+    cost = cursor.fetchone()
+    cnxn.close()
+
+    return cost

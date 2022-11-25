@@ -78,3 +78,11 @@ def updateAccountInfo():
     new_description = request.get_json()['new_description']
 
     return profiles.updateProfile(new_pic, new_description)
+
+
+@routes.route("/download", methods=['GET'])
+def downloadMeme():
+    content = request.get_json()
+    post_url = content['post_url']
+
+    return posts.downloadMeme(post_url)

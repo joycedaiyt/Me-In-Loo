@@ -39,22 +39,22 @@ def createUser(email, secret):
     cnxn.close()
 
 
-def addUserPoint2(email):
+def addUserPoints(email, points):
     cnxn = mysql.connector.connect(**config)
     cursor = cnxn.cursor()
 
-    update_stmt = "UPDATE User SET points = points + 2 WHERE user_email = %(email)s"
-    cursor.execute(update_stmt, {'email': email})
+    update_stmt = "UPDATE User SET points = points + %(points)s  WHERE user_email = %(email)s"
+    cursor.execute(update_stmt, {'points': points, 'email': email})
     cnxn.commit()
     cnxn.close()
 
 
-def minusUserPoint(email):
+def reduceUserPoint(email, cost):
     cnxn = mysql.connector.connect(**config)
     cursor = cnxn.cursor()
 
-    update_stmt = "UPDATE User SET points = points - 10 WHERE user_email = %(email)s"
-    cursor.execute(update_stmt, {'email': email})
+    update_stmt = "UPDATE User SET points = points - %(cost)s WHERE user_email = %(email)s"
+    cursor.execute(update_stmt, {'cost': cost, 'email': email})
     cnxn.commit()
     cnxn.close()
 
@@ -62,7 +62,7 @@ def minusUserPoint(email):
 def getUserPoints(email):
     cnxn = mysql.connector.connect(**config)
     cursor = cnxn.cursor()
-    
+
     select_stmt = "SELECT points FROM User WHERE user_email = %(email)s"
     cursor.execute(select_stmt, {'email': email})
     points = cursor.fetchone()

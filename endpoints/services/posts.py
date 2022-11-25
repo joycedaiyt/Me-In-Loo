@@ -7,8 +7,9 @@ from minio import Minio
 from flask import Response
 from sessionData import session
 from endpoints.services.tags import addTagsToPost
-from endpoints.repositories.post_repo import insertPost, getPostsByPage, getPostCount, getUserByUrl, getReportCount, deleteFromPost
-from endpoints.repositories.user_repo import addUserPoint2
+from endpoints.repositories.post_repo import (insertPost, getPostsByPage, getPostCount, getUserByUrl, getReportCount, 
+                                              deleteFromPost, getPostCost, addDownloadCount)
+from endpoints.repositories.user_repo import addUserPoints, reduceUserPoint, getUserPoints
 from endpoints.repositories.profile_repo import addPostCount
 
 
@@ -56,7 +57,7 @@ def uploadMeme(meme, cost, post_name, tags):
 
         insertPost(content)
         addPostCount(email)
-        addUserPoint2(email)
+        addUserPoints(email, 2)
         addTagsToPost(post_url, tags)
 
         return Response("Meme successfully uploaded", status=200)
@@ -108,3 +109,22 @@ def deleteMeme(content):
             deleteFromPost(content['post_url'])
     else:
         return Response("User email cannot found", status=400)
+
+
+def downloadMeme(post_url):
+    user_email = session['user_email']
+
+    try:
+        available_points = getUserPoints(user_email)[0]
+        cost = getPostCost(post_url)[0]
+
+        if available_points >= cost:
+            reduceUserPoint(user_email, cost)
+            addDownloadCount(post_url)
+            return Response("Enough points to download", status=200)
+        else:
+            return Response("Not enough points", status=400)
+        
+    
+    except mysql.connector.Error as err:
+        return Response("Something went wrong: {}".format(err.msg), status=400)

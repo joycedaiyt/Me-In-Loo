@@ -1,7 +1,7 @@
 from flask import Response
 from sessionData import session
 from endpoints.repositories.report_repo import createReport, deleteFromReport
-from endpoints.repositories.user_repo import minusUserPoint
+from endpoints.repositories.user_repo import reduceUserPoint
 from endpoints.repositories.post_repo import getPostByUrl, addReportCount, checkReport, getReportCount, deleteFromPost
 
 
@@ -24,7 +24,7 @@ def reportMeme(content):
         
         report_count = getReportCount(post_url)[0]
         if user_email and report_count == 15:
-            minusUserPoint(user_email)
+            reduceUserPoint(user_email, 10)
             # delete post from Report, AttachedBy, and Post, missing AttachedBy endpoint
             # deleteFromReport(content['post_url']) included in triggers
             deleteFromPost(post_url)
