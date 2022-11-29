@@ -25,6 +25,7 @@ export const ReportWindow = (props: {
       setHasReported(true);
     }
   };
+  
   const handleChange = (el: any) => {
     setReportDes(el.target.value);
   };

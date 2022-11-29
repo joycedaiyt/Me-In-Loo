@@ -1,14 +1,44 @@
-import { TextField } from "@mui/material";
+import { Paper, Button, TextField } from "@mui/material";
 import HeadBar from "../components/Header";
 import testPhoto1 from "../public/testPhoto1.jpeg";
 import Box from '@mui/material/Box';
 import React from "react"
+import { useState,  useEffect } from "react";
+import Router from "next/router";
+import { updateAccountInfo, getAccountInfo} from "../pages/api/profile";
 export const AccountInfo = () => {
-  const [value, setValue] = React.useState('');
+  //const [value, setValue] = React.useState('');
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
+  const [email, setEmail] = useState("");
+  const [description, setDescription] = useState("");
+  const [errorExist, setErrorExist] = useState(false);
+  const handleDescription = (el: any) => {
+    setDescription(el.target.value);
+    setErrorExist(false);
   };
+  const handleUpdate = async () => {
+    try {
+      let output = await updateAccountInfo(testPhoto1.src, description);
+      Router.replace("/");
+    } catch (e) {
+      setErrorExist(true);
+    }
+  };
+  const getDescription = async () => {
+    try {
+      let output = await getAccountInfo();
+      Router.replace("/");
+    } catch (e) {
+      setErrorExist(true);
+    }
+  };
+  useEffect(() => {
+    const func = async () => {
+      const data = await getAccountInfo();
+      setDescription(data?.data['prof_description']);
+    };
+  });
+  
   const style = {
     rectangle:{
       border: "5px",
@@ -81,16 +111,47 @@ export const AccountInfo = () => {
   style={{width:'400px'}}
           id="filled-multiline-flexible"
           label="Description"
+          
           placeholder="用户很懒，没写简介哦~"
-          multiline
+          //multiline
           maxRows={100}
-          value={value}
-          onChange={handleChange}
+          value={description}
+          onChange={handleDescription}
+          //onChange={handleChange}
           variant="standard"
           InputProps={{ disableUnderline: true }}
         /></Box>
+        
     </div>
-      
+    <div style ={{textAlign: "center",
+      alignItems: "center",
+      justifyContent: "center",}}>
+    <Button 
+    variant="contained"
+    style={{
+      fontSize: 18,
+      color: "black",
+      fontWeight: "500",
+      borderRadius: 0,
+      borderWidth: 5,
+      backgroundColor: "#fbeb4f",
+      letterSpacing: 3,
+      width: 125,
+      height: 45,
+      marginTop: 25,
+      marginBottom: 25,
+      textAlign: "center",
+      alignItems: "center",
+      justifyContent: "center",
+      position: 'relative',
+    }}
+    onClick={handleUpdate}
+  >
+    Save
+  </Button>
+    </div>
+    
+    
     </div>
   );
 };
