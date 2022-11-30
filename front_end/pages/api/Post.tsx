@@ -27,11 +27,11 @@ export const createPost = async (
   return res;
 };
 
-export const getPostByPage = async (pageNum: number, limitPerPage: number) => {
+export const getPostByPage = async (pageNum: number, limitPerPage: number, selectedTags: Array<string>) => {
   try {
     const res = await postAxios({
       method: "GET",
-      url: `/posts?page=${pageNum}&per_page=${limitPerPage}`,
+      url: `/posts?page=${pageNum}&per_page=${limitPerPage}&include_tag=${selectedTags}`,
       //   headers: {
       //     "Content-Type": "application/json",
       //     Accept: "application/json",

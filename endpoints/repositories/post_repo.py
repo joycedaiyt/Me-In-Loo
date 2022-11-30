@@ -47,10 +47,11 @@ def getPostsByPage(startat, per_page):
     return posts
 
 
-def getPostCount(include_tag, per_page):
+def getPostCount(per_page):
     cnxn = mysql.connector.connect(**config)
     cursor = cnxn.cursor()
     select_stmt = "SELECT count(*) FROM Post"
+
     cursor.execute(select_stmt)
     count = cursor.fetchone()
     print(count)
@@ -140,3 +141,21 @@ def getPostCost(post_url):
     cnxn.close()
 
     return cost
+
+
+def getPostsByurls(startat, per_page, post_urls):
+    cnxn = mysql.connector.connect(**config)
+    cursor = cnxn.cursor()
+    data = tuple(post_urls + [startat] + [per_page])
+    print(data)
+
+    select_stmt = """SELECT post_url, post_name, cost FROM Post 
+                    WHERE post_url IN ({urls_placeholders}) 
+                    ORDER BY update_date DESC LIMIT %s, %s;
+                  """.format(urls_placeholders=",".join(["%s"] * len(post_urls)),)
+
+    cursor.execute(select_stmt, data)
+    posts = cursor.fetchall()
+    cnxn.close()
+
+    return posts

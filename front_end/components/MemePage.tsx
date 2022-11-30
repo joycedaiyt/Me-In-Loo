@@ -133,7 +133,7 @@ export const MemePage = () => {
 
   useEffect(() => {
     const func = async () => {
-      const data = await getPostByPage(pageNum, limitPerPage);
+      const data = await getPostByPage(pageNum, limitPerPage, []);
       setMemeInPage(data?.data[1]);
       setCountPage(data?.data[0]);
       if (pageNum >= data?.data[0]) {
