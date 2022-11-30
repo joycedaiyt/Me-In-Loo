@@ -96,7 +96,6 @@ export const MemePage = () => {
   const [limitPerPage, setLimitPerPage] = useState(
     window.innerWidth < 1700 ? 9 : 12
   );
-  console.log(window.innerWidth);
   const [memeInPage, setMemeInPage] = useState([] as Array<any>);
   // const size = window.innerWidth;
   useEffect(() => {
@@ -134,7 +133,6 @@ export const MemePage = () => {
 
   useEffect(() => {
     const func = async () => {
-      console.log(pageNum, limitPerPage);
       const data = await getPostByPage(pageNum, limitPerPage);
       setMemeInPage(data?.data[1]);
       setCountPage(data?.data[0]);

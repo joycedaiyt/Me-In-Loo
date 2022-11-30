@@ -1,6 +1,6 @@
 import datetime
 from flask import request, Blueprint
-from endpoints.services import login_signup, posts, tags, reports, profiles
+from endpoints.services import login_signup, posts, tags, reports, profiles, ranking
 
 
 # In Flask, a blueprint is just a group of related routes (the functions below), it helps organize your code
@@ -63,7 +63,7 @@ def getAllTags():
 def createReport():
     content = request.get_json()
     content['create_date'] = datetime.datetime.utcnow()
-    
+
     return reports.reportMeme(content)
 
 
@@ -86,3 +86,8 @@ def downloadMeme():
     post_url = content['post_url']
 
     return posts.downloadMeme(post_url)
+
+
+@routes.route("/ranking", methods=['GET'])
+def rankingInfo():
+    return ranking.getInfoForRanking()

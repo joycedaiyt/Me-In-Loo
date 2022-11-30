@@ -266,7 +266,6 @@ export const UploadInfo = (props: {
           }}
           onClick={async () => {
             await uploadMemes();
-            console.log("ehreanyway");
           }}
           disabled={disableButton || disableButton1 || disableButton2}
         >
