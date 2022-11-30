@@ -1,10 +1,7 @@
-import HeadBar from "../../components/Header";
-export const RankingPage = () => {
-  return (
-    <div>
-      <HeadBar></HeadBar>
-    </div>
-  );
+import { RankingPage } from "../../components/RankingPage";
+
+export const Ranking = () => {
+  return <RankingPage></RankingPage>;
 };
 
 export default RankingPage;

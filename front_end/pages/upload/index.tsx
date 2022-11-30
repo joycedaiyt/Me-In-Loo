@@ -101,7 +101,7 @@ export const UploadPage = () => {
           >
             Share Your
           </span>
-          <span style={{ marginLeft: 360 }}>Favourate Memes!</span>
+          <span style={{ marginLeft: 360 }}>Favourite Memes!</span>
         </span>
       </div>
       <div>
