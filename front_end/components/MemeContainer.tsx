@@ -6,6 +6,8 @@ import { Button, IconButton } from "@mui/material";
 import { CgDanger } from "react-icons/cg";
 import { MdOutlineReportGmailerrorred } from "react-icons/md";
 import Router from "next/router";
+import { addLike } from "../pages/api/Post";
+import { useState } from "react";
 
 export const MemeContainer = (props: {
   src: string;
@@ -14,6 +16,10 @@ export const MemeContainer = (props: {
 }) => {
   const { src, memeName, cost } = props;
   const handleClick = (el: any) => {};
+  const handleLike = async (el: any) => {
+    let output = await addLike(src);
+    el.target.style.color = "rgb(238, 75, 43)";
+  };
 
   return (
     <div
@@ -101,7 +107,9 @@ export const MemeContainer = (props: {
               //   }}
               //   size="small"
             >
-              <FiThumbsUp />
+              <FiThumbsUp 
+                onClick={handleLike}
+              />
             </IconButton>
             <a href={`/report?post_url=${src}`} target="_blank" style={{cursor: "pointer"}}>
             <IconButton>
