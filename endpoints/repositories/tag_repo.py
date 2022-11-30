@@ -35,3 +35,25 @@ def getAllTags():
     cnxn.close()
 
     return all_tags
+
+
+def getTagIdsByCategories(tags):
+    cnxn = mysql.connector.connect(**config)
+    cursor = cnxn.cursor()
+    categories = tags.split(",")
+    # print(categories)
+
+    data = tuple(categories)
+    select_tagids = """SELECT DISTINCT tag_id FROM Tag 
+                          WHERE category IN ({categories_placeholders})
+                        """.format(categories_placeholders=",".join(["%s"] * len(categories)),)
+
+    cursor.execute(select_tagids, data)
+    tag_ids = cursor.fetchall()
+    ids = []
+    for tag_id in tag_ids:
+        ids.append(tag_id[0])
+
+    cnxn.close()
+    
+    return ids
