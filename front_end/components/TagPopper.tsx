@@ -16,6 +16,8 @@ export const TagPopper = (props: {
   TagItems: Array<string>;
   selectedTags: Array<string>;
   setSelectedTags: any;
+  confirmedTags: Array<string>;
+  setConfirmedTags: any;
 }) => {
   const {
     anchorEl,
@@ -24,6 +26,8 @@ export const TagPopper = (props: {
     TagItems,
     selectedTags,
     setSelectedTags,
+    confirmedTags,
+    setConfirmedTags,
   } = props;
   const handleChange = (el: any) => {
     if (el.target.checked === true) {
@@ -39,8 +43,10 @@ export const TagPopper = (props: {
 
   const handleConfirm = () => {
     setTagPopOpen(false);
+    setConfirmedTags(selectedTags);
     setSelectedTags([]);
   };
+
   const handleClickAway = () => {
     setTagPopOpen(false);
     setSelectedTags([]);

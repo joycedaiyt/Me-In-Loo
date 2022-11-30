@@ -30,11 +30,6 @@ def displayPosts():
     page = request.args.get('page')
     per_page = request.args.get('per_page')
     include_tag = request.args.get('include_tag')
-
-    print(page)
-    print(per_page)
-    print(include_tag)
-
     return posts.getPostsOnPage(int(page), int(per_page), include_tag)
 
 
