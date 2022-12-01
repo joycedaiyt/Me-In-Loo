@@ -14,6 +14,8 @@ def updateProfile(new_pic, new_description):
     if new_description == "" and not new_pic:
         return Response("Missing input value", status=400)
     
+    print(new_description)
+    
     user_email = session['user_email']
     
     try:

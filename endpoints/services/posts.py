@@ -8,7 +8,7 @@ from flask import Response
 from sessionData import session
 from endpoints.services.tags import addTagsToPost
 from endpoints.repositories.post_repo import (insertPost, getPostsByPage, getPostCount, getUserByUrl, getReportCount, 
-                                              deleteFromPost, getPostCost, addDownloadCount, getPostsByurls)
+                                              deleteFromPost, getPostCost, addDownloadCount, getPostsByurls, getUserMostPopularPost)
 from endpoints.repositories.user_repo import addUserPoints, reduceUserPoint, getUserPoints
 from endpoints.repositories.profile_repo import addPostCount
 from endpoints.repositories.tag_repo import getTagIdsByCategories
@@ -138,5 +138,28 @@ def downloadMeme(post_url):
             return Response("Not enough points", status=400)
         
     
+    except mysql.connector.Error as err:
+        return Response("Something went wrong: {}".format(err.msg), status=400)
+
+
+def getMostPopularPost():
+    user_email = session['user_email']
+
+    try:
+        post = getUserMostPopularPost(user_email)
+
+        if post is None:
+            postdto = {
+                'post_url': "",
+                'post_name': ""
+            }
+        else :
+            postdto = {
+                'post_url': post[0],
+                'post_name': post[1]
+            }
+
+        return Response(json.dumps(postdto), status=200)
+
     except mysql.connector.Error as err:
         return Response("Something went wrong: {}".format(err.msg), status=400)

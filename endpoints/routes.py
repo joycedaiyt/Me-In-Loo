@@ -80,7 +80,7 @@ def getAccountInfo():
 @routes.route("/account/update", methods=['PUT'])
 def updateAccountInfo():
     new_pic = request.files
-    new_description = request.get_json()['new_description']
+    new_description = request.form.get('new_description')
 
     return profiles.updateProfile(new_pic, new_description)
 
@@ -96,3 +96,8 @@ def downloadMeme():
 @routes.route("/ranking", methods=['GET'])
 def rankingInfo():
     return ranking.getInfoForRanking()
+
+
+@routes.route("/popular", methods=['GET'])
+def getPopularPost():
+    return posts.getMostPopularPost()

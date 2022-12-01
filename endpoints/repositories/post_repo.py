@@ -159,3 +159,19 @@ def getPostsByurls(startat, per_page, post_urls):
     cnxn.close()
 
     return posts
+
+def getUserMostPopularPost(user_email):
+    cnxn = mysql.connector.connect(**config)
+    cursor = cnxn.cursor()
+
+
+    select_stmt = """Select post_url, post_name from Post 
+                     where user_email = %(user_email)s
+                     order by like_count, download_count Desc Limit 1;
+                  """
+
+    cursor.execute(select_stmt, {'user_email': user_email})
+    post = cursor.fetchone()
+    cnxn.close()
+
+    return post

@@ -1,11 +1,11 @@
-import dynamic from "next/dynamic";
+import { AccountInfo } from "../../components/AccountInfo";
 
-const AccountInfo = dynamic(
-  () => {
-    return import("../../components/account_info");
-  },
-  { ssr: false }
-);
+// const AccountInfo = dynamic(
+//   () => {
+//     return import("../../components/AccountInfo");
+//   },
+//   { ssr: false }
+// );
 
 export const showAcc = () => {
   return <AccountInfo />;
