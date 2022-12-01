@@ -1,5 +1,6 @@
 import os
 import uuid
+import math
 import json
 import datetime
 import mysql.connector
@@ -7,13 +8,12 @@ from minio import Minio
 from flask import Response
 from sessionData import session
 from endpoints.services.tags import addTagsToPost
-from endpoints.repositories.post_repo import (insertPost, getPostsByPage, getPostCount, getUserByUrl, getReportCount, 
+from endpoints.repositories.post_repo import (insertPost, getPostsByPage, getPostCount, getUserByUrl, getReportCount,
                                               deleteFromPost, getPostCost, addDownloadCount, getPostsByurls, getUserMostPopularPost)
-from endpoints.repositories.user_repo import addUserPoints, reduceUserPoint, getUserPoints
+from endpoints.repositories.user_repo import addUserPoints, reduceUserPoint, getUserPoints, addUserForDownload
 from endpoints.repositories.profile_repo import addPostCount
 from endpoints.repositories.tag_repo import getTagIdsByCategories
 from endpoints.repositories.attachedBy_repo import getPostUrlsByTagIds
-
 
 
 def uploadMeme(meme, cost, post_name, tags):
@@ -48,7 +48,6 @@ def uploadMeme(meme, cost, post_name, tags):
 
     try:
         email = session.get("user_email")
-        print(email)
         content = {
             'user_email': email,
             'cost': cost,
@@ -75,14 +74,12 @@ def getPostsOnPage(page, per_page, include_tag):
         if include_tag == "":
             posts = getPostsByPage(startat, per_page)
             count = getPostCount(per_page)
-        
+
         else:
             tag_ids = getTagIdsByCategories(include_tag)
             urls = getPostUrlsByTagIds(tag_ids)
-            # print(urls)
+            count = math.ceil(len(urls) / int(per_page))
             posts = getPostsByurls(startat, per_page, urls)
-            print(posts)
-            count = len(posts)
 
     except mysql.connector.Error as err:
         return Response("Something went wrong: {}".format(err.msg), status=400)
@@ -129,10 +126,12 @@ def downloadMeme(post_url):
     try:
         available_points = getUserPoints(user_email)[0]
         cost = getPostCost(post_url)[0]
-
+        print(available_points, cost)
         if available_points >= cost:
             reduceUserPoint(user_email, cost)
             addDownloadCount(post_url)
+            addUserForDownload(cost, post_url)
+
             return Response("Enough points to download", status=200)
         else:
             return Response("Not enough points", status=400)

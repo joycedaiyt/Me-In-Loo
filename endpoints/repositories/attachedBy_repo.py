@@ -15,13 +15,12 @@ def getMissingTagIdsFromPost(post_url, tag_ids):
 
     cursor.execute(select_insertids, data)
     tag_ids = cursor.fetchall()
-    print(tag_ids)
     ids = []
     for tag_id in tag_ids:
         ids.append(tag_id[0])
 
     cnxn.close()
-    
+
     return ids
 
 
@@ -34,7 +33,7 @@ def attachTagsToPostByIds(post_url, tag_ids):
         data = (post_url, tag_id)
         cursor.execute(attach_stmt, data)
         cnxn.commit()
-    
+
     cnxn.close()
 
 
@@ -54,6 +53,5 @@ def getPostUrlsByTagIds(tag_ids):
         urls.append(post_url[0])
 
     cnxn.close()
-    
+
     return urls
-    

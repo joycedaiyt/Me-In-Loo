@@ -1,6 +1,6 @@
 import datetime
 from flask import request, Blueprint
-from endpoints.services import login_signup, posts, tags, reports, profiles, ranking
+from endpoints.services import login_signup, posts, tags, reports, profiles, ranking, like
 
 
 # In Flask, a blueprint is just a group of related routes (the functions below), it helps organize your code
@@ -30,11 +30,6 @@ def displayPosts():
     page = request.args.get('page')
     per_page = request.args.get('per_page')
     include_tag = request.args.get('include_tag')
-
-    print(page)
-    print(per_page)
-    print(include_tag)
-
     return posts.getPostsOnPage(int(page), int(per_page), include_tag)
 
 
@@ -87,8 +82,10 @@ def updateAccountInfo():
 
 @routes.route("/download", methods=['GET'])
 def downloadMeme():
-    content = request.get_json()
-    post_url = content['post_url']
+    post_url = request.args.get('post_url')
+    # print(content)
+
+    # post_url = content['post_url']
 
     return posts.downloadMeme(post_url)
 
@@ -96,6 +93,13 @@ def downloadMeme():
 @routes.route("/ranking", methods=['GET'])
 def rankingInfo():
     return ranking.getInfoForRanking()
+
+
+@routes.route('/like', methods=['POST'])
+def likePost():
+    #content = request.get_json()
+    post_url = request.args.get('post_url')
+    return like.handle_like(post_url)
 
 
 @routes.route("/popular", methods=['GET'])

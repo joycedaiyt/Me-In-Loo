@@ -4,7 +4,7 @@ import "@fontsource/montserrat";
 import { RankingGraph } from "./RankingGraph";
 import testPhoto1 from "../public/testPhoto1.jpeg";
 import { useEffect, useState } from "react";
-import { getAllRankingInfo } from "../pages/api/ranking";
+import { getAllRankingInfo } from "../pages/api/Ranking";
 
 const data1 = [
   {

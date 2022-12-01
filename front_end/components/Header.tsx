@@ -51,7 +51,7 @@ export default function HeadBar() {
             }}
           >
             {/* <img src={logo.src} width="150" height="65"></img> */}
-            <span onClick={() => Router.push("/main")}>ME-IN-LOO</span>
+            <span>ME-IN-LOO</span>
             {/* <GiWindHole /> */}
           </div>
           <span

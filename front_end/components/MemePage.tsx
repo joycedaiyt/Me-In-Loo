@@ -11,77 +11,6 @@ import { TagPopper } from "./TagPopper";
 import { getAllTags } from "../pages/api/Tags";
 import { getPostByPage } from "../pages/api/Post";
 
-const arrayImage = [
-  {
-    src: testPhoto1.src,
-    memeName: "Test Meme 1",
-    cost: 50,
-  },
-  {
-    src: testPhoto1.src,
-    memeName: "Test Meme 1",
-    cost: 50,
-  },
-  {
-    src: testPhoto1.src,
-    userName: "Yiran Sun",
-    memeName: "Test Meme 1",
-    cost: 50,
-  },
-  {
-    src: testPhoto1.src,
-    userName: "Yiran Sun",
-    memeName: "Test Meme 1",
-    cost: 50,
-  },
-  {
-    src: testPhoto1.src,
-    userName: "Yiran Sun",
-    memeName: "Test Meme 1",
-    cost: 50,
-  },
-  {
-    src: testPhoto1.src,
-    userName: "Yiran Sun",
-    memeName: "Test Meme 1",
-    cost: 50,
-  },
-  {
-    src: testPhoto1.src,
-    userName: "Yiran Sun",
-    memeName: "Test Meme 1",
-    cost: 50,
-  },
-  {
-    src: testPhoto1.src,
-    userName: "Yiran Sun",
-    memeName: "Test Meme 1",
-    cost: 50,
-  },
-  {
-    src: testPhoto1.src,
-    userName: "Yiran Sun",
-    memeName: "Test Meme 1",
-    cost: 50,
-  },
-  {
-    src: testPhoto1.src,
-    userName: "Yiran Sun",
-    memeName: "Test Meme 1",
-    cost: 50,
-  },
-];
-
-const TagItems = [
-  "Tag 1",
-  "Tag 3",
-  "Tag 4",
-  "Tag 5",
-  "Tag 6",
-  "Tag 8",
-  "Tag 95",
-];
-
 export const MemePage = () => {
   const [windowWidth, setWindowWidth] = useState(1440);
   const [pageNum, setPageNum] = useState(0);
@@ -96,6 +25,7 @@ export const MemePage = () => {
   const [limitPerPage, setLimitPerPage] = useState(
     window.innerWidth < 1700 ? 9 : 12
   );
+  const [confirmedTags, setConfirmedTags] = useState([] as Array<string>);
   const [memeInPage, setMemeInPage] = useState([] as Array<any>);
   // const size = window.innerWidth;
   useEffect(() => {
@@ -133,7 +63,7 @@ export const MemePage = () => {
 
   useEffect(() => {
     const func = async () => {
-      const data = await getPostByPage(pageNum, limitPerPage, []);
+      const data = await getPostByPage(pageNum, limitPerPage, confirmedTags);
       setMemeInPage(data?.data[1]);
       setCountPage(data?.data[0]);
       if (pageNum >= data?.data[0]) {
@@ -141,16 +71,16 @@ export const MemePage = () => {
       }
     };
     func();
-  }, [pageNum, limitPerPage]);
+  }, [pageNum, limitPerPage, confirmedTags]);
 
   const curArr = memeInPage?.slice(0, limitPerPage);
-  let curArr2 = curArr.slice(0, 3);
-  let curArr3 = curArr.slice(3, 6);
-  let curArr4 = curArr.slice(6, 9);
+  let curArr2 = curArr?.slice(0, 3);
+  let curArr3 = curArr?.slice(3, 6);
+  let curArr4 = curArr?.slice(6, 9);
   if (windowWidth >= 1600) {
-    curArr2 = curArr.slice(0, 4);
-    curArr3 = curArr.slice(4, 8);
-    curArr4 = curArr.slice(8, 12);
+    curArr2 = curArr?.slice(0, 4);
+    curArr3 = curArr?.slice(4, 8);
+    curArr4 = curArr?.slice(8, 12);
   }
 
   return (
@@ -168,7 +98,7 @@ export const MemePage = () => {
           alignItems: "center",
           display: "flex",
           lineHeight: "57%",
-          marginBottom: 150,
+          marginBottom: 70,
           justifyContent: "space-between",
         }}
       >
@@ -214,6 +144,8 @@ export const MemePage = () => {
           TagItems={allTags}
           selectedTags={selectedTags}
           setSelectedTags={setSelectedTags}
+          confirmedTags={confirmedTags}
+          setConfirmedTags={setConfirmedTags}
         ></TagPopper>
       </div>
       <div
@@ -224,7 +156,7 @@ export const MemePage = () => {
           paddingLeft: 70,
         }}
       >
-        {curArr2.map((el, idx) => {
+        {curArr2?.map((el, idx) => {
           return (
             <div key={idx}>
               <MemeContainer
@@ -244,7 +176,7 @@ export const MemePage = () => {
           paddingLeft: 70,
         }}
       >
-        {curArr3.map((el, idx) => {
+        {curArr3?.map((el, idx) => {
           return (
             <div key={idx}>
               <MemeContainer
@@ -264,7 +196,7 @@ export const MemePage = () => {
           paddingLeft: 70,
         }}
       >
-        {curArr4.map((el, idx) => {
+        {curArr4?.map((el, idx) => {
           return (
             <div key={idx}>
               <MemeContainer

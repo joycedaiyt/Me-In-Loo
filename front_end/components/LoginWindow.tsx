@@ -27,7 +27,7 @@ export const LoginWindow = (props: {
   const handleLogin = async () => {
     try {
       let output = await getUser(email, password);
-      Router.push("/main");
+      Router.push("/memes");
     } catch {
       setErrorExist(true);
     }

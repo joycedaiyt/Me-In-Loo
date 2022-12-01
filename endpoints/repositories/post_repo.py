@@ -54,7 +54,6 @@ def getPostCount(per_page):
 
     cursor.execute(select_stmt)
     count = cursor.fetchone()
-    print(count)
     cnxn.close()
 
     return math.ceil(count[0] / int(per_page))
@@ -147,7 +146,6 @@ def getPostsByurls(startat, per_page, post_urls):
     cnxn = mysql.connector.connect(**config)
     cursor = cnxn.cursor()
     data = tuple(post_urls + [startat] + [per_page])
-    print(data)
 
     select_stmt = """SELECT post_url, post_name, cost FROM Post 
                     WHERE post_url IN ({urls_placeholders}) 
@@ -159,6 +157,16 @@ def getPostsByurls(startat, per_page, post_urls):
     cnxn.close()
 
     return posts
+    
+
+def likePost(post_url):
+    cnxn = mysql.connector.connect(**config)
+    cursor = cnxn.cursor()
+
+    update_stmt = "UPDATE Post SET like_count = like_count + 1 WHERE post_url = %(post_url)s"
+    cursor.execute(update_stmt, {'post_url': post_url})
+    cnxn.commit()
+
 
 def getUserMostPopularPost(user_email):
     cnxn = mysql.connector.connect(**config)

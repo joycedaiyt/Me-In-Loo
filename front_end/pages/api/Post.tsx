@@ -27,7 +27,11 @@ export const createPost = async (
   return res;
 };
 
-export const getPostByPage = async (pageNum: number, limitPerPage: number, selectedTags: Array<string>) => {
+export const getPostByPage = async (
+  pageNum: number,
+  limitPerPage: number,
+  selectedTags: Array<string>
+) => {
   try {
     const res = await postAxios({
       method: "GET",
@@ -37,8 +41,6 @@ export const getPostByPage = async (pageNum: number, limitPerPage: number, selec
       //     Accept: "application/json",
       //   },
     });
-    // console.log(res);
-    // return res.data;
     return res;
   } catch (e) {
     console.log(e);
@@ -48,3 +50,18 @@ export const getPostByPage = async (pageNum: number, limitPerPage: number, selec
 // export const getPost = async (
 
 // )
+
+export const addLike = async (post_url: string) => {
+  try {
+    const res = await postAxios({
+      method: "POST",
+      url: `/like?post_url=${post_url}`,
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Accept: "application/json",
+      //   },
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
