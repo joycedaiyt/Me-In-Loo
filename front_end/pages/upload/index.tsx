@@ -149,6 +149,7 @@ export const UploadPage = () => {
                   <a
                     href={fileUrl}
                     target="_blank"
+                    rel="noreferrer"
                     style={{
                       fontSize: 15,
                       fontFamily: "montserrat",
