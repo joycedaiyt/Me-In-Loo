@@ -64,8 +64,6 @@ export const MemePage = () => {
   useEffect(() => {
     const func = async () => {
       const data = await getPostByPage(pageNum, limitPerPage, confirmedTags);
-      console.log(data);
-      console.log(selectedTags);
       setMemeInPage(data?.data[1]);
       setCountPage(data?.data[0]);
       if (pageNum >= data?.data[0]) {
@@ -100,7 +98,7 @@ export const MemePage = () => {
           alignItems: "center",
           display: "flex",
           lineHeight: "57%",
-          marginBottom: 110,
+          marginBottom: 70,
           justifyContent: "space-between",
         }}
       >

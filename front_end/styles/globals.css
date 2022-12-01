@@ -29,8 +29,8 @@ a {
   left: 10vh;
   font-family: "EB Garamond";
   animation-name: waterPrintAnimination;
-  animation-duration: 15s;
-  animation-delay: 1.5s;
+  animation-duration: 12s;
+  animation-delay: 0.5s;
 }
 
 .heading {
