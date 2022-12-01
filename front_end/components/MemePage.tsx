@@ -158,7 +158,7 @@ export const MemePage = () => {
           paddingLeft: 70,
         }}
       >
-        {curArr2.map((el, idx) => {
+        {curArr2?.map((el, idx) => {
           return (
             <div key={idx}>
               <MemeContainer
@@ -178,7 +178,7 @@ export const MemePage = () => {
           paddingLeft: 70,
         }}
       >
-        {curArr3.map((el, idx) => {
+        {curArr3?.map((el, idx) => {
           return (
             <div key={idx}>
               <MemeContainer
@@ -198,7 +198,7 @@ export const MemePage = () => {
           paddingLeft: 70,
         }}
       >
-        {curArr4.map((el, idx) => {
+        {curArr4?.map((el, idx) => {
           return (
             <div key={idx}>
               <MemeContainer
