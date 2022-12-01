@@ -18,20 +18,30 @@ export const MemeContainer = (props: {
   const { src, memeName, cost } = props;
   const [downloadFail, setDownloadFail] = useState(false);
   const [downloadSuccess, setDownloadSuccess] = useState(false);
-  const handleClick = (el: any) => {};
+  const [likeSuccess, setLikeSuccess] = useState(false);
+  const [likeFail, setLikeFail] = useState(false);
+
   const downloadRef = useRef(null);
   const handleDownload = async (ref: any) => {
     try {
       const res = await getDownloadInfo(src);
       ref.current.click();
       setDownloadSuccess(true);
+      setDownloadFail(false);
     } catch (e) {
       setDownloadFail(true);
+      setDownloadSuccess(false);
     }
   };
   const handleLike = async (el: any) => {
-    let output = await addLike(src);
-    el.target.style.color = "rgb(238, 75, 43)";
+    try {
+      const output = await addLike(src);
+      setLikeSuccess(true);
+      setLikeFail(false);
+    } catch (e) {
+      setLikeFail(true);
+      setLikeSuccess(false);
+    }
   };
 
   return (
@@ -98,7 +108,7 @@ export const MemeContainer = (props: {
           <a href={src} download ref={downloadRef}></a>
           <span>
             <IconButton
-              onClick={handleClick}
+              onClick={handleLike}
               //   variant="outlined"
               //   style={{
               //     color: "black",
@@ -111,7 +121,7 @@ export const MemeContainer = (props: {
               //   }}
               //   size="small"
             >
-              <FiThumbsUp onClick={handleLike} />
+              <FiThumbsUp />
             </IconButton>
             <a
               href={`/report?post_url=${src}`}
@@ -159,6 +169,41 @@ export const MemeContainer = (props: {
             sx={{ width: "100%", fontSize: 16 }}
           >
             Download Successed!
+          </Alert>
+        </Snackbar>
+      ) : (
+        ""
+      )}
+      {likeSuccess ? (
+        <Snackbar
+          open={likeSuccess}
+          autoHideDuration={6000}
+          onClose={() => setLikeSuccess(false)}
+          style={{ marginLeft: "36%", marginBottom: 10 }}
+        >
+          <Alert
+            onClose={() => setLikeSuccess(false)}
+            sx={{ width: "100%", fontSize: 16 }}
+          >
+            You Like A Meme!
+          </Alert>
+        </Snackbar>
+      ) : (
+        ""
+      )}
+
+      {likeFail ? (
+        <Snackbar
+          open={likeFail}
+          autoHideDuration={6000}
+          onClose={() => setLikeFail(false)}
+          style={{ marginLeft: "36%", marginBottom: 10 }}
+        >
+          <Alert
+            onClose={() => setLikeFail(false)}
+            sx={{ width: "100%", fontSize: 16 }}
+          >
+            Sorry, there might be some small issues exist in our product
           </Alert>
         </Snackbar>
       ) : (

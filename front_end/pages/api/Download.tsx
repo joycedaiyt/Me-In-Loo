@@ -8,7 +8,6 @@ const downloadAxios = axios.create({
 });
 
 export const getDownloadInfo = async (post_url1: string) => {
-  console.log(post_url1);
   const data = {
     post_url: post_url1,
   };
