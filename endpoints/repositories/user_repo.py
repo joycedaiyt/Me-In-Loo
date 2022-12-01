@@ -23,7 +23,7 @@ def getUserCountByEmail(email):
     select_stmt = "SELECT count(*) FROM User WHERE user_email = %(email)s"
     cursor.execute(select_stmt, {'email': email})
     result = cursor.fetchone()
-    cnxn.close()    
+    cnxn.close()
 
     return result
 
@@ -43,6 +43,20 @@ def addUserPoints(email, points):
     cnxn = mysql.connector.connect(**config)
     cursor = cnxn.cursor()
 
+    update_stmt = "UPDATE User SET points = points + %(points)s  WHERE user_email = %(email)s"
+    cursor.execute(update_stmt, {'points': points, 'email': email})
+    cnxn.commit()
+    cnxn.close()
+
+
+def addUserForDownload(points, post_url):
+    cnxn = mysql.connector.connect(**config)
+    cursor = cnxn.cursor()
+    select_stmt = "SELECT user_email FROM Post WHERE post_url = %(post_url)s"
+    cursor.execute(select_stmt, {'post_url': post_url})
+    email = cursor.fetchone()
+    cnxn.commit()
+    email = email[0]
     update_stmt = "UPDATE User SET points = points + %(points)s  WHERE user_email = %(email)s"
     cursor.execute(update_stmt, {'points': points, 'email': email})
     cnxn.commit()

@@ -82,8 +82,10 @@ def updateAccountInfo():
 
 @routes.route("/download", methods=['GET'])
 def downloadMeme():
-    content = request.get_json()
-    post_url = content['post_url']
+    post_url = request.args.get('post_url')
+    # print(content)
+
+    # post_url = content['post_url']
 
     return posts.downloadMeme(post_url)
 

@@ -10,7 +10,7 @@ from sessionData import session
 from endpoints.services.tags import addTagsToPost
 from endpoints.repositories.post_repo import (insertPost, getPostsByPage, getPostCount, getUserByUrl, getReportCount,
                                               deleteFromPost, getPostCost, addDownloadCount, getPostsByurls)
-from endpoints.repositories.user_repo import addUserPoints, reduceUserPoint, getUserPoints
+from endpoints.repositories.user_repo import addUserPoints, reduceUserPoint, getUserPoints, addUserForDownload
 from endpoints.repositories.profile_repo import addPostCount
 from endpoints.repositories.tag_repo import getTagIdsByCategories
 from endpoints.repositories.attachedBy_repo import getPostUrlsByTagIds
@@ -126,10 +126,12 @@ def downloadMeme(post_url):
     try:
         available_points = getUserPoints(user_email)[0]
         cost = getPostCost(post_url)[0]
-
+        print(available_points, cost)
         if available_points >= cost:
             reduceUserPoint(user_email, cost)
             addDownloadCount(post_url)
+            addUserForDownload(cost, post_url)
+
             return Response("Enough points to download", status=200)
         else:
             return Response("Not enough points", status=400)
