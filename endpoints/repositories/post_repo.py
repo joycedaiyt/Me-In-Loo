@@ -157,3 +157,11 @@ def getPostsByurls(startat, per_page, post_urls):
     cnxn.close()
 
     return posts
+
+def likePost(post_url):
+    cnxn = mysql.connector.connect(**config)
+    cursor = cnxn.cursor()
+
+    update_stmt = "UPDATE Post SET like_count = like_count + 1 WHERE post_url = %(post_url)s"
+    cursor.execute(update_stmt, {'post_url': post_url})
+    cnxn.commit()

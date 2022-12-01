@@ -46,3 +46,22 @@ export const getPostByPage = async (
     console.log(e);
   }
 };
+
+// export const getPost = async (
+
+// )
+
+export const addLike = async (post_url: string) => {
+  try {
+    const res = await postAxios({
+      method: "POST",
+      url: `/like?post_url=${post_url}`,
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Accept: "application/json",
+      //   },
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
