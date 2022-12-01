@@ -126,6 +126,7 @@ export const MemeContainer = (props: {
             <a
               href={`/report?post_url=${src}`}
               target="_blank"
+              rel="noreferrer"
               style={{ cursor: "pointer" }}
             >
               <IconButton>
